@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/nav_changepass"
+    tools:context=".View.ChangePass.ChangepassFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/tv_changepass"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="135dp"
+        android:gravity="center"
+        android:text="@string/menu_changepass"
+        android:textSize="40sp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/edt_newpass"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:hint="mật khẩu mới"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="250dp"
+        android:singleLine="true" />
+
+
+    <EditText
+        android:id="@+id/edt_Comnewpass"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="298dp"
+        android:hint="Nhập lại mật khẩu"
+        android:singleLine="true" />
+
+
+    <Button
+        android:id="@+id/btn_save"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/style_button"
+        android:gravity="center"
+        android:text="Lưu"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+
+
+</RelativeLayout>

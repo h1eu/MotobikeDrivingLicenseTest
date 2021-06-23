@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <View
+        android:id="@+id/v_adduser"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/ic_adduser"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/edt_res_username"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="200dp"
+            android:hint="Tên đăng nhập"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edt_res_name"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:hint="Tên"
+            android:singleLine="true" />
+
+        <EditText
+            android:id="@+id/edt_res_password"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:hint="Mật khẩu"
+            android:singleLine="true" />
+        <EditText
+            android:id="@+id/edt_res_ComPassword"
+            android:layout_width="302dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="10dp"
+            android:hint="Nhập lại mật khẩu"
+            android:singleLine="true" />
+        <Button
+            android:id="@+id/btn_res_register"
+            android:layout_gravity="center"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="Đăng Ký"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:background="@drawable/style_button"  />
+    </LinearLayout>
+
+
+</RelativeLayout>

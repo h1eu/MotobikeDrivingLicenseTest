@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <View
+        android:id="@+id/v_iconapp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/iconapp" />
+
+    <TextView
+        android:id="@+id/tv_welcome"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="135dp"
+        android:gravity="center"
+        android:text="Welcome"
+        android:textSize="50sp"
+        android:textColor="@color/black"/>
+
+    <EditText
+        android:id="@+id/edt_username"
+        android:layout_width="302dp"
+        android:layout_height="48dp"
+        android:hint="Tên đăng nhập"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="250dp"
+        android:singleLine="true" />
+
+
+    <EditText
+        android:id="@+id/edt_password"
+        android:layout_width="300dp"
+        android:layout_height="48dp"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="298dp"
+        android:hint="Mật khẩu"
+        android:singleLine="true" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/style_button"
+        android:gravity="center"
+        android:text="Đăng nhập"
+        android:textColor="@color/black"
+        android:textSize="36sp" />
+
+    <TextView
+        android:id="@+id/tv_login"
+        android:layout_width="350dp"
+        android:layout_height="45dp"
+        android:text="Bạn chưa có tài khoản ?"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="550dp"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:gravity="center"
+        />
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal">
+        <View
+            android:id="@+id/v_adduser"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginLeft="100dp"
+            android:layout_marginTop="600dp"
+            android:background="@drawable/ic_adduser"
+            />
+        <Button
+            android:id="@+id/btn_register"
+            android:layout_width="200dp"
+            android:layout_height="60dp"
+            android:text="Đăng Ký"
+            android:layout_marginTop="600dp"
+            android:textColor="@color/black"
+            android:textSize="28sp"
+            android:gravity="center"
+            android:background="@drawable/style_button"  />
+
+    </LinearLayout>
+
+
+</RelativeLayout>
