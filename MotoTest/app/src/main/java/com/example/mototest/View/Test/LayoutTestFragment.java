@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.mototest.Models.Test;
+import com.example.mototest.Model.Test;
 import com.example.mototest.R;
 
 public class LayoutTestFragment extends Fragment {
@@ -27,7 +27,7 @@ public class LayoutTestFragment extends Fragment {
         {
             Test test = (Test) bundle.get("question");
             if(test !=null) {
-                tvquestitle.setText(test.getName());
+                tvquestitle.setText(test.getListQuestion());
             }
         }
 

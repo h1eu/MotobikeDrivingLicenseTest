@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.MainActivity;
-import com.example.mototest.Models.Test;
+import com.example.mototest.Model.Test;
 import com.example.mototest.R;
 
 import java.util.ArrayList;
@@ -93,19 +93,19 @@ public class LayoutTest extends AppCompatActivity{
     }
 
     private void initUi() {
-        tvbackquestion=(TextView)findViewById(R.id.tv_back_quesion);
-        tvnextquestion=(TextView)findViewById(R.id.tv_next_quesion);
-        tvcurrentquestion=(TextView)findViewById(R.id.tv_current_question);
-        tvmaxquestion=(TextView)findViewById(R.id.tv_max_quesion);
-        viewPager=(ViewPager)findViewById(R.id.viewpager);
-        toolbar_title=(TextView)findViewById(R.id.tv_toolbar_title);
+        tvbackquestion=(TextView) findViewById(R.id.tv_back_quesion);
+        tvnextquestion=(TextView) findViewById(R.id.tv_next_quesion);
+        tvcurrentquestion=(TextView) findViewById(R.id.tv_current_question);
+        tvmaxquestion=(TextView) findViewById(R.id.tv_max_quesion);
+        viewPager=(ViewPager) findViewById(R.id.viewpager);
+        toolbar_title=(TextView) findViewById(R.id.tv_toolbar_title);
         toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
 
     }
     private List<Test> getQuestionList(){
         List<Test> list=new ArrayList<>();
         for (int i=1;i<=20;i++){
-            list.add(new Test("question"+i));
+            list.add(new Test(i,"Cau hoi: "+Integer.toString(i),50));
         }
         return list;
     }

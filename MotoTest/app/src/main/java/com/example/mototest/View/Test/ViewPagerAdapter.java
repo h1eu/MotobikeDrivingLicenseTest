@@ -7,7 +7,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.example.mototest.Models.Test;
+import com.example.mototest.Model.Test;
 
 import org.jetbrains.annotations.NotNull;
 
