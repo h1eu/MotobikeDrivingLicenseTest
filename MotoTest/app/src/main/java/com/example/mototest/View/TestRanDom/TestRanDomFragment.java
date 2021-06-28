@@ -12,34 +12,14 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.mototest.databinding.FragmentTestrandomBinding;
+import com.example.mototest.R;
+
 
 public class TestRanDomFragment extends Fragment {
 
-    private TestRanDomViewModel testrandomViewModel;
-    private FragmentTestrandomBinding binding;
-
-    public View onCreateView(@NonNull LayoutInflater inflater,
-                             ViewGroup container, Bundle savedInstanceState) {
-        testrandomViewModel =
-                new ViewModelProvider(this).get(TestRanDomViewModel.class);
-
-        binding = FragmentTestrandomBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textTestrandom;
-        testrandomViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_testrandom, container, false);
     }
 }

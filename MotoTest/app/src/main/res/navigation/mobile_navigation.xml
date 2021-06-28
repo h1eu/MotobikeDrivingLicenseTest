@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_test"
-        android:name="com.example.mototest.View.Test.Test"
+        android:name="com.example.mototest.View.Test.TestFragment"
         android:label="@string/menu_test"
         tools:layout="@layout/fragment_test" />
     <fragment

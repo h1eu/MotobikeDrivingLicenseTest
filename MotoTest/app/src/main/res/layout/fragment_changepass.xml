@@ -43,16 +43,15 @@
         android:hint="Nhập lại mật khẩu"
         android:singleLine="true" />
 
-
     <Button
         android:id="@+id/btn_save"
-        android:layout_width="300dp"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
         android:layout_centerInParent="true"
         android:layout_marginTop="360dp"
-        android:background="@drawable/style_button"
+        android:backgroundTint="@color/orange"
         android:gravity="center"
         android:text="Lưu"
         android:textColor="@color/black"

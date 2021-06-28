@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true">
 
     <View
         android:id="@+id/v_iconapp"
@@ -12,57 +13,70 @@
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
-        android:background="@drawable/iconapp" />
+        android:background="@drawable/icon" />
 
-    <TextView
-        android:id="@+id/tv_welcome"
-        android:layout_width="240dp"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="135dp"
-        android:gravity="center"
-        android:text="Welcome"
-        android:textSize="50sp"
-        android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/edt_username"
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/edt_usernamelayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="302dp"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/v_iconapp"
+        android:layout_alignParentLeft="false"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dp"
         android:hint="Tên đăng nhập"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="250dp"
-        android:singleLine="true" />
+        app:startIconDrawable="@drawable/ic_user">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="text"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
 
-    <EditText
-        android:id="@+id/edt_password"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="298dp"
-        android:hint="Mật khẩu"
-        android:singleLine="true" />
-
-    <Button
-        android:id="@+id/btn_login"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/edt_passwordlayout"
         android:layout_width="300dp"
         android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:endIconMode="password_toggle"
         android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/edt_usernamelayout"
         android:layout_centerInParent="true"
-        android:layout_marginTop="360dp"
-        android:background="@drawable/style_button"
+        android:layout_marginTop="20dp"
+        android:hint="Mật khẩu"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_password"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_login"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/blue"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/edt_passwordlayout"
+        android:layout_centerInParent="true"
+        app:cornerRadius="100dp"
+        android:layout_marginTop="20dp"
         android:gravity="center"
         android:text="Đăng nhập"
         android:textColor="@color/black"
-        android:textSize="36sp" />
+        android:textSize="26sp" />
 
     <TextView
         android:id="@+id/tv_login"
@@ -72,38 +86,29 @@
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="550dp"
-        android:textSize="30sp"
+        android:layout_marginTop="500dp"
+        android:textSize="20sp"
         android:textColor="@color/black"
         android:gravity="center"
         />
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_register"
+        android:layout_width="180dp"
+        android:layout_height="50dp"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
-        android:orientation="horizontal">
-        <View
-            android:id="@+id/v_adduser"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="600dp"
-            android:background="@drawable/ic_adduser"
-            />
-        <Button
-            android:id="@+id/btn_register"
-            android:layout_width="200dp"
-            android:layout_height="60dp"
-            android:text="Đăng Ký"
-            android:layout_marginTop="600dp"
-            android:textColor="@color/black"
-            android:textSize="28sp"
-            android:gravity="center"
-            android:background="@drawable/style_button"  />
-
-    </LinearLayout>
+        android:layout_centerInParent="true"
+        android:layout_marginTop="547dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/blue"
+        android:gravity="center"
+        android:text="Đăng Ký"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        app:cornerRadius="100dp"
+        app:icon="@drawable/ic_useradd" />
 
 
 </RelativeLayout>
