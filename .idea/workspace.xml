@@ -9,15 +9,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="bf4699c8-cb65-43a4-ba71-1485a40d5f4e" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Forum.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Forum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/History.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/History.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Post.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Post.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Question.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Question.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Ranking.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Ranking.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/Test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/MotoTest/app/src/main/java/com/example/mototest/Model/User.java" afterDir="false" />
-    </list>
+    <list default="true" id="bf4699c8-cb65-43a4-ba71-1485a40d5f4e" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
