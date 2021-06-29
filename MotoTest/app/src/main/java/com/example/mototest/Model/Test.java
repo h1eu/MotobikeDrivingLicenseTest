@@ -3,7 +3,6 @@ package com.example.mototest.Model;
 import java.io.Serializable;
 
 public class Test implements Serializable {
-    public class Test {
         private int Idtest;
         private int Listquestion;
         private long Time;
@@ -37,5 +36,5 @@ public class Test implements Serializable {
         public void setTime(long time) {
             Time = time;
         }
-    }
+
 }

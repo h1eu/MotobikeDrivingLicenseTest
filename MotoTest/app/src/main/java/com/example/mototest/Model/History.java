@@ -44,5 +44,3 @@ public class History {
         Time = time;
     }
 }
-
-}

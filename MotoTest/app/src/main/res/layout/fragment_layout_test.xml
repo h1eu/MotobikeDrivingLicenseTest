@@ -22,30 +22,34 @@
             android:textStyle="bold" />
 
         <ImageView
-            android:adjustViewBounds="true"
             android:id="@+id/iv_description"
             android:layout_width="140dp"
             android:layout_height="140dp"
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/padding_normal"
             android:layout_marginRight="@dimen/padding_normal"
+            android:adjustViewBounds="true"
+            android:clickable="true"
             android:src="@drawable/icon" />
 
         <LinearLayout
             android:id="@+id/layout_answer1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
             android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal">
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal">
 
             <TextView
                 android:id="@+id/tv_number1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:background="@drawable/ic_cirle"
+                android:clickable="true"
+                android:focusable="true"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="@color/grey"
@@ -56,6 +60,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/padding_normal"
+                android:clickable="true"
+                android:focusable="true"
                 android:text="Đường, cầu đường bộ."
                 android:textColor="@color/grey" />
 
@@ -72,11 +78,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_normal"
+            android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
             android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal">
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal">
 
             <TextView
                 android:id="@+id/tv_number2"
@@ -109,11 +116,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_normal"
+            android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
             android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal">
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal">
 
             <TextView
                 android:id="@+id/tv_number3"
@@ -146,11 +154,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/padding_normal"
+            android:clickable="true"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
             android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal">
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal">
 
             <TextView
                 android:id="@+id/tv_number4"

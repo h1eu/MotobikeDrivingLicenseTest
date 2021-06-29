@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -16,16 +17,22 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.mototest.Model.Question;
 import com.example.mototest.R;
 
 import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
 
 
 public class TestFragment extends Fragment implements AdapterView.OnItemClickListener {
     Button button;
 
+
     public TestFragment() {
     }
+
+
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -42,7 +49,9 @@ public class TestFragment extends Fragment implements AdapterView.OnItemClickLis
 
         String[] test={"Đề 1","Đề 2","Đề 3","Đề 4"};
         ListView listView=(ListView)view.findViewById(R.id.lv_test);
+
         ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,test);
+
 
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
