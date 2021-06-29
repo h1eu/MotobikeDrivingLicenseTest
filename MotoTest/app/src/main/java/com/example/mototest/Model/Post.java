@@ -1,47 +1,47 @@
 package com.example.mototest.Model;
 
 public class Post {
-    private int idPost;
-    private String title;
-    private String content;
-    private String image;
-    public Post(int idPost ,String title  ,String content ,String image){
-        this.idPost = idPost;
-        this.title = title;
-        this.content = content;
-        this.image = image;
+    private int Idpost;
+    private String Title;
+    private String Content;
+    private String Image;
+    public Post(int Idpost ,String Title  ,String Content ,String Image){
+        this.Idpost = Idpost;
+        this.Title = Title;
+        this.Content = Content;
+        this.Image = Image;
 
     }
 
-    public int getIdPost() {
-        return idPost;
+    public int getIdpost() {
+        return Idpost;
     }
 
-    public void setIdPost(int idPost) {
-        this.idPost = idPost;
+    public void setIdpost(int idpost) {
+        Idpost = idpost;
     }
 
     public String getTitle() {
-        return title;
+        return Title;
     }
 
     public void setTitle(String title) {
-        this.title = title;
+        Title = title;
     }
 
     public String getContent() {
-        return content;
+        return Content;
     }
 
     public void setContent(String content) {
-        this.content = content;
+        Content = content;
     }
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        Image = image;
     }
 }

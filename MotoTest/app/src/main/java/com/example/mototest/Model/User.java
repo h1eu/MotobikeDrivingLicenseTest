@@ -1,25 +1,26 @@
 package com.example.mototest.Model;
 
 public class User {
-    private int idUser;
-    private String userName;
+    private int Iduser;
+    private String Username;
     private String Password;
     private String Name;
+    private String Permission;
 
-    public int getIdUser() {
-        return idUser;
+    public int getIduser() {
+        return Iduser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setIduser(int iduser) {
+        Iduser = iduser;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public String getPassword() {
@@ -38,18 +39,27 @@ public class User {
         Name = name;
     }
 
+    public String getPermission() {
+        return Permission;
+    }
+
+    public void setPermission(String permission) {
+        Permission = permission;
+    }
+
     public User(){
-        this.idUser = idUser;
-        this.userName = userName;
+        this.Iduser = Iduser;
+        this.Username = Username;
         this.Password = Password;
         this.Name = Name;
     }
 
-    public User(int idUser , String userName,String Password ,String Name){
-        this.idUser = idUser;
-        this.userName = userName;
+    public User(int Iduser , String Username,String Password ,String Name,String Permission){
+        this.Iduser = Iduser;
+        this.Username = Username;
         this.Password = Password;
         this.Name = Name;
+        this.Permission=Permission;
     }
 
 }

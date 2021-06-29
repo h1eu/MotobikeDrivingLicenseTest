@@ -1,46 +1,48 @@
 package com.example.mototest.Model;
 
 public class History {
-    private int idTest;
-    private int idUser;
-    private int scores;
-    private long time;
-    public History(int idUser,int idTest,int scores, long time){
-        this.idUser = idUser;
-        this.idTest = idTest;
-        this.scores = scores;
-        this.time = time;
+    private int Iduser;
+    private int Idtest;
+    private int Scores;
+    private long Time;
+    public History(int Iduser,int Idtest,int Scores, long Time){
+        this.Iduser = Iduser;
+        this.Idtest = Idtest;
+        this.Scores = Scores;
+        this.Time = Time;
     }
 
-    public int getIdTest() {
-        return idTest;
+    public int getIduser() {
+        return Iduser;
     }
 
-    public void setIdTest(int idTest) {
-        this.idTest = idTest;
+    public void setIduser(int iduser) {
+        Iduser = iduser;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getIdtest() {
+        return Idtest;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setIdtest(int idtest) {
+        Idtest = idtest;
     }
 
     public int getScores() {
-        return scores;
+        return Scores;
     }
 
     public void setScores(int scores) {
-        this.scores = scores;
+        Scores = scores;
     }
 
     public long getTime() {
-        return time;
+        return Time;
     }
 
     public void setTime(long time) {
-        this.time = time;
+        Time = time;
     }
+}
+
 }

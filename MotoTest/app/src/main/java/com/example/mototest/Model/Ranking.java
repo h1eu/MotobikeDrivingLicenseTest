@@ -1,46 +1,46 @@
 package com.example.mototest.Model;
 
 public class Ranking {
-    private int idUser;
-    private int idTest;
-    private String userName;
-    private int scores;
-    public Ranking(int idUser,int idTest,String userName,int scores){
-        this.idUser = idUser;
-        this.idTest = idTest;
-        this.userName = userName;
-        this.scores = scores;
+    private int Iduser;
+    private int Idtest;
+    private String Username;
+    private int Scores;
+    public Ranking(int Iduser,int Idtest,String Username,int Scores){
+        this.Iduser = Iduser;
+        this.Idtest = Idtest;
+        this.Username = Username;
+        this.Scores = Scores;
     }
 
-    public int getIdUser() {
-        return idUser;
+    public int getIduser() {
+        return Iduser;
     }
 
-    public void setIdUser(int idUser) {
-        this.idUser = idUser;
+    public void setIduser(int iduser) {
+        Iduser = iduser;
     }
 
-    public int getIdTest() {
-        return idTest;
+    public int getIdtest() {
+        return Idtest;
     }
 
-    public void setIdTest(int idTest) {
-        this.idTest = idTest;
+    public void setIdtest(int idtest) {
+        Idtest = idtest;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return Username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        Username = username;
     }
 
     public int getScores() {
-        return scores;
+        return Scores;
     }
 
     public void setScores(int scores) {
-        this.scores = scores;
+        Scores = scores;
     }
 }

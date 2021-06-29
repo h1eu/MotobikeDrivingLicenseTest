@@ -2,97 +2,97 @@ package com.example.mototest.Model;
 
 public class Question {
 
-        private int idQuestion;
-        private String kindofquestion;
-        private String Content;
-        private String image;
-        private String DA1;
-        private String DA2;
-        private String DA3;
-        private String DA4;
+    private int Idquestion;
+    private String Questionform;
+    private String Content;
+    private String Image;
+    private String Da1;
+    private String Da2;
+    private String Da3;
+    private String Da4;
+    private String Answer;
+    public Question(int Idquestion , String Questionform, String Content ,String Image ,String Da1,String Da2,String Da3, String Da4,String Answer){
+        this.Idquestion = Idquestion;
+        this.Questionform = Questionform;
+        this.Content = Content;
+        this.Image = Image;
+        this.Da1 = Da1;
+        this.Da2 = Da2;
+        this.Da3 = Da3;
+        this.Da4 = Da4;
+        this.Answer = Answer;
 
+    }
 
+    public int getIdquestion() {
+        return Idquestion;
+    }
 
-    private String answer;
-        public Question(int idQuestion , String kindofquestion, String Content ,String image ,String answer){
-            this.idQuestion = idQuestion;
-            this.kindofquestion = kindofquestion;
-            this.Content = Content;
-            this.image = image;
-            this.answer = answer;
+    public void setIdquestion(int idquestion) {
+        Idquestion = idquestion;
+    }
 
-        }
+    public String getQuestionform() {
+        return Questionform;
+    }
 
-        public int getIdQuestion() {
-            return idQuestion;
-        }
+    public void setQuestionform(String questionform) {
+        Questionform = questionform;
+    }
 
-        public void setIdQuestion(int idQuestion) {
-            this.idQuestion = idQuestion;
-        }
+    public String getContent() {
+        return Content;
+    }
 
-        public String getKindofquestion() {
-            return kindofquestion;
-        }
+    public void setContent(String content) {
+        Content = content;
+    }
 
-        public void setKindofquestion(String kindofquestion) {
-            this.kindofquestion = kindofquestion;
-        }
+    public String getImage() {
+        return Image;
+    }
 
-        public String getContent() {
-            return Content;
-        }
+    public void setImage(String image) {
+        Image = image;
+    }
 
-        public void setContent(String content) {
-            Content = content;
-        }
+    public String getDa1() {
+        return Da1;
+    }
 
-        public String getImage() {
-            return image;
-        }
+    public void setDa1(String da1) {
+        Da1 = da1;
+    }
 
-        public void setImage(String image) {
-            this.image = image;
-        }
+    public String getDa2() {
+        return Da2;
+    }
 
-        public String getAnswer() {
-            return answer;
-        }
+    public void setDa2(String da2) {
+        Da2 = da2;
+    }
 
-        public void setAnswer(String answer) {
-            this.answer = answer;
-        }
+    public String getDa3() {
+        return Da3;
+    }
 
-        public String getDA1() {
-            return DA1;
-        }
+    public void setDa3(String da3) {
+        Da3 = da3;
+    }
 
-        public void setDA1(String DA1) {
-            this.DA1 = DA1;
-        }
+    public String getDa4() {
+        return Da4;
+    }
 
-        public String getDA2() {
-            return DA2;
-        }
+    public void setDa4(String da4) {
+        Da4 = da4;
+    }
 
-        public void setDA2(String DA2) {
-            this.DA2 = DA2;
-        }
+    public String getAnswer() {
+        return Answer;
+    }
 
-        public String getDA3() {
-            return DA3;
-        }
-
-        public void setDA3(String DA3) {
-            this.DA3 = DA3;
-        }
-
-        public String getDA4() {
-            return DA4;
-        }
-
-        public void setDA4(String DA4) {
-            this.DA4 = DA4;
-        }
-
+    public void setAnswer(String answer) {
+        Answer = answer;
+    }
 }

@@ -3,36 +3,39 @@ package com.example.mototest.Model;
 import java.io.Serializable;
 
 public class Test implements Serializable {
-    private int idTest;
-    private String listQuestion;
-    private long time ;
-    public Test(int idTest , String listQuestion , long time){
-        this.idTest = idTest;
-        this.listQuestion = listQuestion;
-        this.time = time;
-    }
+    public class Test {
+        private int Idtest;
+        private int Listquestion;
+        private long Time;
 
-    public int getIdTest() {
-        return idTest;
-    }
+        public Test(int Idtest, int ListQuestion, long Time) {
+            this.Idtest = Idtest;
+            this.Listquestion = ListQuestion;
+            this.Time = Time;
+        }
 
-    public void setIdTest(int idTest) {
-        this.idTest = idTest;
-    }
+        public int getIdtest() {
+            return Idtest;
+        }
 
-    public String getListQuestion() {
-        return listQuestion;
-    }
+        public void setIdtest(int idtest) {
+            Idtest = idtest;
+        }
 
-    public void setListQuestion(String listQuestion) {
-        this.listQuestion = listQuestion;
-    }
+        public int getListquestion() {
+            return Listquestion;
+        }
 
-    public long getTime() {
-        return time;
-    }
+        public void setListquestion(int listquestion) {
+            Listquestion = listquestion;
+        }
 
-    public void setTime(long time) {
-        this.time = time;
+        public long getTime() {
+            return Time;
+        }
+
+        public void setTime(long time) {
+            Time = time;
+        }
     }
 }
