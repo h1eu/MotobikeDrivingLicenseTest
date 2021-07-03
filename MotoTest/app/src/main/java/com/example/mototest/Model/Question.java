@@ -1,6 +1,8 @@
 package com.example.mototest.Model;
 
-public class Question {
+import java.io.Serializable;
+
+public class Question implements Serializable {
 
     private int Idquestion;
     private String Questionform;

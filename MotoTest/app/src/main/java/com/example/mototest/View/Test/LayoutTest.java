@@ -35,10 +35,10 @@ public class LayoutTest extends AppCompatActivity{
     private TextView tvbackquestion,tvnextquestion,tvcurrentquestion,tvmaxquestion,toolbar_title,tv_toolbar_check ;
     private ImageView toolbar_back;
     private ViewPager viewPager;
-    private List<Question> questionList;
+//    private List<Question> questionList;
     private ActionBar actionBar;
     private  Question question;
-    ArrayList<Question> arrayListanser;
+    ArrayList<Question> questionArrayList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -46,14 +46,21 @@ public class LayoutTest extends AppCompatActivity{
         setContentView(R.layout.activity_layout_test);
         actionBar= getSupportActionBar();
         initUi();
-        questionList = getQuestionList();
+        questionArrayList = getQuestionList();
 
           ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),
-                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, questionList);
+                 FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, questionArrayList);
          viewPager.setAdapter(viewPagerAdapter);
 
+        tv_toolbar_check.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               checkanser();
+            }
+        });
+
          tvcurrentquestion.setText("1");
-         tvmaxquestion.setText(String.valueOf(questionList.size()));
+         tvmaxquestion.setText(String.valueOf(questionArrayList.size()));
          toolbar_title.setText("Đề Thi");
          viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
              @Override
@@ -68,7 +75,7 @@ public class LayoutTest extends AppCompatActivity{
                  {
                      tvbackquestion.setVisibility(View.GONE);
                      tvnextquestion.setVisibility(View.VISIBLE);
-                 } else if(position == questionList.size()-1){
+                 } else if(position == questionArrayList.size()-1){
                      tvbackquestion.setVisibility(View.VISIBLE);
                      tvnextquestion.setVisibility(View.GONE);
                  }
@@ -107,17 +114,33 @@ public class LayoutTest extends AppCompatActivity{
                 viewPager.setCurrentItem(viewPager.getCurrentItem()+1 );
             }
         });
-        tv_toolbar_check.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                checkanser();
-            }
-        });
+
+    }
+
+
+
+    private void initUi() {
+        tvbackquestion=(TextView)findViewById(R.id.tv_back_quesion);
+        tvnextquestion=(TextView)findViewById(R.id.tv_next_quesion);
+        tvcurrentquestion=(TextView)findViewById(R.id.tv_current_question);
+        tvmaxquestion=(TextView)findViewById(R.id.tv_max_quesion);
+        viewPager=(ViewPager)findViewById(R.id.viewpager);
+        toolbar_title=(TextView)findViewById(R.id.tv_toolbar_title);
+        toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
+        tv_toolbar_check=(TextView) findViewById(R.id.tv_toobar_check);
+
 
 
 
     }
+    private ArrayList<Question> getQuestionList(){
+        ArrayList<Question> list=new ArrayList<Question>();
+        for (int i=1;i<=20;i++){
+            list.add(new Question(i,"3","asd","asd","1","ads","asd","asd","1"));
 
+        }
+        return list;
+    }
     private void checkanser() {
         Button btn_exit,btn_finish;
         btn_exit=(Button)findViewById(R.id.btn_exit);
@@ -126,7 +149,7 @@ public class LayoutTest extends AppCompatActivity{
         dialog.setContentView(R.layout.check_question);
         dialog.setTitle("Danh sach câu trả lời");
 
-        CheckAnserAdapter checkAnserAdapter=new CheckAnserAdapter(arrayListanser,this);
+        CheckAnserAdapter checkAnserAdapter=new CheckAnserAdapter(questionArrayList,this);
         GridView gridView=(GridView) findViewById(R.id.grv_listquestion);
         gridView.setAdapter(checkAnserAdapter);
 
@@ -152,28 +175,6 @@ public class LayoutTest extends AppCompatActivity{
         dialog.show();
 
 
-    }
-
-    private void initUi() {
-        tvbackquestion=(TextView)findViewById(R.id.tv_back_quesion);
-        tvnextquestion=(TextView)findViewById(R.id.tv_next_quesion);
-        tvcurrentquestion=(TextView)findViewById(R.id.tv_current_question);
-        tvmaxquestion=(TextView)findViewById(R.id.tv_max_quesion);
-        viewPager=(ViewPager)findViewById(R.id.viewpager);
-        toolbar_title=(TextView)findViewById(R.id.tv_toolbar_title);
-        toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
-        tv_toolbar_check=(TextView) findViewById(R.id.tv_toobar_check);
-
-
-
-
-    }
-    private List<Question> getQuestionList(){
-        List<Question> list=new ArrayList<>();
-        for (int i=1;i<=20;i++){
-            list.add(new Question(2,"3","asd","asd","1","ads","asd","asd","1",""));
-        }
-        return list;
     }
 
 }

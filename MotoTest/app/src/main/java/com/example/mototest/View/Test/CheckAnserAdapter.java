@@ -35,10 +35,7 @@ public class CheckAnserAdapter extends BaseAdapter {
     public long getItemId(int position) {
         return 0;
     }
-    private static class ViewHolder{
-        TextView tvnum, tvanser;
 
-    }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -57,6 +54,10 @@ public class CheckAnserAdapter extends BaseAdapter {
         viewHolder.tvnum.setText("Câu "+i+": ");
         viewHolder.tvanser.setText(data.getAnswer());
         return convertView;
+    }
+    private static class ViewHolder{
+        TextView tvnum, tvanser;
+
     }
 
 }

@@ -14,25 +14,26 @@ import com.example.mototest.Model.Test;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Question> testList;
-    public ViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior,List<Question> list) {
+    private ArrayList<Question> questionList;
+    public ViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior,ArrayList<Question> list) {
         super(fm, behavior);
-        this.testList =list;
+        this.questionList =list;
     }
 
     @NonNull
     @NotNull
     @Override
     public Fragment getItem(int position) {
-        if(testList ==null || testList.isEmpty()){
+        if(questionList ==null || questionList.isEmpty()){
             return null;
         }
         else
         {
-            Question question = testList.get(position);
+            Question question = questionList.get(position);
             LayoutTestFragment questionFragment=new LayoutTestFragment();
             Bundle bundle=new Bundle();
             bundle.putSerializable("idquestion", (Serializable) question);
@@ -43,8 +44,8 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        if(testList !=null){
-            return testList.size();
+        if(questionList !=null){
+            return questionList.size();
         }
         return 0;
     }
