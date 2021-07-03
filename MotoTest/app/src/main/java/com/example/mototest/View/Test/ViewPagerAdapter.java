@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
+import com.example.mototest.Model.Question;
+import com.example.mototest.Model.Test;
 import com.example.mototest.Model.Test;
 
 import org.jetbrains.annotations.NotNull;
@@ -15,8 +17,8 @@ import java.io.Serializable;
 import java.util.List;
 
 public class ViewPagerAdapter extends FragmentStatePagerAdapter {
-    private List<Test> testList;
-    public ViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior,List<Test> list) {
+    private List<Question> testList;
+    public ViewPagerAdapter(@NonNull @NotNull FragmentManager fm, int behavior,List<Question> list) {
         super(fm, behavior);
         this.testList =list;
     }
@@ -30,10 +32,10 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
         }
         else
         {
-            Test test = testList.get(position);
+            Question question = testList.get(position);
             LayoutTestFragment questionFragment=new LayoutTestFragment();
             Bundle bundle=new Bundle();
-            bundle.putSerializable("question", (Serializable) test);
+            bundle.putSerializable("idquestion", (Serializable) question);
             questionFragment.setArguments(bundle);
             return  questionFragment;
         }

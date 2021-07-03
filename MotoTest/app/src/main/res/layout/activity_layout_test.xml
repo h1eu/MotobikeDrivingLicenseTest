@@ -5,67 +5,125 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbarlayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="@color/orange_2"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/iv_toolbar_back"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:contentDescription="@null"
+                android:focusable="true"
+                android:padding="@dimen/padding_normal"
+                android:src="@drawable/ic_back"
+                android:textColor="@color/black"/>
+
+            <TextView
+                android:id="@+id/tv_toolbar_title"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:textSize="@dimen/font_text_normal"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:text="Title Toolbar" />
+
+            <TextView
+                android:id="@+id/tv_toobar_check"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:textColor="@color/black"
+                android:textSize="@dimen/font_text_normal"
+                android:textStyle="bold"
+                android:visibility="visible"
+                android:text="Kiểm tra" />
+
+
+        </LinearLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+<!--   <FrameLayout-->
+<!--       android:id="@+id/view_frag"-->
+<!--           android:layout_width="match_parent"-->
+<!--           android:layout_height="match_parent"-->
+<!--            android:layout_above="@+id/toolbar_bottom"-->
+<!--            android:layout_below="@+id/appbarlayout"/>-->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/toolbar_bottom"
+        android:layout_below="@+id/appbarlayout"
+        android:layout_marginTop="0dp" />
+
     <LinearLayout
+        android:id="@+id/toolbar_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:background="@color/orange_2"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_alignParentBottom="true">
 
-        <ImageView
-            android:id="@+id/iv_toolbar_back"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:contentDescription="@null"
-            android:focusable="true"
-            android:padding="@dimen/padding_normal"
-            android:src="@drawable/ic_back"
-            android:textColor="@color/black"/>
 
         <TextView
-            android:id="@+id/tv_toolbar_title"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:textSize="@dimen/font_text_normal"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:text="Title Toolbar" />
+            android:id="@+id/tv_back_quesion"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:visibility="gone"
+            android:background="@drawable/ic_back"
+            android:layout_marginEnd="120dp"
+            />
 
         <TextView
-            android:id="@+id/tv_toolbar_finish"
+            android:id="@+id/tv_current_question"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:clickable="true"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal"
-            android:textColor="@color/black"
-            android:textSize="@dimen/font_text_normal"
-            android:textStyle="bold"
-            android:visibility="visible"
-            android:text="Nộp bài" />
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
-    </LinearLayout><![CDATA[
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:text="/"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
-    android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true">
+        <TextView
+            android:id="@+id/tv_max_quesion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20"
+            android:textSize="20sp"
+            android:textColor="@color/white"/>
 
-    ]]>
-
-    <ListView
-        android:id="@+id/listquestion"
-        android:layout_width="match_parent"
-        android:layout_height="681dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="50dp" />
+        <TextView
+            android:id="@+id/tv_next_quesion"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/ic_next"
+            android:layout_marginStart="120dp"
+            />
 
 
+
+    </LinearLayout>
 
 </RelativeLayout>
