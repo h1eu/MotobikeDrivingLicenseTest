@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -38,6 +39,7 @@ public class LayoutTest extends AppCompatActivity{
 //    private List<Question> questionList;
     private ActionBar actionBar;
     private  Question question;
+    private ArrayList<String> listans=new ArrayList<String>();
     ArrayList<Question> questionArrayList;
 
     @Override
@@ -137,20 +139,32 @@ public class LayoutTest extends AppCompatActivity{
         ArrayList<Question> list=new ArrayList<Question>();
         for (int i=1;i<=20;i++){
             list.add(new Question(i,"3","asd","asd","1","ads","asd","asd","1"));
-
         }
         return list;
     }
+    protected void setAns(Integer stt,String ctl){
+        if(stt-1<listans.size())
+            listans.set(stt-1,ctl);
+        else {
+            while ((stt - 1) > listans.size()) {
+                listans.add("");
+            }
+            listans.add(ctl);
+        }
+    }
     private void checkanser() {
+
+
         Button btn_exit,btn_finish;
-        btn_exit=(Button)findViewById(R.id.btn_exit);
+
         btn_finish=(Button)findViewById(R.id.btn_finish);
         Dialog dialog=new Dialog(this);
         dialog.setContentView(R.layout.check_question);
         dialog.setTitle("Danh sach câu trả lời");
+        btn_exit=(Button)dialog.findViewById(R.id.btn_exit);
 
-        CheckAnserAdapter checkAnserAdapter=new CheckAnserAdapter(questionArrayList,this);
-        GridView gridView=(GridView) findViewById(R.id.grv_listquestion);
+        CheckAnserAdapter checkAnserAdapter=new CheckAnserAdapter(listans,this);
+        GridView gridView=(GridView) dialog.findViewById(R.id.grv_listquestion);
         gridView.setAdapter(checkAnserAdapter);
 
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -166,15 +180,17 @@ public class LayoutTest extends AppCompatActivity{
                 dialog.dismiss();
             }
         });
-        btn_finish.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        btn_finish.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
-            }
-        });
+        for (int i=0;i<listans.size();i++){
+            Log.e("cau "+Integer.toString(i+1),listans.get(i));
+        }
         dialog.show();
-
-
     }
 
 }

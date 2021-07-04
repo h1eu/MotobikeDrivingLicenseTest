@@ -13,10 +13,10 @@ import com.example.mototest.R;
 import java.util.ArrayList;
 
 public class CheckAnserAdapter extends BaseAdapter {
-    ArrayList arrayListanser;
+    ArrayList<String> arrayListanser;
     LayoutInflater inflater;
 
-    public CheckAnserAdapter(ArrayList arrayListanser, Context context) {
+    public CheckAnserAdapter(ArrayList<String> arrayListanser, Context context) {
         this.arrayListanser = arrayListanser;
         inflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
@@ -39,7 +39,7 @@ public class CheckAnserAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        Question data=(Question) getItem(position);
+        String data=(String) getItem(position);
         ViewHolder viewHolder;
         if(convertView==null){
             viewHolder=new ViewHolder();
@@ -52,7 +52,7 @@ public class CheckAnserAdapter extends BaseAdapter {
         }
         int i=position+1;
         viewHolder.tvnum.setText("Câu "+i+": ");
-        viewHolder.tvanser.setText(data.getAnswer());
+        viewHolder.tvanser.setText(data);
         return convertView;
     }
     private static class ViewHolder{
