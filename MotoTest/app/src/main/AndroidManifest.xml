@@ -10,7 +10,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoTest">
         <activity android:name=".View.Test.Result"></activity>
-        <activity android:name=".View.Result" />
         <activity android:name=".View.Register" />
         <activity android:name=".View.Login" />
         <activity android:name=".View.Test.LayoutTest" />

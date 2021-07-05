@@ -4,20 +4,17 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
-import androidx.viewpager2.widget.ViewPager2;
 
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,21 +22,18 @@ import com.example.mototest.Api.ApiService;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
-import com.example.mototest.Model.Test;
 import com.example.mototest.R;
-import com.example.mototest.View.Result;
-import com.google.android.material.navigation.NavigationView;
-import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.TimeUnit;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class LayoutTest extends AppCompatActivity{
-    private TextView tvbackquestion,tvnextquestion,tvcurrentquestion,tvmaxquestion,toolbar_title,tv_toolbar_check,tv_result ;
+    private TextView tvbackquestion,tvnextquestion,tvcurrentquestion,tvmaxquestion,toolbar_time,tv_toolbar_check,tv_result ;
     private ImageView toolbar_back;
     private ViewPager viewPager;
 //    private List<Question> questionList;
@@ -77,7 +71,6 @@ public class LayoutTest extends AppCompatActivity{
 
                     tvcurrentquestion.setText("1");
                     tvmaxquestion.setText(String.valueOf(questionArrayList.size()));
-                    toolbar_title.setText("Đề Thi");
                     viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                         @Override
                         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -138,8 +131,32 @@ public class LayoutTest extends AppCompatActivity{
                 Toast.makeText(LayoutTest.this,"Call API FAILED",Toast.LENGTH_SHORT).show();
             }
         });
+        countdowntime();
+
 
     }
+    private void countdowntime() {
+        long duration = TimeUnit.MINUTES.toMillis(20);
+        CountDownTimer countDownTimer=new CountDownTimer(duration,1000) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+                //chuyển đổi mili giây sang phút và giây khi tick
+                String sduation = String.format(Locale.ENGLISH,"%02d : %02d"
+                        , TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished),
+                        TimeUnit.MILLISECONDS.toSeconds(millisUntilFinished) -
+                                TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(millisUntilFinished))
+
+                );
+                toolbar_time.setText(sduation);
+            }
+
+            @Override
+            public void onFinish() {
+                Toast.makeText(getApplicationContext(),"hết thời gian",Toast.LENGTH_SHORT).show();
+            }
+        }.start();
+    }
+
 
 
 
@@ -149,7 +166,7 @@ public class LayoutTest extends AppCompatActivity{
         tvcurrentquestion=(TextView)findViewById(R.id.tv_current_question);
         tvmaxquestion=(TextView)findViewById(R.id.tv_max_quesion);
         viewPager=(ViewPager)findViewById(R.id.viewpager);
-        toolbar_title=(TextView)findViewById(R.id.tv_toolbar_title);
+        toolbar_time=(TextView)findViewById(R.id.tv_toolbar_time);
         toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
         tv_toolbar_check=(TextView) findViewById(R.id.tv_toobar_check);
 
@@ -195,11 +212,12 @@ public class LayoutTest extends AppCompatActivity{
 
         Button btn_exit,btn_finish;
 
-        btn_finish=(Button)findViewById(R.id.btn_finish);
+
         Dialog dialog=new Dialog(this);
         dialog.setContentView(R.layout.check_question);
         dialog.setTitle("Danh sach câu trả lời");
         btn_exit=(Button)dialog.findViewById(R.id.btn_exit);
+        btn_finish=(Button)dialog.findViewById(R.id.btn_finish);
         tv_result=(TextView) dialog.findViewById(R.id.tv_result);
 //        TINH DIEM
         for(int i=0;i<listans.size();i++){
@@ -229,12 +247,14 @@ public class LayoutTest extends AppCompatActivity{
                 dialog.dismiss();
             }
         });
-//        btn_finish.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        btn_finish.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(LayoutTest.this,Result.class);
+                startActivity(intent);
+
+            }
+        });
 //
 //        for (int i=0;i<listans.size();i++){
 //            Log.e("cau "+Integer.toString(i+1),listans.get(i));
