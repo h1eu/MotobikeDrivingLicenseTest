@@ -37,6 +37,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
             LayoutTestFragment questionFragment=new LayoutTestFragment();
             Bundle bundle=new Bundle();
             bundle.putSerializable("idquestion", (Serializable) question);
+            bundle.putInt("position",position+1);
             questionFragment.setArguments(bundle);
             return  questionFragment;
         }

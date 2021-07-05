@@ -1,13 +1,15 @@
 package com.example.mototest.Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Test implements Serializable {
         private int Idtest;
-        private int Listquestion;
-        private long Time;
 
-        public Test(int Idtest, int ListQuestion, long Time) {
+        private String Time;
+    private ArrayList<Question> Listquestion;
+
+        public Test(int Idtest, ArrayList<Question> ListQuestion, String Time) {
             this.Idtest = Idtest;
             this.Listquestion = ListQuestion;
             this.Time = Time;
@@ -21,19 +23,19 @@ public class Test implements Serializable {
             Idtest = idtest;
         }
 
-        public int getListquestion() {
+        public ArrayList<Question> getListquestion() {
             return Listquestion;
         }
 
-        public void setListquestion(int listquestion) {
+        public void setListquestion(ArrayList<Question> listquestion) {
             Listquestion = listquestion;
         }
 
-        public long getTime() {
-            return Time;
-        }
+        public String getTime() {
+                return Time;
+            }
 
-        public void setTime(long time) {
+        public void setTime(String time) {
             Time = time;
         }
 

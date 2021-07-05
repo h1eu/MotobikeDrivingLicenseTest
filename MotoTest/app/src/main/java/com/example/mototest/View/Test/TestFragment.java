@@ -19,6 +19,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
 import com.example.mototest.View.Login;
@@ -56,16 +57,16 @@ public class TestFragment extends Fragment  {
 //
 //        listView.setAdapter(adapter);
 //        listView.setOnItemClickListener(this);
+            ArrayList<Question> listqs=new ArrayList<Question>();
+            for (int i=1;i<=5;i++){
+                listqs.add(new Question(i,"3","asd","asd","1","ads","asd","asd","1"));
+            }
             listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
-            testArrayList.add(new Test(1,1,20));
-            testArrayList.add(new Test(2,1,20));
-            testArrayList.add(new Test(3,1,20));
-            testArrayList.add(new Test(4,1,20));
-            testArrayList.add(new Test(5,1,20));
-            testArrayList.add(new Test(6,1,20));
-            testArrayList.add(new Test(7,1,20));
-            testArrayList.add(new Test(8,1,20));
-
+            testArrayList.add(new Test(1,listqs,"20"));
+            testArrayList.add(new Test(2,listqs,"20"));
+            testArrayList.add(new Test(3,listqs,"20"));
+            testArrayList.add(new Test(4,listqs,"20"));
+            testArrayList.add(new Test(5,listqs,"20"));
             testAdapter=new TestAdapter(getActivity(),testArrayList);
             listViewtest.setAdapter(testAdapter);
             listViewtest.setOnItemClickListener(new AdapterView.OnItemClickListener() {

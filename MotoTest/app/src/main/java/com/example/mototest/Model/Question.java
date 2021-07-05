@@ -12,8 +12,8 @@ public class Question implements Serializable {
     private String Da2;
     private String Da3;
     private String Da4;
-    private String Answer;
-    public Question(int Idquestion , String Questionform, String Content ,String Image ,String Da1,String Da2,String Da3, String Da4,String Answer){
+    private String Dadung;
+    public Question(int Idquestion , String Questionform, String Content ,String Image ,String Da1,String Da2,String Da3, String Da4,String Dadung){
         this.Idquestion = Idquestion;
         this.Questionform = Questionform;
         this.Content = Content;
@@ -22,7 +22,7 @@ public class Question implements Serializable {
         this.Da2 = Da2;
         this.Da3 = Da3;
         this.Da4 = Da4;
-        this.Answer = Answer;
+        this.Dadung = Dadung;
 
     }
 
@@ -90,11 +90,11 @@ public class Question implements Serializable {
         Da4 = da4;
     }
 
-    public String getAnswer() {
-        return Answer;
+    public String getDadung() {
+        return Dadung;
     }
 
-    public void setAnswer(String answer) {
-        Answer = answer;
+    public void setDadung(String answer) {
+        Dadung = answer;
     }
 }
