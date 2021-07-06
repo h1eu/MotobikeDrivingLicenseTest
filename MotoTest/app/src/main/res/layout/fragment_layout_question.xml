@@ -38,14 +38,15 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_normal"
             android:paddingLeft="@dimen/padding_normal"
-            android:paddingRight="@dimen/padding_normal">
+            android:paddingRight="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal"
+            android:visibility="visible">
 
             <CheckBox
                 android:id="@+id/checkbox1"
                 android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_height="30dp" />
 
             <TextView
                 android:id="@+id/tv_answer1_content"
@@ -55,9 +56,9 @@
                 android:text="Đường, cầu đường bộ."
                 android:textColor="@color/grey" />
 
-                    </LinearLayout>
+        </LinearLayout>
 
-                    <View
+        <View
                         android:id="@+id/divider1"
                         android:layout_width="match_parent"
                         android:layout_height="0.3dp"
@@ -65,6 +66,7 @@
 
                     <LinearLayout
                         android:id="@+id/layout_answer2"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/padding_normal"
@@ -98,6 +100,7 @@
 
                     <LinearLayout
                         android:id="@+id/layout_answer3"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/padding_normal"
@@ -130,6 +133,7 @@
 
                     <LinearLayout
                         android:id="@+id/layout_answer4"
+                        android:visibility="visible"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/padding_normal"
@@ -153,7 +157,11 @@
                             android:textColor="@color/grey" />
 
                     </LinearLayout>
-
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
                     <LinearLayout
                         android:id="@+id/layout_explain_title"
                         android:layout_width="match_parent"
@@ -182,6 +190,7 @@
 
                     <TextView
                         android:id="@+id/tv_explain_content"
+
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="@dimen/padding_normal"
@@ -194,4 +203,5 @@
                         android:textSize="@dimen/font_text_normal"
                         android:textStyle="bold" />
                 </LinearLayout>
-            </ScrollView>
+        </LinearLayout>
+</ScrollView>

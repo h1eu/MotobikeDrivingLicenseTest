@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -19,6 +20,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
+import com.example.mototest.Api.Alltest;
+import com.example.mototest.Api.ApiService;
 import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
@@ -28,12 +31,16 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 
 public class TestFragment extends Fragment  {
     Button button;
     TestAdapter testAdapter;
     ListView listViewtest;
-    ArrayList<Test> testArrayList = new ArrayList<Test>();
+    ArrayList<String> testArrayList = new ArrayList<String>();
 
     public TestFragment() {
     }
@@ -51,32 +58,37 @@ public class TestFragment extends Fragment  {
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-    //        String[] test={"Đề 1","Đề 2","Đề 3","Đề 4"};
-//        ListView listView=(ListView)view.findViewById(R.id.lv_test);
-//        ArrayAdapter<String> adapter=new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1,test);
-//
-//        listView.setAdapter(adapter);
-//        listView.setOnItemClickListener(this);
-            ArrayList<Question> listqs=new ArrayList<Question>();
-            for (int i=1;i<=5;i++){
-                listqs.add(new Question(i,"3","asd","asd","1","ads","asd","asd","1"));
-            }
-            listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
-            testArrayList.add(new Test(1,listqs,"20"));
-            testArrayList.add(new Test(2,listqs,"20"));
-            testArrayList.add(new Test(3,listqs,"20"));
-            testArrayList.add(new Test(4,listqs,"20"));
-            testArrayList.add(new Test(5,listqs,"20"));
-            testAdapter=new TestAdapter(getActivity(),testArrayList);
-            listViewtest.setAdapter(testAdapter);
-            listViewtest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                    Intent intent=new Intent();
-                    intent.setClass(getActivity(), LayoutTest.class);
-                    getActivity().startActivity(intent);
+        ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
+            @Override
+            public void onResponse(Call<Alltest> call, Response<Alltest> response) {
+                listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
+                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
+                Alltest alltest=response.body();
+                ArrayList<Test> allidTest=alltest.getAllTest();
+//                Log.e("testid 1:",Integer.toString(alltest.getAllTest().get(0).getIdtest()));
+                for(Test t : allidTest)
+                {
+                    testArrayList.add(Integer.toString(t.getIdtest()));
                 }
-            });
+                testAdapter=new TestAdapter(getActivity(),testArrayList);
+                listViewtest.setAdapter(testAdapter);
+                listViewtest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        Bundle bundle=new Bundle();
+                        bundle.putString("Idtest", testArrayList.get(position));
+                        Intent intent=new Intent();
+                        intent.putExtras(bundle);
+                        intent.setClass(getActivity(), LayoutTest.class);
+                        getActivity().startActivity(intent);
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Call<Alltest> call, Throwable t) {
+                Toast.makeText(getContext(), "Call API FAIL", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 

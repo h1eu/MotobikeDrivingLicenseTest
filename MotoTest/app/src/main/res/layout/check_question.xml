@@ -20,6 +20,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:visibility="visible"
             android:text="Nộp bài"/>
 
         <Button
@@ -28,13 +29,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="đóng" />
-
-        <TextView
-            android:id="@+id/tv_result"
-            android:layout_width="30dp"
-            android:layout_height="40dp"
-            android:layout_weight="1"
-            android:text="Điểm" />
 
 
     </LinearLayout>

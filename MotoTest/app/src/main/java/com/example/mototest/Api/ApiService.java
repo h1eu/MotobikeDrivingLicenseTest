@@ -19,6 +19,8 @@ public interface ApiService {
             .build()
             .create(ApiService.class);
     @GET("api")
-    Call<Test> getTest(@Query("test_key") String test_key,
-                       @Query("type") String type);
+    Call<Test> getTest(@Query("action") String action,
+                       @Query("idtest") String idtest);
+    @GET("api")
+    Call<Alltest> getAllTest(@Query("action") String action);
 }

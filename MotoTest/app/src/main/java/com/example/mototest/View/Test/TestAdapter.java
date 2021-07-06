@@ -16,8 +16,8 @@ import com.example.mototest.R;
 
 import java.util.ArrayList;
 
-public class TestAdapter extends ArrayAdapter<Test> {
-    public TestAdapter(@NonNull Context context, ArrayList<Test> testArrayList) {
+public class TestAdapter extends ArrayAdapter<String> {
+    public TestAdapter(@NonNull Context context, ArrayList<String> testArrayList) {
         super(context, 0,testArrayList);
     }
 
@@ -31,9 +31,9 @@ public class TestAdapter extends ArrayAdapter<Test> {
         }
         TextView test_name=(TextView)convertView.findViewById(R.id.tv_test_name);
 
-        Test test=getItem(position);
+        String test=getItem(position);
         if(test!=null){
-            test_name.setText("Đề "+Integer.toString(test.getIdtest()));
+            test_name.setText("Đề "+test);
         }
 
         return convertView;
