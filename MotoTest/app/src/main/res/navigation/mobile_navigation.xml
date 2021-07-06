@@ -32,4 +32,9 @@
         android:name="com.example.mototest.View.ChangePass.ChangepassFragment"
         android:label="Đổi Mật Khẩu"
         tools:layout="@layout/fragment_changepass"/>
+    <fragment
+        android:id="@+id/nav_dashboard"
+        android:label="Dashboard"
+        android:name="com.example.mototest.View.Admin.DashboardFragment"
+        tools:layout="@layout/fragment_dashboard"/>
 </navigation>
