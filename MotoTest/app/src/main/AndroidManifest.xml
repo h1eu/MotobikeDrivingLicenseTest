@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.mototest">
-
-    <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@drawable/icon"
@@ -11,7 +9,7 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoTest">
-        <activity android:name=".View.Test.Result" />
+        <activity android:name=".View.Test.Result"></activity>
         <activity android:name=".View.Register" />
         <activity android:name=".View.Login" />
         <activity android:name=".View.Test.LayoutTest" />
