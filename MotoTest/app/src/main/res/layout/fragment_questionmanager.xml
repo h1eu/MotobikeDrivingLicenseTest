@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".View.Admin.questionmanager">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:background="@color/blue">
+
+        <Button
+            android:id="@+id/btn_addquestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="New Question" />
+
+        <ListView
+            android:id="@+id/lv_question"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollingCache="true" >
+        </ListView>
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,119 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.example.mototest.View.Admin.infoquestion" >
+
+    <TextView
+        android:id="@+id/tv_questionform"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="QuestionForm" />
+
+    <EditText
+        android:id="@+id/edt_questionform"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:id="@+id/imgtv_question"
+        />
+
+    <TextView
+        android:id="@+id/tv_da1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Đáp án 1" />
+
+    <EditText
+        android:id="@+id/edt_da1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_da2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Đáp án 2" />
+
+    <EditText
+        android:id="@+id/edt_da2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_da3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Đáp án 3" />
+
+    <EditText
+        android:id="@+id/edt_da3"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_da4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Đáp án 4" />
+
+    <EditText
+        android:id="@+id/edt_da4"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/tv_dadung"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:text="Đáp án đúng" />
+
+    <EditText
+        android:id="@+id/edt_dadung"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:id="@+id/ll_editquestion"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/btn_addquestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Add" />
+
+        <Button
+            android:id="@+id/btn_updatequestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Update" />
+
+        <Button
+            android:id="@+id/btn_deletequestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Delete" />
+        <Button
+            android:id="@+id/btn_imagequestion"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.3"
+            android:text="Image" />
+    </LinearLayout>
+
+
+
+
+</LinearLayout>
