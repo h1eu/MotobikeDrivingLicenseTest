@@ -12,7 +12,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:background="@color/orange_2"
+            android:background="@color/blue_2"
             android:orientation="horizontal">
 
             <ImageView
@@ -74,7 +74,7 @@
         android:id="@+id/toolbar_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="@color/orange_2"
+        android:background="@color/blue_2"
         android:orientation="horizontal"
         android:gravity="center"
         android:layout_alignParentBottom="true">
@@ -95,7 +95,7 @@
             android:layout_height="wrap_content"
             android:text="1"
             android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -104,7 +104,7 @@
             android:layout_marginEnd="5dp"
             android:text="/"
             android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_max_quesion"
@@ -112,7 +112,7 @@
             android:layout_height="wrap_content"
             android:text="20"
             android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/tv_next_quesion"

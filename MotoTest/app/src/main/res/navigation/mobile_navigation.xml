@@ -32,81 +32,9 @@
         android:name="com.example.mototest.View.ChangePass.ChangepassFragment"
         android:label="Đổi Mật Khẩu"
         tools:layout="@layout/fragment_changepass"/>
-
     <fragment
         android:id="@+id/nav_dashboard"
         android:label="Dashboard"
         android:name="com.example.mototest.View.Admin.DashboardFragment"
-        tools:layout="@layout/fragment_dashboard">
-
-        <action
-            android:id="@+id/action_nav_dashboard_to_accountmanager"
-            app:destination="@id/accountmanager" />
-
-        <action
-            android:id="@+id/action_nav_dashboard_to_testmanager"
-            app:destination="@id/testmanager" />
-        <action
-            android:id="@+id/action_nav_dashboard_to_questionmanager"
-            app:destination="@id/questionmanager" />
-    </fragment>
-    <fragment
-        android:id="@+id/rowquestion"
-        android:name="com.example.mototest.View.Admin.rowquestion"
-        android:label="rowquestion" />
-    <fragment
-        android:id="@+id/accountmanager"
-        android:name="com.example.mototest.View.Admin.accountmanager"
-        android:label="fragment_accountmanager"
-        tools:layout="@layout/fragment_accountmanager" >
-
-    </fragment>
-    <fragment
-        android:id="@+id/infoaccount"
-        android:name="com.example.mototest.View.Admin.infoaccount"
-        android:label="fragment_infoaccount"
-        tools:layout="@layout/fragment_infoaccount" />
-    <fragment
-        android:id="@+id/infotest"
-        android:name="com.example.mototest.View.Admin.infotest"
-        android:label="fragment_infotest"
-        tools:layout="@layout/fragment_infotest" />
-    <fragment
-        android:id="@+id/questionmanager"
-        android:name="com.example.mototest.View.Admin.questionmanager"
-        android:label="fragment_questionmanager"
-        tools:layout="@layout/fragment_questionmanager" >
-
-        <action
-            android:id="@+id/action_questionmanager_to_infoquestion"
-            app:destination="@id/infoquestion" />
-    </fragment>
-    <fragment
-        android:id="@+id/rowaccount"
-        android:name="com.example.mototest.View.Admin.rowaccount"
-        android:label="fragment_rowaccount"
-        tools:layout="@layout/fragment_rowaccount" />
-    <fragment
-        android:id="@+id/rowtest"
-        android:name="com.example.mototest.View.Admin.rowtest"
-        android:label="fragment_rowtest"
-        tools:layout="@layout/fragment_rowtest" />
-    <navigation android:id="@+id/navigation" />
-    <fragment
-        android:id="@+id/testmanager"
-        android:name="com.example.mototest.View.Admin.testmanager"
-        android:label="fragment_testmanager"
-        tools:layout="@layout/fragment_testmanager" >
-
-        <action
-            android:id="@+id/action_testmanager_to_infotest"
-            app:destination="@id/infotest" />
-    </fragment>
-    <fragment
-        android:id="@+id/infoquestion"
-        android:name="com.example.mototest.View.Admin.infoquestion"
-        android:label="fragment_infoquestion"
-        tools:layout="@layout/fragment_infoquestion" />
-
-
+        tools:layout="@layout/fragment_dashboard"/>
 </navigation>

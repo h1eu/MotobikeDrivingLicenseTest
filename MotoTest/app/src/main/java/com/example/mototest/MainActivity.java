@@ -1,34 +1,31 @@
 package com.example.mototest;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
-import com.google.android.material.snackbar.Snackbar;
-import com.google.android.material.navigation.NavigationView;
-
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mototest.databinding.ActivityMainBinding;
+import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private TextView tvbackq,tvnextq,tvcurrentq,tvmaxq,tv_name_main,tv_username_main;
+    private TextView tvbackq,tvnextq,tvcurrentq,tvmaxq;
     private ViewPager viewPager;
-    private View view;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+ //       setContentView(R.layout.activity_login);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -45,15 +42,7 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
-        view=navigationView.getHeaderView(0);
-        tv_name_main=view.findViewById(R.id.tv_name_main);
-        tv_username_main=view.findViewById(R.id.tv_usn_main);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if(bundle!=null) {
-            tv_name_main.setText(bundle.get("Name").toString());
-            tv_username_main.setText(bundle.get("Username").toString());
-        }
+
     }
 
     @Override

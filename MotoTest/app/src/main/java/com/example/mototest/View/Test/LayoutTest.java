@@ -71,7 +71,7 @@ public class LayoutTest extends AppCompatActivity{
         ApiService.apiservice.getTest(action,bundle.getString("Idtest")).enqueue(new Callback<Test>() {
             @Override
             public void onResponse(Call<Test> call, Response<Test> response) {
-//                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
                 Test test = response.body();
                 if(test!=null) {
                     Log.e("test:", Integer.toString(test.getIdtest()));
@@ -240,7 +240,7 @@ public class LayoutTest extends AppCompatActivity{
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                viewPager.setCurrentItem(position);
                 dialog.dismiss();
             }
         });

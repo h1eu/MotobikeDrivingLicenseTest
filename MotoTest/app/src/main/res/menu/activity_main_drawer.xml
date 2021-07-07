@@ -36,7 +36,7 @@
                     android:title="Đăng xuất" />
                 <item
                     android:id="@+id/nav_dashboard"
-                    android:icon="@drawable/ic_logout"
+                    android:icon="@drawable/ic_bike"
                     android:title="Dashboard" />
             </menu>
 
