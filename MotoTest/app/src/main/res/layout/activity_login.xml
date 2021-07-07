@@ -29,11 +29,11 @@
         app:startIconDrawable="@drawable/ic_user">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_usn_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:maxLines="1"
             android:inputType="text"
-            />
+            android:maxLines="1" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -53,7 +53,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_password"
+            android:id="@+id/edt_pass_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"

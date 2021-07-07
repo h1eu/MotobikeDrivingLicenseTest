@@ -6,6 +6,34 @@ public class User {
     private String Password;
     private String Name;
     private String Permission;
+    private int Active;
+    private String Recover;
+
+    public int getActive() {
+        return Active;
+    }
+
+    public void setActive(int active) {
+        Active = active;
+    }
+
+    public String getRecover() {
+        return Recover;
+    }
+
+    public void setRecover(String recover) {
+        Recover = recover;
+    }
+
+    public User(int iduser, String username, String password, String name, String permission, int active, String recover) {
+        Iduser = iduser;
+        Username = username;
+        Password = password;
+        Name = name;
+        Permission = permission;
+        Active = active;
+        Recover = recover;
+    }
 
     public int getIduser() {
         return Iduser;
@@ -47,19 +75,6 @@ public class User {
         Permission = permission;
     }
 
-    public User(){
-        this.Iduser = Iduser;
-        this.Username = Username;
-        this.Password = Password;
-        this.Name = Name;
-    }
 
-    public User(int Iduser , String Username,String Password ,String Name,String Permission){
-        this.Iduser = Iduser;
-        this.Username = Username;
-        this.Password = Password;
-        this.Name = Name;
-        this.Permission=Permission;
-    }
 
 }

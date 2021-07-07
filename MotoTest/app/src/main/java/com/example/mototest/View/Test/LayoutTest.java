@@ -2,10 +2,15 @@ package com.example.mototest.View.Test;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
 import android.app.Dialog;
+import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -23,6 +28,7 @@ import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
+import com.example.mototest.View.TestRanDom.TestRanDomFragment;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -43,6 +49,7 @@ public class LayoutTest extends AppCompatActivity{
     ArrayList<Question> questionArrayList=new ArrayList<>();
     private int point=0;
     private int ttTime=1;
+    private String action="getTest";
     private boolean isSubmit=false;
     ArrayList<String> listdadung=new ArrayList<>();
     @Override
@@ -50,7 +57,7 @@ public class LayoutTest extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_test);
         actionBar= getSupportActionBar();
-        String action="getTest";
+
         initUi();
 //        questionArrayList = getQuestionList();
         Intent intent = getIntent();
@@ -64,7 +71,7 @@ public class LayoutTest extends AppCompatActivity{
         ApiService.apiservice.getTest(action,bundle.getString("Idtest")).enqueue(new Callback<Test>() {
             @Override
             public void onResponse(Call<Test> call, Response<Test> response) {
-                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
                 Test test = response.body();
                 if(test!=null) {
                     Log.e("test:", Integer.toString(test.getIdtest()));
@@ -118,11 +125,11 @@ public class LayoutTest extends AppCompatActivity{
                         @Override
                         public void onClick(View v) {
                             isSubmit=true;
-                            Intent intent=new Intent(LayoutTest.this, MainActivity.class);
-                            startActivity(intent);
+                            finish();
 //                Toast.makeText(LayoutTest.this,"lick thanh cong",Toast.LENGTH_SHORT).show();
 
                         }
+
                     });
 
                     tvbackquestion.setOnClickListener(new View.OnClickListener() {
@@ -295,5 +302,10 @@ public class LayoutTest extends AppCompatActivity{
     protected void onStop() {
         super.onStop();
         isSubmit=true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
     }
 }

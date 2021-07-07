@@ -7,13 +7,18 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.mototest.R;
+import com.squareup.picasso.Picasso;
 
 public class Result extends AppCompatActivity {
     private Button btn_xemlaibaithi;
     private TextView tv_diem,tv_ketqua;
+    private LinearLayout ll_rs;
+    private ImageView img_v1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +39,11 @@ public class Result extends AppCompatActivity {
             else
                 tv_ketqua.setText("Trượt - Time: "+bundle.get("minutes")+":"+bundle.get("seconds"));
 
+//            ***************************************************************
+            ll_rs=findViewById(R.id.ll_rs);
+            createImg("https://i.imgur.com/DvpvklR.png");
+
+
         }
         btn_xemlaibaithi.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,5 +51,10 @@ public class Result extends AppCompatActivity {
                 finish();
             }
         });
+    }
+    private void createImg(String url){
+        ImageView imageView = new ImageView(this);
+        Picasso.get().load(url).into(imageView);
+        ll_rs.addView(imageView);
     }
 }

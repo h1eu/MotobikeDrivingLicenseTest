@@ -2,60 +2,62 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ll_rs"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="10dp"
-    tools:context=".View.Test.Result"
-    >
+    tools:context=".View.Test.Result">
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="Kết quả:"
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
-        />
+        android:text="Kết quả:"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:layout_marginBottom="5dp"
         android:gravity="center"
-        android:layout_marginBottom="5dp">
+        android:orientation="horizontal">
+
         <TextView
+            android:id="@+id/tv_diem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/holo_blue_dark"
             android:text="0"
-            android:id="@+id/tv_diem"/>
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="30sp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
-            android:textColor="@android:color/holo_blue_dark"
             android:text="/20"
-            />
+            android:textColor="@android:color/holo_blue_dark"
+            android:textSize="30sp" />
     </LinearLayout>
+
     <TextView
+        android:id="@+id/tv_ketqua"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="@android:color/holo_red_dark"
-        android:text="TRƯỢT"
-        android:id="@+id/tv_ketqua"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dp"/>
+        android:layout_marginBottom="5dp"
+        android:text="TRƯỢT"
+        android:textColor="@android:color/holo_red_dark"
+        android:textSize="20sp" />
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_xemlaibaithi"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/btn_xemlaibaithi"
-        android:text="Xem lại bài thi"
         android:layout_gravity="center"
-        android:backgroundTint="@color/orange"/>
-
+        android:backgroundTint="@color/orange"
+        android:text="Xem lại bài thi" />
 
 
 </LinearLayout>

@@ -62,7 +62,7 @@ public class TestFragment extends Fragment  {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
                 listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
-                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
                 Alltest alltest=response.body();
                 ArrayList<Test> allidTest=alltest.getAllTest();
 //                Log.e("testid 1:",Integer.toString(alltest.getAllTest().get(0).getIdtest()));
@@ -92,25 +92,4 @@ public class TestFragment extends Fragment  {
     }
 
 
-
-//    @Override
-//    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//        if(position==0){
-//            Intent intent=new Intent();
-//            intent.setClass(getActivity(), LayoutTest.class);
-//            getActivity().startActivity(intent);
-//
-//        }
-//        if(position==1){
-//            Toast.makeText(getActivity(),"đề 1",Toast.LENGTH_SHORT).show();
-//        }
-//        if(position==2){
-//            Toast.makeText(getActivity(),"đề 1",Toast.LENGTH_SHORT).show();
-//        }
-//        if(position==3){
-//            Toast.makeText(getActivity(),"đề 1",Toast.LENGTH_SHORT).show();
-//        }
-//
-//
-//    }
 }
