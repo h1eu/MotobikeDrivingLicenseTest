@@ -240,7 +240,7 @@ public class LayoutTest extends AppCompatActivity{
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                viewPager.setCurrentItem(position);
                 dialog.dismiss();
             }
         });
@@ -254,9 +254,6 @@ public class LayoutTest extends AppCompatActivity{
         btn_finish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-//                Log.e("size listdadung",Integer.toString(listdadung.size()));
-
                 Submit();
                 dialog.dismiss();
             }

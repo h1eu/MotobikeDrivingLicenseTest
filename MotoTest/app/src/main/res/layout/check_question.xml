@@ -21,12 +21,14 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:visibility="visible"
+            android:backgroundTint="@color/blue_2"
             android:text="Nộp bài"/>
 
         <Button
             android:id="@+id/btn_exit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/blue_2"
             android:layout_weight="1"
             android:text="đóng" />
 

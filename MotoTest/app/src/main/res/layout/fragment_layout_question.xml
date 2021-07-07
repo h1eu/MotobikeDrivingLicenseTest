@@ -30,7 +30,8 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginLeft="@dimen/padding_normal"
             android:layout_marginRight="@dimen/padding_normal"
-            android:src="@drawable/bienbaotest" />
+            android:src="@drawable/bienbaotest"
+           />
 
         <LinearLayout
             android:id="@+id/layout_answer1"
@@ -52,6 +53,7 @@
                 android:id="@+id/tv_answer1_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:layout_marginLeft="@dimen/padding_normal"
                 android:text="Đường, cầu đường bộ."
                 android:textColor="@color/grey" />
@@ -87,6 +89,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/padding_normal"
                             android:text="Đường, cầu đường bộ."
+                            android:textStyle="bold"
                             android:textColor="@color/grey" />
 
                     </LinearLayout>
@@ -118,6 +121,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/padding_normal"
+                            android:textStyle="bold"
                             android:text="Đường, cầu đường bộ."
                             android:textColor="@color/grey" />
 
@@ -150,6 +154,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="@dimen/padding_normal"
+                            android:textStyle="bold"
                             android:text="Đường, cầu đường bộ."
                             android:textColor="@color/grey" />
 

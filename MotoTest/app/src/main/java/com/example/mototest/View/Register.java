@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
@@ -20,6 +21,7 @@ import retrofit2.Response;
 public class Register extends AppCompatActivity {
     private EditText edt_res_username,edt_res_name,edt_res_password,edt_res_ComPassword;
     private Button btn_res_register;
+    TextView tv_login;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +31,14 @@ public class Register extends AppCompatActivity {
         edt_res_name=findViewById(R.id.edt_res_name);
         edt_res_password=findViewById(R.id.edt_res_password);
         edt_res_ComPassword=findViewById(R.id.edt_res_ComPassword);
+        tv_login = (TextView)findViewById(R.id.tv_login);
+        tv_login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Register.this,Login.class);
+                startActivity(intent);
+            }
+        });
         btn_res_register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

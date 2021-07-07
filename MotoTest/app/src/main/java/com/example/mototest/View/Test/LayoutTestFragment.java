@@ -51,27 +51,31 @@ public class LayoutTestFragment extends Fragment {
         linearLayout3=v.findViewById(R.id.layout_answer3);
         linearLayout4=v.findViewById(R.id.layout_answer4);
 
-        checkBox1.setOnClickListener(new View.OnClickListener() {
+        linearLayout1.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                checkBox1.setChecked(!checkBox1.isChecked());
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
             }
         });
-        checkBox2.setOnClickListener(new View.OnClickListener() {
+        linearLayout2.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                checkBox2.setChecked(!checkBox2.isChecked());
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
             }
         });
-        checkBox3.setOnClickListener(new View.OnClickListener() {
+        linearLayout3.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                checkBox3.setChecked(!checkBox3.isChecked());
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
             }
         });
-        checkBox4.setOnClickListener(new View.OnClickListener() {
+        linearLayout4.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
+                checkBox4.setChecked(!checkBox4.isChecked());
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
             }
         });
@@ -121,27 +125,29 @@ public class LayoutTestFragment extends Fragment {
             String kq=((LayoutTest) getActivity()).getResult(stt-1);
 //            LOI CHO NAY
             if (kq.indexOf("1") != -1)
-                linearLayout1.setBackgroundColor(getResources().getColor(R.color.green));
+                tv_da1.setTextColor(getResources().getColor(R.color.green));
 
             if (kq.indexOf("2") != -1)
-                linearLayout2.setBackgroundColor(getResources().getColor(R.color.green));
+                tv_da2.setTextColor(getResources().getColor(R.color.green));
 
             if (kq.indexOf("3") != -1)
-                linearLayout3.setBackgroundColor(getResources().getColor(R.color.green));
+                tv_da3.setTextColor(getResources().getColor(R.color.green));
 
             if (kq.indexOf("4") != -1)
-                linearLayout4.setBackgroundColor(getResources().getColor(R.color.green));
+                tv_da4.setTextColor(getResources().getColor(R.color.green));
 
             if (kq.indexOf("1") == -1 && checkBox1.isChecked())
-                linearLayout1.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                tv_da1.setTextColor(getResources().getColor(R.color.red));
+
             if (kq.indexOf("2") == -1 && checkBox2.isChecked())
-                linearLayout2.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                tv_da2.setTextColor(getResources().getColor(R.color.red));
+
             if (kq.indexOf("3") == -1 && checkBox3.isChecked())
             {
-                linearLayout3.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                tv_da3.setTextColor(getResources().getColor(R.color.red));
             }
             if (kq.indexOf("4") == -1 && checkBox4.isChecked())
-                linearLayout4.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                tv_da4.setTextColor(getResources().getColor(R.color.red));
 
 
         }

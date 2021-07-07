@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
@@ -22,6 +23,7 @@ import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
     Button btn_login,btn_res;
+    TextView tv_res;
     EditText edt_usn_login,edt_pass_login;
     private int i=0;
     @Override
@@ -29,7 +31,7 @@ public class Login extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         btn_login = (Button)findViewById(R.id.btn_login);
-        btn_res = (Button)findViewById(R.id.btn_register);
+        tv_res = (TextView) findViewById(R.id.tv_register);
         edt_usn_login=(EditText)findViewById(R.id.edt_usn_login);
         edt_pass_login=(EditText)findViewById(R.id.edt_pass_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -42,7 +44,7 @@ public class Login extends AppCompatActivity {
 
             }
         });
-        btn_res.setOnClickListener(new View.OnClickListener() {
+        tv_res.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Login.this,Register.class);

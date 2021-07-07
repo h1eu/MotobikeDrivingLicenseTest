@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.example.mototest.MainActivity;
 import com.example.mototest.R;
 import com.squareup.picasso.Picasso;
 
@@ -19,11 +20,13 @@ public class Result extends AppCompatActivity {
     private TextView tv_diem,tv_ketqua;
     private LinearLayout ll_rs;
     private ImageView img_v1;
+    private ImageView toolbar_back;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         btn_xemlaibaithi=(Button)findViewById(R.id.btn_xemlaibaithi) ;
+        toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
         tv_diem=(TextView)findViewById(R.id.tv_diem);
         tv_ketqua=(TextView)findViewById(R.id.tv_ketqua);
 //        ActionBar actionBar=getSupportActionBar();
@@ -45,6 +48,15 @@ public class Result extends AppCompatActivity {
 
 
         }
+        toolbar_back.setOnClickListener(new  View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1=new Intent(Result.this, MainActivity.class);
+                startActivity(intent1);
+            }
+
+        });
+
         btn_xemlaibaithi.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

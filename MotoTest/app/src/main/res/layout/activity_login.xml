@@ -19,12 +19,12 @@
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/edt_usernamelayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="302dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/v_iconapp"
         android:layout_alignParentLeft="false"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="70dp"
         android:hint="Tên đăng nhập"
         app:startIconDrawable="@drawable/ic_user">
 
@@ -41,7 +41,7 @@
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:id="@+id/edt_passwordlayout"
-        android:layout_width="300dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_lock"
         app:endIconMode="password_toggle"
@@ -61,53 +61,53 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+    <TextView
+        android:id="@+id/tv_forgetpass"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Quên Mật Khẩu ?"
+        android:layout_centerInParent="true"
+        android:layout_below="@+id/edt_passwordlayout"
+        android:layout_alignParentLeft="false"
+        android:layout_marginTop="15dp"
+        android:textSize="20sp"
+        android:textColor="@color/blue"
+        android:gravity="end"
+        android:textStyle="bold"
+        />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_login"
-        android:layout_width="250dp"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/blue"
+        android:layout_below="@+id/tv_forgetpass"
         android:layout_alignParentLeft="false"
-        android:layout_below="@+id/edt_passwordlayout"
-        android:layout_centerInParent="true"
-        app:cornerRadius="100dp"
-        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/blue"
         android:gravity="center"
         android:text="Đăng nhập"
         android:textColor="@color/white"
-        android:textSize="26sp" />
+        android:textSize="26sp"
+        app:cornerRadius="100dp" />
 
     <TextView
-        android:id="@+id/tv_login"
-        android:layout_width="350dp"
-        android:layout_height="45dp"
-        android:text="Bạn chưa có tài khoản ?"
+        android:id="@+id/tv_register"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:text="Bạn chưa có tài khoản ? Đăng kí ngay"
         android:layout_centerInParent="true"
+        android:layout_below="@+id/btn_login"
         android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="15dp"
         android:textSize="20sp"
-        android:textColor="@color/black"
+        android:textColor="@color/blue_2"
         android:gravity="center"
+        android:textStyle="bold"
         />
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btn_register"
-        android:layout_width="180dp"
-        android:layout_height="50dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="547dp"
-        android:layout_marginEnd="30dp"
-        android:backgroundTint="@color/blue"
-        android:gravity="center"
-        android:text="Đăng Ký"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        app:cornerRadius="100dp"
-        app:icon="@drawable/ic_useradd" />
 
 
 </RelativeLayout>

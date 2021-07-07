@@ -7,7 +7,7 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="green">#81c784</color>
+    <color name="green">#32CD32</color>
     <color name="orange">#FFC125</color>
     <color name="orange_2">#ffa726</color>
     <color name="blue">#0288d1</color>
@@ -20,5 +20,8 @@
     <color name="yello">#ffb300</color>
     <color name="greens">#00bfa5</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="orange_3">#ff5c00</color>
+    <color name="blue_2">#3b72ff</color>
+    <color name="red">#F65B65</color>
 
 </resources>

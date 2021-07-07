@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/nav_changepass"
     tools:context=".View.ChangePass.ChangepassFragment">
 
@@ -14,48 +15,73 @@
         android:layout_centerInParent="true"
         android:layout_alignParentLeft="false"
         android:layout_alignParentTop="true"
-        android:layout_marginTop="135dp"
+        android:layout_marginTop="80dp"
         android:gravity="center"
         android:text="@string/menu_changepass"
         android:textSize="40sp"
         android:textColor="@color/black"/>
 
-    <EditText
-        android:id="@+id/edt_newpass"
-        android:layout_width="302dp"
-        android:layout_height="48dp"
-        android:hint="mật khẩu mới"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="250dp"
-        android:singleLine="true" />
-
-
-    <EditText
-        android:id="@+id/edt_Comnewpass"
-        android:layout_width="300dp"
-        android:layout_height="48dp"
-        android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="298dp"
-        android:hint="Nhập lại mật khẩu"
-        android:singleLine="true" />
-
-    <Button
-        android:id="@+id/btn_save"
-        android:layout_width="200dp"
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/edt_passwordlayoutchange"
+        android:layout_width="310dp"
         android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:endIconMode="password_toggle"
         android:layout_alignParentLeft="false"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/tv_changepass"
         android:layout_centerInParent="true"
-        android:layout_marginTop="360dp"
+        android:layout_marginTop="100dp"
+        android:hint="Nhập mật khẩu mới"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_passwordchane"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/edt_Comfirmpasswordlayoutchange"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_lock"
+        app:endIconMode="password_toggle"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/edt_passwordlayoutchange"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
+        android:hint="Nhập lại mật khẩu"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_Comfirmpasschange"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="textPassword"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_save"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/edt_Comfirmpasswordlayoutchange"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="20dp"
         android:backgroundTint="@color/orange"
         android:gravity="center"
         android:text="Lưu"
         android:textColor="@color/black"
-        android:textSize="36sp" />
+        android:textSize="20sp"
+        app:cornerRadius="10dp"/>
 
 
 
