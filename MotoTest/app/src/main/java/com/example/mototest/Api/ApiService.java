@@ -43,4 +43,33 @@ public interface ApiService {
             @Field("Username") String username,
             @Field("Password") String password
     );
+
+    @GET("api")
+    Call<AllQues> getAllQues(@Query("action") String action);
+
+//    UPDATE CAU HOI
+    @FormUrlEncoded
+    @POST("api")
+    Call<Status> querryQues(
+            @Field("action") String action,
+            @Field("QId") String QId,
+            @Field("QForm") String Qform,
+            @Field("QContent") String QContent,
+            @Field("QDa1") String QDa1,
+            @Field("QDa2") String QDa2,
+            @Field("QDa3") String QDa3,
+            @Field("QDa4") String QDa4,
+            @Field("QDadung") String QDadung
+    );
+
+    @FormUrlEncoded
+    @POST("api")
+    Call<Status> querryTest(
+            @Field("action") String action,
+            @Field("TestID") String TestID,
+            @Field("QuesID") String QuesID
+    );
+
+
+
 }

@@ -11,14 +11,18 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 
+import com.example.mototest.Model.Question;
 import com.example.mototest.R;
 import com.example.mototest.View.Test.LayoutTest;
+
+import java.util.ArrayList;
 
 
 public class DashboardFragment extends Fragment {
     private LinearLayout ll_accountmanager;
     private LinearLayout ll_testmanager;
     private LinearLayout ll_questionmanager;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -45,10 +49,14 @@ public class DashboardFragment extends Fragment {
         });
         ll_questionmanager.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
+
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_nav_dashboard_to_questionmanager);
             }
         });
+
+
 
         return  v;
     }

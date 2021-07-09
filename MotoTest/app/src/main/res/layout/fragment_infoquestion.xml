@@ -5,8 +5,21 @@
     android:orientation="vertical"
     android:padding="10dp"
     tools:context="com.example.mototest.View.Admin.infoquestion" >
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-    <TextView
+            <TextView
+                android:id="@+id/tv_QuesId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="id" />
+
+            <TextView
         android:id="@+id/tv_questionform"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -17,10 +30,26 @@
         android:id="@+id/edt_questionform"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/tv_info_qscontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Nội dung" />
+
+    <EditText
+        android:id="@+id/edt_info_qscontent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Name" />
+
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="150dp"
         android:id="@+id/imgtv_question"
+        android:visibility="gone"
         />
 
     <TextView
@@ -86,7 +115,7 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn_addquestion"
+            android:id="@+id/btn_newquestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
@@ -112,7 +141,8 @@
             android:layout_weight="0.3"
             android:text="Image" />
     </LinearLayout>
-
+    </LinearLayout>
+    </ScrollView>
 
 
 

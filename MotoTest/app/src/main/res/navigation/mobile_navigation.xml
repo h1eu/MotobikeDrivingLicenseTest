@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_questionmanager_to_infoquestion"
             app:destination="@id/infoquestion" />
+        <argument
+            android:name="TestID"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/rowaccount"
@@ -101,12 +104,19 @@
         <action
             android:id="@+id/action_testmanager_to_infotest"
             app:destination="@id/infotest" />
+        <action
+            android:id="@+id/action_testmanager_to_questionmanager"
+            app:destination="@id/questionmanager" />
     </fragment>
     <fragment
         android:id="@+id/infoquestion"
         android:name="com.example.mototest.View.Admin.infoquestion"
         android:label="fragment_infoquestion"
-        tools:layout="@layout/fragment_infoquestion" />
+        tools:layout="@layout/fragment_infoquestion" >
+        <argument
+            android:name="Ques"
+            app:argType="com.example.mototest.Model.Question" />
+    </fragment>
 
 
 </navigation>

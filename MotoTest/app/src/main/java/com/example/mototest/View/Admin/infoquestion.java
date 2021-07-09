@@ -7,8 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.Status;
+import com.example.mototest.MainActivity;
+import com.example.mototest.Model.Question;
 import com.example.mototest.R;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,7 +33,7 @@ public class infoquestion extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private Integer TestId=0;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -61,6 +73,124 @@ public class infoquestion extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_infoquestion, container, false);
+//        btn_updatequestion
+        View v = inflater.inflate(R.layout.fragment_infoquestion, container, false);
+        EditText edt_questionform = v.findViewById(R.id.edt_questionform);
+        EditText edt_info_qscontent = v.findViewById(R.id.edt_info_qscontent);
+        EditText edt_da1 = v.findViewById(R.id.edt_da1);
+        EditText edt_da2 = v.findViewById(R.id.edt_da2);
+        EditText edt_da3 = v.findViewById(R.id.edt_da3);
+        EditText edt_da4 = v.findViewById(R.id.edt_da4);
+        EditText edt_dadung = v.findViewById(R.id.edt_dadung);
+        TextView tv_QuesId = v.findViewById(R.id.tv_QuesId);
+        Question ques = new Question();
+
+        try{
+//code that may throw an exception
+            ques = infoquestionArgs.fromBundle(getArguments()).getQues();
+        }catch(Exception e){
+
+        }
+
+
+//        String qs="";
+//        qs=infoquestionArgs.fromBundle(getArguments()).getQSForm();
+
+
+        tv_QuesId.setText(Integer.toString(ques.getIdquestion()));
+        edt_questionform.setText(ques.getQuestionform());
+        edt_info_qscontent.setText(ques.getContent());
+        edt_da1.setText(ques.getDa1());
+        edt_da2.setText(ques.getDa2());
+        edt_da3.setText(ques.getDa3());
+        edt_da4.setText(ques.getDa4());
+        edt_dadung.setText(ques.getDadung());
+
+        Button btn_updatequestion = (Button) v.findViewById(R.id.btn_updatequestion);
+        btn_updatequestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiService.apiservice.querryQues("updateQS",
+                        tv_QuesId.getText().toString(),
+                        edt_questionform.getText().toString(),
+                        edt_info_qscontent.getText().toString(),
+                        edt_da1.getText().toString(),
+                        edt_da2.getText().toString(),
+                        edt_da3.getText().toString(),
+                        edt_da4.getText().toString(),
+                        edt_dadung.getText().toString()
+                        ).enqueue(new Callback<Status>() {
+                    @Override
+                    public void onResponse(Call<Status> call, Response<Status> response) {
+                        Status status = response.body();
+                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Status> call, Throwable t) {
+                        Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        Button btn_deletequestion = (Button) v.findViewById(R.id.btn_deletequestion);
+        btn_deletequestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiService.apiservice.querryQues("deleteQS",
+                        tv_QuesId.getText().toString(),
+                        edt_questionform.getText().toString(),
+                        edt_info_qscontent.getText().toString(),
+                        edt_da1.getText().toString(),
+                        edt_da2.getText().toString(),
+                        edt_da3.getText().toString(),
+                        edt_da4.getText().toString(),
+                        edt_dadung.getText().toString()
+                ).enqueue(new Callback<Status>() {
+                    @Override
+                    public void onResponse(Call<Status> call, Response<Status> response) {
+                        Status status = response.body();
+                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Status> call, Throwable t) {
+                        Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+        Button btn_newquestion = (Button) v.findViewById(R.id.btn_newquestion);
+        btn_newquestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ApiService.apiservice.querryQues("createQS",
+                        tv_QuesId.getText().toString(),
+                        edt_questionform.getText().toString(),
+                        edt_info_qscontent.getText().toString(),
+                        edt_da1.getText().toString(),
+                        edt_da2.getText().toString(),
+                        edt_da3.getText().toString(),
+                        edt_da4.getText().toString(),
+                        edt_dadung.getText().toString()
+                ).enqueue(new Callback<Status>() {
+                    @Override
+                    public void onResponse(Call<Status> call, Response<Status> response) {
+                        Status status = response.body();
+                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<Status> call, Throwable t) {
+                        Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+        return v;
     }
 }

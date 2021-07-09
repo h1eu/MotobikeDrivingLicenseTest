@@ -56,6 +56,7 @@ public class LayoutTestFragment extends Fragment {
                 // Code here executes on main thread after user presses button
                 checkBox1.setChecked(!checkBox1.isChecked());
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
+
             }
         });
         linearLayout2.setOnClickListener(new View.OnClickListener() {
@@ -76,6 +77,30 @@ public class LayoutTestFragment extends Fragment {
             public void onClick(View v) {
                 // Code here executes on main thread after user presses button
                 checkBox4.setChecked(!checkBox4.isChecked());
+                ((LayoutTest) getActivity()).setAns(stt,getAns());
+            }
+        });
+        checkBox1.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                ((LayoutTest) getActivity()).setAns(stt,getAns());
+            }
+        });
+        checkBox2.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                ((LayoutTest) getActivity()).setAns(stt,getAns());
+            }
+        });
+        checkBox3.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
+                ((LayoutTest) getActivity()).setAns(stt,getAns());
+            }
+        });
+        checkBox4.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Code here executes on main thread after user presses button
                 ((LayoutTest) getActivity()).setAns(stt,getAns());
             }
         });
@@ -148,9 +173,9 @@ public class LayoutTestFragment extends Fragment {
             }
             if (kq.indexOf("4") == -1 && checkBox4.isChecked())
                 tv_da4.setTextColor(getResources().getColor(R.color.red));
-
-
         }
+
+
     }
     public String getAns(){
         String ctl="";
@@ -169,6 +194,7 @@ public class LayoutTestFragment extends Fragment {
             if(ctl!="") ctl+=",";
             ctl+="4";
         }
+//        Log.e("stt",ctl);
         return ctl;
     }
 

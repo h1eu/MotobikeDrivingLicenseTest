@@ -209,6 +209,7 @@ public class LayoutTest extends AppCompatActivity{
     protected boolean getisSubmit(){
         return isSubmit;
     }
+
     protected void setAns(Integer stt,String ctl){
         if(stt-1<listans.size())
             listans.set(stt-1,ctl);
@@ -219,6 +220,7 @@ public class LayoutTest extends AppCompatActivity{
             listans.add(ctl);
         }
     }
+
     private void checkanser(boolean timeout) {
 
 

@@ -2,10 +2,12 @@ package com.example.mototest;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.mototest.Model.Question;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity {
     private TextView tvbackq,tvnextq,tvcurrentq,tvmaxq,tv_name_main,tv_username_main;
     private ViewPager viewPager;
     private View view;
+    protected Question question;
+    public int check=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,5 +74,17 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
+    public void setQuestion(Question qs){
+        this.question=qs;
+        this.check=1;
+        Log.e("Check:",Integer.toString(this.check));
+    }
+
+    public Question getQuestion(){
+//        if(this.check==0) return new Question(-1,"","","","","","","","");
+//        else this.check=0;
+        return this.question;
+//        return null;
+    }
 
 }

@@ -1,17 +1,33 @@
 package com.example.mototest.View.Admin;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.Toast;
 
+import com.example.mototest.Api.Alltest;
+import com.example.mototest.Api.ApiService;
+import com.example.mototest.Model.Test;
 import com.example.mototest.R;
+import com.example.mototest.View.Test.LayoutTest;
+import com.example.mototest.View.Test.TestAdapter;
+
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,7 +40,8 @@ public class testmanager extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    private ArrayList<String> testArrayList = new ArrayList<String>();
+    TestAdapter testAdapter;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -69,11 +86,48 @@ public class testmanager extends Fragment {
         btn_addtest = (Button) v.findViewById(R.id.btn_addtest);
         btn_addtest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_testmanager_to_infotest);
 
             }
         });
+        ListView lv_test = v.findViewById(R.id.lv_test);
+        ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
+            @Override
+            public void onResponse(Call<Alltest> call, Response<Alltest> response) {
+//                lv_test=(ListView)getActivity().findViewById(R.id.lv_test);
+//                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
+                Alltest alltest=response.body();
+                ArrayList<Test> allidTest=alltest.getAllTest();
+//                Log.e("testid 1:",Integer.toString(alltest.getAllTest().get(0).getIdtest()));
+                for(Test t : allidTest)
+                {
+                    testArrayList.add(Integer.toString(t.getIdtest()));
+                }
+                testAdapter=new TestAdapter(getActivity(),testArrayList);
+                lv_test.setAdapter(testAdapter);
+                lv_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                        Bundle bundle=new Bundle();
+//                        bundle.putString("Idtest", testArrayList.get(position));
+//                        Intent intent=new Intent();
+//                        intent.putExtras(bundle);
+//                        intent.setClass(getActivity(), LayoutTest.class);
+//                        getActivity().startActivity(intent);
+                        NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
+                        NavController navController = Navigation.findNavController(v);
+                        navController.navigate(action);
+                    }
+                });
+            }
+            @Override
+            public void onFailure(Call<Alltest> call, Throwable t) {
+                Toast.makeText(getContext(), "Call API FAIL", Toast.LENGTH_SHORT).show();
+            }
+
+    });
         return v;
     }
 }

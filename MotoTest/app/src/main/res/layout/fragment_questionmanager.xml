@@ -13,10 +13,24 @@
         android:background="@color/blue">
 
         <Button
-            android:id="@+id/btn_addquestion"
+            android:id="@+id/btn_newquestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="New Question" />
+
+        <Button
+            android:id="@+id/btn_addtoTest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ADD FROM LIBARY TO TEST"
+            android:visibility="gone"/>
+
+        <Button
+            android:id="@+id/btn_remove"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:text="Remove" />
 
         <ListView
             android:id="@+id/lv_question"
@@ -24,6 +38,7 @@
             android:layout_height="fill_parent"
             android:scrollingCache="true" >
         </ListView>
+
     </LinearLayout>
 
 </FrameLayout>

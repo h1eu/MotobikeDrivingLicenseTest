@@ -26,6 +26,21 @@ public class Question implements Serializable {
 
     }
 
+    public Question() {
+        this.Idquestion = -1;
+        this.Questionform = "";
+        this.Content = "";
+        this.Image = "";
+        this.Da1 = "";
+        this.Da2 = "";
+        this.Da3 = "";
+        this.Da4 = "";
+        this.Dadung = "";
+    }
+//    public Question(int idquestion) {
+//        Idquestion = idquestion;
+//    }
+
     public int getIdquestion() {
         return Idquestion;
     }
