@@ -56,16 +56,23 @@
         android:label="rowquestion" />
     <fragment
         android:id="@+id/accountmanager"
-        android:name="com.example.mototest.View.Admin.accountmanager"
+        android:name="com.example.mototest.View.Admin.usermanager"
         android:label="fragment_accountmanager"
-        tools:layout="@layout/fragment_accountmanager" >
+        tools:layout="@layout/fragment_usermanager" >
 
+        <action
+            android:id="@+id/action_accountmanager_to_infoaccount"
+            app:destination="@id/infoaccount" />
     </fragment>
     <fragment
         android:id="@+id/infoaccount"
         android:name="com.example.mototest.View.Admin.infoaccount"
         android:label="fragment_infoaccount"
-        tools:layout="@layout/fragment_infoaccount" />
+        tools:layout="@layout/fragment_infoaccount" >
+        <argument
+            android:name="User"
+            app:argType="com.example.mototest.Model.User" />
+    </fragment>
     <fragment
         android:id="@+id/infotest"
         android:name="com.example.mototest.View.Admin.infotest"

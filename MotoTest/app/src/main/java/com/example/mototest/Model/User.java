@@ -1,6 +1,8 @@
 package com.example.mototest.Model;
 
-public class User {
+import java.io.Serializable;
+
+public class User implements Serializable {
     private int Iduser;
     private String Username;
     private String Password;

@@ -7,6 +7,12 @@
     tools:context="com.example.mototest.View.Admin.infoaccount" >
 
     <TextView
+        android:id="@+id/tv_iduser"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ID" />
+
+    <TextView
         android:id="@+id/tv_username"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -19,14 +25,14 @@
         android:layout_height="wrap_content" />
 
     <TextView
-        android:id="@+id/tv_password"
+        android:id="@+id/tv_Recover"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="left"
-        android:text="Password" />
+        android:text="RecoverCode" />
 
     <EditText
-        android:id="@+id/edt_phone"
+        android:id="@+id/edt_recoverCode"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" />
 
@@ -48,10 +54,23 @@
         android:gravity="left"
         android:text="Permission" />
 
-    <EditText
-        android:id="@+id/edt_permission"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content" />
+    <RadioGroup
+        android:id="@+id/rbtn_permission"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbtn_admin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Admin" />
+
+        <RadioButton
+            android:id="@+id/rbtn_user"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="User" />
+    </RadioGroup>
 
     <LinearLayout
         android:id="@+id/ll_edit"
@@ -60,11 +79,11 @@
         android:orientation="horizontal" >
 
         <Button
-            android:id="@+id/btn_add"
+            android:id="@+id/btn_active"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_weight="0.3"
-            android:text="Add" />
+            android:text="Block" />
 
         <Button
             android:id="@+id/btn_update"

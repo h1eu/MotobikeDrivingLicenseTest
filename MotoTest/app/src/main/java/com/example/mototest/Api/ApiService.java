@@ -17,39 +17,41 @@ import retrofit2.http.Query;
 
 //https://btl60pm2.000webhostapp.com/api
 public interface ApiService {
+    String api="index.php";
     Gson gson = new GsonBuilder().create();
     ApiService apiservice = new Retrofit.Builder()
-            .baseUrl("https://btl60pm2.000webhostapp.com/")
+//            .baseUrl("https://btl60pm2.000webhostapp.com/")
+            .baseUrl("http://project3h.me/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
-    @GET("api")
+    @GET(api)
     Call<Test> getTest(@Query("action") String action,
                        @Query("idtest") String idtest);
-    @GET("api")
+    @GET(api)
     Call<Alltest> getAllTest(@Query("action") String action);
 
     @FormUrlEncoded
-    @POST("api")
+    @POST(api)
     Call<User> login(
             @Field("Username") String username,
             @Field("Password") String password
     );
 
     @FormUrlEncoded
-    @POST("api")
+    @POST(api)
     Call<User> register(
             @Field("Name") String name,
             @Field("Username") String username,
             @Field("Password") String password
     );
 
-    @GET("api")
+    @GET(api)
     Call<AllQues> getAllQues(@Query("action") String action);
 
 //    UPDATE CAU HOI
     @FormUrlEncoded
-    @POST("api")
+    @POST(api)
     Call<Status> querryQues(
             @Field("action") String action,
             @Field("QId") String QId,
@@ -63,7 +65,7 @@ public interface ApiService {
     );
 
     @FormUrlEncoded
-    @POST("api")
+    @POST(api)
     Call<Status> querryTest(
             @Field("action") String action,
             @Field("TestID") String TestID,
@@ -71,5 +73,21 @@ public interface ApiService {
     );
 
 
+//USER MANAGER
+    @GET(api)
+    Call<AllUser> getAllUser(@Query("action") String action);
+
+    @FormUrlEncoded
+    @POST(api)
+    Call<Status> querryUser(
+            @Field("action") String action,
+            @Field("Iduser") String iduser,
+            @Field("Username") String Username,
+            @Field("Password") String Password,
+            @Field("Name") String Name,
+            @Field("Permission") String Permission,
+            @Field("Active") String Active,
+            @Field("Recover") String Recover
+    );
 
 }

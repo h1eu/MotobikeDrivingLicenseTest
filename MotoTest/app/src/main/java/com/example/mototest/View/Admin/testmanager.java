@@ -8,16 +8,19 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.Alltest;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.Status;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
 import com.example.mototest.View.Test.LayoutTest;
@@ -42,22 +45,26 @@ public class testmanager extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<String> testArrayList = new ArrayList<String>();
     TestAdapter testAdapter;
+
     // TODO: Rename and change types of parameters
     private String mParam1;
+
+
+
     private String mParam2;
     private Button btn_addtest;
+    private Boolean did=true;
     public testmanager() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment testmanager.
-     */
+    public Boolean getDid() {
+        return did;
+    }
+
+    public void setDid(Boolean did) {
+        this.did = did;
+    }
     // TODO: Rename and change types and number of parameters
     public static testmanager newInstance(String param1, String param2) {
         testmanager fragment = new testmanager();
@@ -86,12 +93,13 @@ public class testmanager extends Fragment {
         btn_addtest = (Button) v.findViewById(R.id.btn_addtest);
         btn_addtest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-
-                NavController navController = Navigation.findNavController(v);
-                navController.navigate(R.id.action_testmanager_to_infotest);
+                createTest();
+//                NavController navController = Navigation.findNavController(v);
+//                navController.navigate(R.id.action_testmanager_to_infotest);
 
             }
         });
+
         ListView lv_test = v.findViewById(R.id.lv_test);
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
@@ -110,17 +118,17 @@ public class testmanager extends Fragment {
                 lv_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        Bundle bundle=new Bundle();
-//                        bundle.putString("Idtest", testArrayList.get(position));
-//                        Intent intent=new Intent();
-//                        intent.putExtras(bundle);
-//                        intent.setClass(getActivity(), LayoutTest.class);
-//                        getActivity().startActivity(intent);
-                        NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
-                        NavController navController = Navigation.findNavController(v);
-                        navController.navigate(action);
+                        if(!testAdapter.isdel){
+                            Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
+                            NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
+                            NavController navController = Navigation.findNavController(v);
+                            navController.navigate(action);
+                        }
                     }
                 });
+
+
+                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<Alltest> call, Throwable t) {
@@ -130,4 +138,20 @@ public class testmanager extends Fragment {
     });
         return v;
     }
+
+    private void createTest(){
+        ApiService.apiservice.querryTest("createTest","-1","0").enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
+                Toast.makeText(getContext(),"Tao thanh cong",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+                Toast.makeText(getContext(),"Tao that bai",Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+
 }

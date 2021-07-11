@@ -5,6 +5,16 @@ import java.io.Serializable;
 public class Status implements Serializable {
     private boolean status;
 
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+    }
+
+    private String message;
+
     public Status(boolean status) {
         this.status = status;
     }
