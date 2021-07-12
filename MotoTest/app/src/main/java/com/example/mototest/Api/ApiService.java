@@ -8,7 +8,6 @@ import com.google.gson.GsonBuilder;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -17,11 +16,12 @@ import retrofit2.http.Query;
 
 //https://btl60pm2.000webhostapp.com/api
 public interface ApiService {
-    String api="index.php";
+    String api="api";
+//    String api="index.php";
     Gson gson = new GsonBuilder().create();
     ApiService apiservice = new Retrofit.Builder()
-//            .baseUrl("https://btl60pm2.000webhostapp.com/")
-            .baseUrl("http://project3h.me/")
+            .baseUrl("https://btl60pm2.000webhostapp.com/")
+//            .baseUrl("http://project3h.me/")
             .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
             .create(ApiService.class);
@@ -89,5 +89,10 @@ public interface ApiService {
             @Field("Active") String Active,
             @Field("Recover") String Recover
     );
+
+//    Comment
+    @GET(api)
+    Call<AllCmt> getAllCmt(@Query("action") String action,
+                           @Query("TestId") String TestId);
 
 }

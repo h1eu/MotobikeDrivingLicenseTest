@@ -2,32 +2,22 @@ package com.example.mototest.View.Test;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.Layout;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 
 import com.example.mototest.Api.Alltest;
 import com.example.mototest.Api.ApiService;
-import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
-import com.example.mototest.View.Login;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 

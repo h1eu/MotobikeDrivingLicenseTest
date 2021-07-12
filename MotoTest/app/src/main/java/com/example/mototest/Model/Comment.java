@@ -1,6 +1,6 @@
 package com.example.mototest.Model;
 
-public class Forum {
+public class Comment {
     private int Idcmt;
     private int Iduser;
     private int Idtest;
@@ -8,7 +8,7 @@ public class Forum {
     private int Like;
     private int DisLike;
 
-    public Forum(int Idcmt, int Iduser, int Idtest, String Content, int Like, int DisLike) {
+    public Comment(int Idcmt, int Iduser, int Idtest, String Content, int Like, int DisLike) {
         this.Idcmt = Idcmt;
         this.Iduser = Iduser;
         this.Idtest = Idtest;

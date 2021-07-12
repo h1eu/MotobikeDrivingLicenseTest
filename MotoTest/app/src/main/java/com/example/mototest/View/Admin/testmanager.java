@@ -1,6 +1,5 @@
 package com.example.mototest.View.Admin;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,7 +7,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +21,6 @@ import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.Status;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
-import com.example.mototest.View.Test.LayoutTest;
 import com.example.mototest.View.Test.TestAdapter;
 
 import java.util.ArrayList;
@@ -45,7 +42,7 @@ public class testmanager extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<String> testArrayList = new ArrayList<String>();
     TestAdapter testAdapter;
-
+    private ImageView img_delTest;
     // TODO: Rename and change types of parameters
     private String mParam1;
 
@@ -53,18 +50,11 @@ public class testmanager extends Fragment {
 
     private String mParam2;
     private Button btn_addtest;
-    private Boolean did=true;
     public testmanager() {
         // Required empty public constructor
     }
 
-    public Boolean getDid() {
-        return did;
-    }
 
-    public void setDid(Boolean did) {
-        this.did = did;
-    }
     // TODO: Rename and change types and number of parameters
     public static testmanager newInstance(String param1, String param2) {
         testmanager fragment = new testmanager();
@@ -100,7 +90,7 @@ public class testmanager extends Fragment {
             }
         });
 
-        ListView lv_test = v.findViewById(R.id.lv_test);
+        ListView lv_test = v.findViewById(R.id.lv_testmanager);
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {

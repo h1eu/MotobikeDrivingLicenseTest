@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".View.Comment">
+    tools:context=".View.Comment.comment">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -218,12 +218,28 @@
             android:hint="Nhập bình luận"
             app:startIconDrawable="@drawable/ic_user">
 
+
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edt_cmt_content"
-                android:layout_width="match_parent"
+                android:layout_width="355dp"
                 android:layout_height="match_parent"
                 android:inputType="text"
                 android:maxLines="1" />
+
+            <ImageView
+                android:id="@+id/iv_send"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@android:drawable/ic_menu_send" />
+
+            <!--            <com.google.android.material.imageview.ShapeableImageView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginTop="0dp"-->
+<!--                android:layout_marginEnd="88dp"-->
+<!--                app:srcCompat="@android:drawable/ic_menu_send" />-->
+
 
         </com.google.android.material.textfield.TextInputLayout>
 

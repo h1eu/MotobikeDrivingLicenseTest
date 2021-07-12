@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:text="New Test" />
         <ListView
-            android:id="@+id/lv_test"
+            android:id="@+id/lv_testmanager"
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:background="@android:color/transparent"

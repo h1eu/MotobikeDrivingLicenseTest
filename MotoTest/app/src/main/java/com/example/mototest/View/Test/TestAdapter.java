@@ -1,6 +1,8 @@
 package com.example.mototest.View.Test;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +13,11 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.navigation.NavController;
-import androidx.navigation.NavDirections;
-import androidx.navigation.Navigation;
 
 import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.Status;
 import com.example.mototest.R;
-import com.example.mototest.View.Admin.testmanagerDirections;
+import com.example.mototest.View.Comment.comment;
 
 import java.util.ArrayList;
 
@@ -28,10 +27,12 @@ import retrofit2.Response;
 
 public class TestAdapter extends ArrayAdapter<String> {
     public static boolean isdel=false;
+    private Context context;
     private ArrayList<String> testArrayList=new ArrayList<>();
     public TestAdapter(@NonNull Context context, ArrayList<String> testArrayList) {
         super(context, 0,testArrayList);
         this.testArrayList=testArrayList;
+        this.context=context;
     }
 
     @NonNull
@@ -43,7 +44,24 @@ public class TestAdapter extends ArrayAdapter<String> {
             convertView=inflater.inflate(R.layout.items_test,parent,false);
         }
         TextView test_name=(TextView)convertView.findViewById(R.id.tv_test_name);
+        ImageView iv_show_cmt = convertView.findViewById(R.id.iv_show_cmt);
+
+
+        iv_show_cmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("TestId",Integer.parseInt(testArrayList.get(position)));
+                Intent intent = new Intent(getContext(), comment.class);
+                intent.putExtras(bundle);
+                context.startActivity(intent);
+            }
+        });
+
+
         ImageView img_delTest = convertView.findViewById(R.id.img_delTest);
+        if(parent.getId()==R.id.lv_testmanager)
+            img_delTest.setVisibility(View.VISIBLE);
         img_delTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,18 +71,6 @@ public class TestAdapter extends ArrayAdapter<String> {
                 isdel=false;
             }
         });
-//        convertView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(getContext(), "da click vao detail", Toast.LENGTH_SHORT).show();
-//                if(!isdel){
-
-//                    Toast.makeText(getContext(), "da chuyen sang detail", Toast.LENGTH_SHORT).show();
-//
-//                 }
-//            }
-//        });
-
 
 
         String test=getItem(position);

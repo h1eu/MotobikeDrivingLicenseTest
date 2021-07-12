@@ -11,7 +11,7 @@
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.MotoTest">
-        <activity android:name=".View.Comment"></activity>
+        <activity android:name=".View.Comment.comment"></activity>
         <activity android:name=".View.ForgetPass" />
         <activity android:name=".View.Test.Result" />
         <activity android:name=".View.Register" />
