@@ -23,7 +23,7 @@ import retrofit2.Response;
 
 public class Login extends AppCompatActivity {
     Button btn_login,btn_res;
-    TextView tv_res;
+    TextView tv_res,tv_forgetpass;
     EditText edt_usn_login,edt_pass_login;
     private int i=0;
     @Override
@@ -32,6 +32,7 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         btn_login = (Button)findViewById(R.id.btn_login);
         tv_res = (TextView) findViewById(R.id.tv_register);
+        tv_forgetpass=(TextView) findViewById(R.id.tv_forgetpass);
         edt_usn_login=(EditText)findViewById(R.id.edt_usn_login);
         edt_pass_login=(EditText)findViewById(R.id.edt_pass_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
@@ -48,6 +49,13 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(Login.this,Register.class);
+                startActivity(intent);
+            }
+        });
+        tv_forgetpass.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Login.this,ForgetPass.class);
                 startActivity(intent);
             }
         });

@@ -101,11 +101,18 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_xemlaibaithi"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:backgroundTint="@color/orange"
         android:text="Xem lại bài thi" />
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_cmt"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:backgroundTint="@color/orange"
+        android:text="Bình luận" />
 
 
 </LinearLayout>

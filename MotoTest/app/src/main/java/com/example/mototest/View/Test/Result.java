@@ -13,10 +13,11 @@ import android.widget.TextView;
 
 import com.example.mototest.MainActivity;
 import com.example.mototest.R;
+import com.example.mototest.View.Comment;
 import com.squareup.picasso.Picasso;
 
 public class Result extends AppCompatActivity {
-    private Button btn_xemlaibaithi;
+    private Button btn_xemlaibaithi,btn_cmt;
     private TextView tv_diem,tv_ketqua;
     private LinearLayout ll_rs;
     private ImageView img_v1;
@@ -26,6 +27,7 @@ public class Result extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
         btn_xemlaibaithi=(Button)findViewById(R.id.btn_xemlaibaithi) ;
+        btn_cmt=(Button)findViewById(R.id.btn_cmt);
         toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
         tv_diem=(TextView)findViewById(R.id.tv_diem);
         tv_ketqua=(TextView)findViewById(R.id.tv_ketqua);
@@ -61,6 +63,13 @@ public class Result extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+        btn_cmt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent2=new Intent(Result.this, Comment.class);
+                startActivity(intent2);
             }
         });
     }
