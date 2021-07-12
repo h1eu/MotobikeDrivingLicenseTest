@@ -21,9 +21,10 @@
         android:textSize="40sp"
         android:textColor="@color/black"/>
 
+
     <com.google.android.material.textfield.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:id="@+id/edt_layoutforgetpasscode"
+        android:id="@+id/edt_layoutforgetpasscode2"
         android:layout_width="310dp"
         android:layout_height="wrap_content"
         app:startIconDrawable="@drawable/ic_code"
@@ -31,11 +32,31 @@
         android:layout_below="@+id/tv_forgetpass"
         android:layout_centerInParent="true"
         android:layout_marginTop="100dp"
+        android:hint="Nhập Username"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/edt_forgot_usn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:maxLines="1"
+            android:inputType="text"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
+    <com.google.android.material.textfield.TextInputLayout
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:id="@+id/edt_layoutforgetpasscode"
+        android:layout_width="310dp"
+        android:layout_height="wrap_content"
+        app:startIconDrawable="@drawable/ic_code"
+        android:layout_alignParentLeft="false"
+        android:layout_below="@+id/edt_layoutforgetpasscode2"
+        android:layout_centerInParent="true"
         android:hint="Nhập mã đăng kí"
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_passwordchane"
+            android:id="@+id/edt_forgot_recover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"
@@ -58,7 +79,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_passchange_forget"
+            android:id="@+id/edt_forgot_pass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"
@@ -81,7 +102,7 @@
         >
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_Comfirmpasschange_forget"
+            android:id="@+id/edt_forgot_confpass"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:maxLines="1"

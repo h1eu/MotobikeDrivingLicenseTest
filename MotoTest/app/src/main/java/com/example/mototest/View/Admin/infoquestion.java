@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
@@ -84,7 +85,7 @@ public class infoquestion extends Fragment {
         EditText edt_dadung = v.findViewById(R.id.edt_dadung);
         TextView tv_QuesId = v.findViewById(R.id.tv_QuesId);
         Question ques = new Question();
-
+        String access_token =((InfoAcc) getActivity().getApplication()).getAccess_token();
         try{
 //code that may throw an exception
             ques = infoquestionArgs.fromBundle(getArguments()).getQues();
@@ -118,12 +119,13 @@ public class infoquestion extends Fragment {
                         edt_da2.getText().toString(),
                         edt_da3.getText().toString(),
                         edt_da4.getText().toString(),
-                        edt_dadung.getText().toString()
+                        edt_dadung.getText().toString(),
+                        access_token
                         ).enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
                         Status status = response.body();
-                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -146,12 +148,13 @@ public class infoquestion extends Fragment {
                         edt_da2.getText().toString(),
                         edt_da3.getText().toString(),
                         edt_da4.getText().toString(),
-                        edt_dadung.getText().toString()
+                        edt_dadung.getText().toString(),
+                        access_token
                 ).enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
                         Status status = response.body();
-                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -174,12 +177,13 @@ public class infoquestion extends Fragment {
                         edt_da2.getText().toString(),
                         edt_da3.getText().toString(),
                         edt_da4.getText().toString(),
-                        edt_dadung.getText().toString()
+                        edt_dadung.getText().toString(),
+                        access_token
                 ).enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
                         Status status = response.body();
-                        Toast.makeText(getContext(),"Thanh cong"+Boolean.toString(status.isStatus()),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
                     }
 
                     @Override

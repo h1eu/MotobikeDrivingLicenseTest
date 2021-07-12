@@ -61,7 +61,8 @@ public interface ApiService {
             @Field("QDa2") String QDa2,
             @Field("QDa3") String QDa3,
             @Field("QDa4") String QDa4,
-            @Field("QDadung") String QDadung
+            @Field("QDadung") String QDadung,
+            @Field("Access_token") String access_token
     );
 
     @FormUrlEncoded
@@ -69,13 +70,15 @@ public interface ApiService {
     Call<Status> querryTest(
             @Field("action") String action,
             @Field("TestID") String TestID,
-            @Field("QuesID") String QuesID
+            @Field("QuesID") String QuesID,
+            @Field("Access_token") String access_token
     );
 
 
 //USER MANAGER
-    @GET(api)
-    Call<AllUser> getAllUser(@Query("action") String action);
+    @FormUrlEncoded
+    @POST(api)
+    Call<AllUser> getAllUser(@Field("action") String action,@Field("Access_token") String access_token);
 
     @FormUrlEncoded
     @POST(api)
@@ -87,12 +90,22 @@ public interface ApiService {
             @Field("Name") String Name,
             @Field("Permission") String Permission,
             @Field("Active") String Active,
-            @Field("Recover") String Recover
+            @Field("Recover") String Recover,
+            @Field("Access_token") String access_token
     );
+
 
 //    Comment
     @GET(api)
     Call<AllCmt> getAllCmt(@Query("action") String action,
                            @Query("TestId") String TestId);
-
+    @FormUrlEncoded
+    @POST(api)
+    Call<Status> createCmt(
+            @Field("action") String action,
+            @Field("IdUser") String iduser,
+            @Field("IdTest") String idtest,
+            @Field("Content") String content,
+            @Field("Access_token") String access_token
+    );
 }

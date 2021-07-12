@@ -3,7 +3,7 @@ package com.example.mototest.Api;
 import java.io.Serializable;
 
 public class Status implements Serializable {
-    private boolean status;
+    private String status;
 
     public String getMessage() {
         return message;
@@ -15,15 +15,15 @@ public class Status implements Serializable {
 
     private String message;
 
-    public Status(boolean status) {
-        this.status = status;
-    }
-
-    public boolean isStatus() {
+    public String getStatus() {
         return status;
     }
 
-    public void setStatus(boolean status) {
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Status(String status) {
         this.status = status;
     }
 }

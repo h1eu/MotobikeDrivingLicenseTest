@@ -10,12 +10,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Model.Question;
 import com.example.mototest.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class LayoutTestFragment extends Fragment {
     private CheckBox checkBox1;
     private CheckBox checkBox3;
     private CheckBox checkBox4;
+    private ImageView iv_description;
     private LinearLayout linearLayout1,linearLayout2,linearLayout3,linearLayout4;
     private View v;
     private int stt=0;
@@ -37,6 +40,7 @@ public class LayoutTestFragment extends Fragment {
         v=inflater.inflate(R.layout.fragment_layout_question, container, false);
 
         tvquestitle=v.findViewById(R.id.tv_question_title);
+        iv_description = v.findViewById(R.id.iv_description);
         layout1=v.findViewById(R.id.layout_answer1);
         checkBox1=v.findViewById(R.id.checkbox1);
         checkBox2=v.findViewById(R.id.checkbox2);
@@ -129,6 +133,8 @@ public class LayoutTestFragment extends Fragment {
                 if(question.getDa4()==null){
                     linearLayout4.setVisibility(View.GONE);
                 }
+                if(question.getImage()!=null)
+                    Picasso.get().load(question.getImage()).into(iv_description);
             }
 
         }

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.example.mototest.Api.AllQues;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
@@ -63,6 +64,7 @@ public class questionmanager extends Fragment {
     private Button btn_addtoTest,btn_remove;
     private LinearLayout ll_rowques;
     private int current_index=0;
+    private String access_token;
     public questionmanager() {
         // Required empty public constructor
     }
@@ -100,6 +102,7 @@ public class questionmanager extends Fragment {
 
             }
         });
+        access_token = ((InfoAcc) getActivity().getApplication()).getAccess_token();
         btn_remove=(Button) v.findViewById(R.id.btn_remove);
         btn_addtoTest = (Button) v.findViewById(R.id.btn_addtoTest);
         if(TestId!=0){
@@ -230,7 +233,7 @@ public class questionmanager extends Fragment {
     }
     private void addtoTest(){
         for(String quesId:addqsList)
-        ApiService.apiservice.querryTest("addQStoTest",Integer.toString(TestId),quesId).enqueue(new Callback<Status>() {
+        ApiService.apiservice.querryTest("addQStoTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Log.e("Thanh cong","1 cau hoi");
@@ -244,7 +247,7 @@ public class questionmanager extends Fragment {
     }
     private void removeQSinTest(){
         for(String quesId:rmqsList)
-            ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId).enqueue(new Callback<Status>() {
+            ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
                 @Override
                 public void onResponse(Call<Status> call, Response<Status> response) {
                     Log.e("Thanh cong","1 cau hoi");

@@ -18,6 +18,7 @@ import android.widget.Toast;
 
 import com.example.mototest.Api.Alltest;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
@@ -41,7 +42,8 @@ public class testmanager extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private ArrayList<String> testArrayList = new ArrayList<String>();
-    TestAdapter testAdapter;
+    private TestAdapter testAdapter;
+    private String access_token;
     private ImageView img_delTest;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -90,6 +92,7 @@ public class testmanager extends Fragment {
             }
         });
 
+        access_token = ((InfoAcc) getActivity().getApplication()).getAccess_token();
         ListView lv_test = v.findViewById(R.id.lv_testmanager);
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
@@ -130,7 +133,7 @@ public class testmanager extends Fragment {
     }
 
     private void createTest(){
-        ApiService.apiservice.querryTest("createTest","-1","0").enqueue(new Callback<Status>() {
+        ApiService.apiservice.querryTest("createTest","-1","0",access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Toast.makeText(getContext(),"Tao thanh cong",Toast.LENGTH_SHORT).show();

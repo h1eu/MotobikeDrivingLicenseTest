@@ -10,6 +10,15 @@ public class User implements Serializable {
     private String Permission;
     private int Active;
     private String Recover;
+    private String Access_token;
+
+    public String getAccess_token() {
+        return Access_token;
+    }
+
+    public void setAccess_token(String access_token) {
+        Access_token = access_token;
+    }
 
     public int getActive() {
         return Active;

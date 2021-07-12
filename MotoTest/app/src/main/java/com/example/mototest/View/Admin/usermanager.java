@@ -7,6 +7,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.mototest.Api.AllUser;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
 import com.example.mototest.View.Test.TestAdapter;
@@ -44,6 +46,7 @@ public class usermanager extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    private String access_token;
 
 
     public usermanager() {
@@ -83,7 +86,7 @@ public class usermanager extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_usermanager, container, false);
 //        UserArrayList.add(new User(1,"abc","123","huy","2",1,"0"));
-
+        access_token =((InfoAcc) getActivity().getApplication()).getAccess_token();
         lv_account = v.findViewById(R.id.lv_account);
         getAllUser();
 
@@ -91,7 +94,7 @@ public class usermanager extends Fragment {
     }
 
     public void getAllUser(){
-        ApiService.apiservice.getAllUser("getAllUser").enqueue(new Callback<AllUser>() {
+        ApiService.apiservice.getAllUser("getAllUser",access_token).enqueue(new Callback<AllUser>() {
             @Override
             public void onResponse(Call<AllUser> call, Response<AllUser> response) {
                 AllUser allUser = response.body();
@@ -111,6 +114,7 @@ public class usermanager extends Fragment {
             @Override
             public void onFailure(Call<AllUser> call, Throwable t) {
                 Toast.makeText(getContext(),"GET USER FAIL",Toast.LENGTH_SHORT).show();
+                Log.e("access_token",access_token+"loi: "+t.toString());
             }
         });
 

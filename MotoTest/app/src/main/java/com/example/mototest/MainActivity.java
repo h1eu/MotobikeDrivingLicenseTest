@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.Menu;
 import android.widget.TextView;
 
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Model.Question;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
@@ -52,12 +53,12 @@ public class MainActivity extends AppCompatActivity {
         view=navigationView.getHeaderView(0);
         tv_name_main=view.findViewById(R.id.tv_name_main);
         tv_username_main=view.findViewById(R.id.tv_usn_main);
-        Intent intent = getIntent();
-        Bundle bundle = intent.getExtras();
-        if(bundle!=null) {
-            tv_name_main.setText(bundle.get("Name").toString());
-            tv_username_main.setText(bundle.get("Username").toString());
-        }
+//        Intent intent = getIntent();
+//        Bundle bundle = intent.getExtras();
+//        if(bundle!=null) {
+            tv_name_main.setText(((InfoAcc) getApplication()).getName());
+            tv_username_main.setText(((InfoAcc) getApplication()).getUsername());
+//        }
     }
 
     @Override

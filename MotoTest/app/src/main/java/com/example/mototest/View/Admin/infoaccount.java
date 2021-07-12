@@ -15,6 +15,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
@@ -43,6 +44,7 @@ public class infoaccount extends Fragment {
     private Button btn_update,btn_delete;
     private Button btn_active;
     private TextView tv_iduser;
+    private String access_token;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -100,6 +102,7 @@ public class infoaccount extends Fragment {
         rbtn_user = (RadioButton) v.findViewById(R.id.rbtn_user);
         btn_update = (Button) v.findViewById(R.id.btn_update);
         btn_active = (Button) v.findViewById(R.id.btn_active);
+        access_token =((InfoAcc) getActivity().getApplication()).getAccess_token();
 //        if(user.getActive()!=1){
 //            btn_active.setText("Unblock");
 //        }
@@ -149,7 +152,8 @@ public class infoaccount extends Fragment {
                 edt_name.getText().toString(),
                 permission,
                 Integer.toString(active),
-                edt_recoverCode.getText().toString())
+                edt_recoverCode.getText().toString(),
+                access_token)
                 .enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
@@ -182,7 +186,8 @@ public class infoaccount extends Fragment {
                 "g",
                 "g",
                 "g",
-                "g"
+                "g",
+                access_token
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {

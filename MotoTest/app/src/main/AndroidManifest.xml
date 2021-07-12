@@ -10,7 +10,10 @@
         android:label="@string/app_name"
         android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
+        android:name=".Api.InfoAcc"
+
         android:theme="@style/Theme.MotoTest">
+
         <activity android:name=".View.Comment.comment"></activity>
         <activity android:name=".View.ForgetPass" />
         <activity android:name=".View.Test.Result" />

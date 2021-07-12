@@ -21,6 +21,7 @@ public class Result extends AppCompatActivity {
     private LinearLayout ll_rs;
     private ImageView img_v1;
     private ImageView toolbar_back;
+    private String Idtest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,6 +38,7 @@ public class Result extends AppCompatActivity {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!=null) {
+            Idtest=bundle.getString("IdTest");
             tv_diem.setText(Integer.toString(bundle.getInt("point")));
             if(bundle.getInt("point")>15)
                 tv_ketqua.setText("ĐỖ - Time: "+bundle.get("minutes")+":"+bundle.get("seconds"));
@@ -64,10 +66,16 @@ public class Result extends AppCompatActivity {
                 finish();
             }
         });
+        if(Idtest.equals("random"))
+            btn_cmt.setVisibility(View.GONE);
+
         btn_cmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Bundle bundle = new Bundle();
+                bundle.putInt("TestId",Integer.parseInt(Idtest));
                 Intent intent2=new Intent(Result.this, comment.class);
+                intent2.putExtras(bundle);
                 startActivity(intent2);
             }
         });

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
@@ -68,14 +70,20 @@ public class Login extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
 //                Toast.makeText(getBaseContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                 User user =response.body();
-                Bundle bundle=new Bundle();
-                bundle.putString("Username",user.getUsername());
-                bundle.putString("Name",user.getName());
+//                Bundle bundle=new Bundle();
+//                bundle.putString("Username",user.getUsername());
+//                bundle.putString("Name",user.getName());
+
+                ((InfoAcc) getApplication()).setUsername(user.getUsername());
+                ((InfoAcc) getApplication()).setName(user.getName());
+                ((InfoAcc) getApplication()).setIduser(user.getIduser());
+                ((InfoAcc) getApplication()).setPermission(user.getPermission());
+                ((InfoAcc) getApplication()).setAccess_token(user.getAccess_token());
                 Intent intent=new Intent(Login.this, MainActivity.class);
-                intent.putExtras(bundle);
+//                intent.putExtras(bundle);
                 startActivity(intent);
                 Toast.makeText(getBaseContext(),"OK -> LOGIN SOON",Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getBaseContext(),user.getUsername()+"avbababab",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),user.getAccess_token(),Toast.LENGTH_SHORT).show();
             }
 
             @Override

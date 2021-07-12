@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.R;
 import com.example.mototest.View.Comment.comment;
@@ -28,6 +29,7 @@ import retrofit2.Response;
 public class TestAdapter extends ArrayAdapter<String> {
     public static boolean isdel=false;
     private Context context;
+    private String access_token;
     private ArrayList<String> testArrayList=new ArrayList<>();
     public TestAdapter(@NonNull Context context, ArrayList<String> testArrayList) {
         super(context, 0,testArrayList);
@@ -46,7 +48,7 @@ public class TestAdapter extends ArrayAdapter<String> {
         TextView test_name=(TextView)convertView.findViewById(R.id.tv_test_name);
         ImageView iv_show_cmt = convertView.findViewById(R.id.iv_show_cmt);
 
-
+        access_token = ((InfoAcc) getContext().getApplicationContext()).getAccess_token();
         iv_show_cmt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -82,7 +84,7 @@ public class TestAdapter extends ArrayAdapter<String> {
     }
 
     private void delTest(String testId){
-        ApiService.apiservice.querryTest("delTest",testId,"0").enqueue(new Callback<Status>() {
+        ApiService.apiservice.querryTest("delTest",testId,"0",access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();

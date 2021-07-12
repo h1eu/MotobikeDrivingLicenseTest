@@ -51,6 +51,7 @@ public class LayoutTest extends AppCompatActivity{
     private int ttTime=1;
     private String action="getTest";
     private boolean isSubmit=false;
+    private String idTest;
     ArrayList<String> listdadung=new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -72,6 +73,7 @@ public class LayoutTest extends AppCompatActivity{
             @Override
             public void onResponse(Call<Test> call, Response<Test> response) {
 //                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
+                idTest = bundle.getString("Idtest");
                 Test test = response.body();
                 if(test!=null) {
                     Log.e("test:", Integer.toString(test.getIdtest()));
@@ -290,6 +292,7 @@ public class LayoutTest extends AppCompatActivity{
         bundle.putInt("point", point);
         bundle.putString("minutes",Dominutes);
         bundle.putString("seconds",Doseconds);
+        bundle.putString("IdTest",idTest);
         isSubmit=true;
         Intent intent=new Intent(LayoutTest.this,Result.class);
         intent.putExtras(bundle);
