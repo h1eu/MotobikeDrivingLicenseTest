@@ -64,6 +64,7 @@ public class questionmanager extends Fragment {
     private Button btn_addtoTest,btn_remove;
     private LinearLayout ll_rowques;
     private int current_index=0;
+    private int type=0;
     private String access_token;
     public questionmanager() {
         // Required empty public constructor
@@ -194,32 +195,37 @@ public class questionmanager extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //                current_index=position;
 //                adQuestionAdapter.notifyDataSetChanged();{
-                if(TestId!=0)
-                    if(btn_addtoTest.getText().toString().equals("ADD FROM LIBARY TO TEST")) {
-//                        rmqsList.add();
+                if(TestId!=0) {
+
+                    if (btn_addtoTest.getText().toString().equals("ADD FROM LIBARY TO TEST")) {
+                        //                        rmqsList.add();
                         int pos = rmqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
-                        Log.e("POS:",Integer.toString(pos));
-                        if(pos!=-1){
+                        Log.e("POS:", Integer.toString(pos));
+                        if (pos != -1) {
+                            type=-2;
                             rmqsList.remove(pos);
-                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
-                            Log.e("SET BACKGAO R","TRUE");
-                        }
-                        else {
+
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                            //                            Log.e("SET BACKGAO R","TRUE");
+                        } else {
+                            type=2;
                             rmqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
-                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+//                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
                         }
-                    }
-                    else {
+                    } else {
                         int pos = addqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
-                        if(pos!=-1){
+                        if (pos != -1) {
+                            type=-1;
                             addqsList.remove(pos);
-                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
-                        }
-                        else {
-                            view.setBackgroundColor(Color.parseColor("#81C784"));
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                        } else {
+                            type=1;
+//                            view.setBackgroundColor(Color.parseColor("#81C784"));
                             addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
                         }
                     }
+                    adQuestionAdapter.notifyDataSetChanged(position,type);
+                }
                 else
                 {
                     NavDirections action = questionmanagerDirections.actionQuestionmanagerToInfoquestion(arrayList.get(position));
@@ -258,5 +264,13 @@ public class questionmanager extends Fragment {
                     Log.e("That bai","1 cau hoi");
                 }
             });
+    }
+
+    public ArrayList<String> getAddqsList() {
+        return addqsList;
+    }
+
+    public ArrayList<String> getRmqsList() {
+        return rmqsList;
     }
 }

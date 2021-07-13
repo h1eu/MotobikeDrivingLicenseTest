@@ -41,9 +41,10 @@ public class testmanager extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private ArrayList<String> testArrayList = new ArrayList<String>();
+    private ArrayList<String> testArrayList;
     private TestAdapter testAdapter;
     private String access_token;
+    private ListView lv_test;
     private ImageView img_delTest;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -93,7 +94,12 @@ public class testmanager extends Fragment {
         });
 
         access_token = ((InfoAcc) getActivity().getApplication()).getAccess_token();
-        ListView lv_test = v.findViewById(R.id.lv_testmanager);
+        lv_test = v.findViewById(R.id.lv_testmanager);
+        setAdapter();
+        return v;
+    }
+
+    private void setAdapter(){
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
@@ -101,7 +107,7 @@ public class testmanager extends Fragment {
 //                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
                 Alltest alltest=response.body();
                 ArrayList<Test> allidTest=alltest.getAllTest();
-//                Log.e("testid 1:",Integer.toString(alltest.getAllTest().get(0).getIdtest()));
+                testArrayList = new ArrayList<String>();
                 for(Test t : allidTest)
                 {
                     testArrayList.add(Integer.toString(t.getIdtest()));
@@ -114,7 +120,7 @@ public class testmanager extends Fragment {
                         if(!testAdapter.isdel){
                             Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
                             NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
-                            NavController navController = Navigation.findNavController(v);
+                            NavController navController = Navigation.findNavController(getView());
                             navController.navigate(action);
                         }
                     }
@@ -128,8 +134,7 @@ public class testmanager extends Fragment {
                 Toast.makeText(getContext(), "Call API FAIL", Toast.LENGTH_SHORT).show();
             }
 
-    });
-        return v;
+        });
     }
 
     private void createTest(){

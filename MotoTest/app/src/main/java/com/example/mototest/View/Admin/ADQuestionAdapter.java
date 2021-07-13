@@ -1,6 +1,7 @@
 package com.example.mototest.View.Admin;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.text.Layout;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +27,9 @@ import java.util.ArrayList;
 public class ADQuestionAdapter extends ArrayAdapter<Question> {
     Context context;
     ArrayList<Question> arrayList;
+    ArrayList<Integer> addQS = new ArrayList<>(),rmQS=new ArrayList<>();
     int layoutResource; //Hàm khởi tạo cho CustomArrayAdapter
+
 
     public ADQuestionAdapter(@NonNull @NotNull Context context, int resource, ArrayList<Question> arrayList) {
         super(context, resource, arrayList);
@@ -40,6 +44,12 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
 //            Log.e("Position =",Integer.toString(position));
             LayoutInflater inflater=LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.fragment_rowquestion,parent,false);
+
+            if(rmQS.indexOf(position)!=-1){
+                convertView.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+            }
+            if(addQS.indexOf(position)!=-1)
+                convertView.setBackgroundColor(Color.parseColor("#81C784"));
             TextView tv_qsform = (TextView) convertView.findViewById(R.id.tv_questionform);
             TextView tv_qscontent = (TextView) convertView.findViewById(R.id.tv_qscontent);
             TextView tv_da1 = (TextView) convertView.findViewById(R.id.tv_da1);
@@ -58,5 +68,20 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
             tv_dadung.setText(arrayList.get(position).getDadung());
 //            if(position==current_index)
         return convertView;
+    }
+
+    public void notifyDataSetChanged(int position,int type) {
+        super.notifyDataSetChanged();
+        if(type==-2)
+            rmQS.remove(position);
+        if(type==2)
+            rmQS.add(position);
+        if(type==-1)
+            addQS.remove(position);
+        if(type==1)
+            addQS.add(position);
+        Toast.makeText(getContext(),"co thay doi"+Integer.toString(position),Toast.LENGTH_SHORT).show();
+
+
     }
 }

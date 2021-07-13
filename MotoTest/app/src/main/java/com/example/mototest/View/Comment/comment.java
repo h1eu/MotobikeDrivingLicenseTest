@@ -58,6 +58,8 @@ public class comment extends AppCompatActivity {
                 String content = edt_cmt_content.getText().toString();
                 if(content!=null)
                 sendCmt(content,Integer.toString(Testid));
+                edt_cmt_content.setText("");
+                getComment(Testid);
             }
         });
 //        Toast.makeText(this,Integer.toString(Testid),Toast.LENGTH_SHORT).show();

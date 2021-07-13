@@ -12,6 +12,7 @@
         android:orientation="vertical"
         android:background="@color/blue">
 
+
         <Button
             android:id="@+id/btn_newquestion"
             android:layout_width="fill_parent"
