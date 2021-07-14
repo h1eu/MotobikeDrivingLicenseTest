@@ -2,6 +2,7 @@ package com.example.mototest.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -28,6 +29,7 @@ public class Login extends AppCompatActivity {
     TextView tv_res,tv_forgetpass;
     EditText edt_usn_login,edt_pass_login;
     private int i=0;
+    Activity activity=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +44,8 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
 //                Intent intent=new Intent(Login.this,Register.class);
 //                startActivity(intent);
+                CustomDialog customDialog=new CustomDialog();
+                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
                 login();
 
 

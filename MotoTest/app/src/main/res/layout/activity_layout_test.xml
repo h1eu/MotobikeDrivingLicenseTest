@@ -74,28 +74,28 @@
         android:id="@+id/toolbar_bottom"
         android:layout_width="match_parent"
         android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="1dp"
         android:background="@color/blue_2"
-        android:orientation="horizontal"
         android:gravity="center"
-        android:layout_alignParentBottom="true">
+        android:orientation="horizontal">
 
 
         <TextView
             android:id="@+id/tv_back_quesion"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:visibility="gone"
-            android:background="@drawable/ic_back"
             android:layout_marginEnd="120dp"
-            />
+            android:background="@drawable/ic_back"
+            android:visibility="gone" />
 
         <TextView
             android:id="@+id/tv_current_question"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -103,25 +103,23 @@
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
             android:text="/"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_max_quesion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="20"
-            android:textSize="20sp"
-            android:textColor="@color/white"/>
+            android:textColor="@color/white"
+            android:textSize="20sp" />
 
         <TextView
             android:id="@+id/tv_next_quesion"
             android:layout_width="30dp"
             android:layout_height="30dp"
-            android:background="@drawable/ic_next"
             android:layout_marginStart="120dp"
-            />
-
+            android:background="@drawable/ic_next" />
 
 
     </LinearLayout>
