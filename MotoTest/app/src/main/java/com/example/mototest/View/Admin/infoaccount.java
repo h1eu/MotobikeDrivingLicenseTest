@@ -1,5 +1,8 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Activity;
+import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -19,6 +22,8 @@ import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
+import com.example.mototest.View.Login;
+import com.example.mototest.View.Register;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -45,7 +50,7 @@ public class infoaccount extends Fragment {
     private Button btn_active;
     private TextView tv_iduser;
     private String access_token;
-
+    Activity activity=getActivity();
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
@@ -123,8 +128,9 @@ public class infoaccount extends Fragment {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getContext(),"Chay delete",Toast.LENGTH_SHORT).show();
-                deleteUser();
+//                Toast.makeText(getContext(),"Chay delete",Toast.LENGTH_SHORT).show();
+                confirmDel();
+
             }
         });
         tv_iduser.setText(Integer.toString(user.getIduser()));
@@ -157,12 +163,16 @@ public class infoaccount extends Fragment {
                 .enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
-                        Toast.makeText(getContext(),"Update thanh cong",Toast.LENGTH_SHORT).show();
+                        if(active==-1) {
+                            btn_active.setText("UNBLOCK");
+                            Toast.makeText(getContext(),"Block thanh cong",Toast.LENGTH_SHORT).show();
+                        }else
+                            Toast.makeText(getContext(),"Update thanh cong",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Status> call, Throwable t) {
-                        Toast.makeText(getContext(),"Update that bai",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -192,6 +202,8 @@ public class infoaccount extends Fragment {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Toast.makeText(getContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
 
             @Override
@@ -199,5 +211,34 @@ public class infoaccount extends Fragment {
                 Toast.makeText(getContext(),"Xoa that bai",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    private void confirmDel(){
+        Dialog dialog=new Dialog(getActivity());
+//        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+        dialog.setContentView(R.layout.dialog_custom);
+
+        Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+        Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+        TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+        TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+        tv_dialog_title.setText("Xác nhận Xóa");
+        tv_dialog_content.setText("Bạn có chắc muốn xóa người dùng này chứ");
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                deleteUser();
+
+            }
+        });
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 }

@@ -2,6 +2,8 @@ package com.example.mototest.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +24,7 @@ public class Register extends AppCompatActivity {
     private EditText edt_res_username,edt_res_name,edt_res_password,edt_res_ComPassword;
     private Button btn_res_register;
     TextView tv_login;
+    Activity activity=this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,15 +61,37 @@ public class Register extends AppCompatActivity {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 User user =response.body();
-                if(user.getUsername()!=null)
-                Toast.makeText(getBaseContext(),"REG THANH CONG",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(),"Ma RECOVER PASS:"+user.getRecover(),Toast.LENGTH_SHORT).show();
+                if(user.getUsername()!=null){
+                    Dialog dialog=new Dialog(activity);
+                    dialog.setContentView(R.layout.dialog_custom);
+//                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+//                dialog.setTitle("Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+                    Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+                    Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+                    btn_no.setVisibility(View.GONE);
+                    btn_yes.setText("Đồng Ý");
+                    TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+                    TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+                    tv_dialog_title.setText("Tạo tài khoản thành công");
+                    tv_dialog_content.setText("Chào "+user.getUsername()+", bạn hãy lưu mã khôi phục pass:"+user.getRecover());
+
+                    btn_yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+//                    Toast.makeText(getBaseContext(),"REG THANH CONG",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getBaseContext(),"Ma RECOVER PASS:"+user.getRecover(),Toast.LENGTH_SHORT).show();
+                }
+
 //                CHUYEN SANG VIEW LOGIN
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getBaseContext(),"TEN TK DA TON TAI",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Tên tài khoản đã tồn tại",Toast.LENGTH_SHORT).show();
             }
         });
     }

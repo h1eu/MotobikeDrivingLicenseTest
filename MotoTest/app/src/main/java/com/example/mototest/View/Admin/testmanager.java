@@ -35,7 +35,7 @@ import retrofit2.Response;
  * Use the {@link testmanager#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class testmanager extends Fragment {
+public class testmanager extends Fragment implements TestAdapter.EventListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -87,6 +87,7 @@ public class testmanager extends Fragment {
         btn_addtest.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 createTest();
+                setAdapter();
 //                NavController navController = Navigation.findNavController(v);
 //                navController.navigate(R.id.action_testmanager_to_infotest);
 
@@ -95,11 +96,13 @@ public class testmanager extends Fragment {
 
         access_token = ((InfoAcc) getActivity().getApplication()).getAccess_token();
         lv_test = v.findViewById(R.id.lv_testmanager);
+
         setAdapter();
+
         return v;
     }
 
-    private void setAdapter(){
+    public void setAdapter(){
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
@@ -112,17 +115,17 @@ public class testmanager extends Fragment {
                 {
                     testArrayList.add(Integer.toString(t.getIdtest()));
                 }
-                testAdapter=new TestAdapter(getActivity(),testArrayList);
+                testAdapter=new TestAdapter(getActivity(),testArrayList,testmanager.this::onEvent);
                 lv_test.setAdapter(testAdapter);
                 lv_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        if(!testAdapter.isdel){
+
                             Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
                             NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
                             NavController navController = Navigation.findNavController(getView());
                             navController.navigate(action);
-                        }
+
                     }
                 });
 
@@ -151,5 +154,11 @@ public class testmanager extends Fragment {
         });
     }
 
-
+    @Override
+    public void onEvent(int data) {
+//        Toast.makeText(getContext(), "Co thay doi", Toast.LENGTH_SHORT).show();
+        if(data==1){
+            setAdapter();
+        }
+    }
 }

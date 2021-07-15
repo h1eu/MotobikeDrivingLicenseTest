@@ -3,9 +3,9 @@ package com.example.mototest.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,8 +17,6 @@ import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
-import com.example.mototest.View.Test.LayoutTest;
-import com.example.mototest.View.Test.Result;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -44,11 +42,30 @@ public class Login extends AppCompatActivity {
             public void onClick(View v) {
 //                Intent intent=new Intent(Login.this,Register.class);
 //                startActivity(intent);
-                CustomDialog customDialog=new CustomDialog();
-                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
                 login();
-
-
+//                Dialog dialog=new Dialog(activity);
+//                dialog.setContentView(R.layout.dialog_custom);
+////                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+////                dialog.setTitle("Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+//                Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+//                Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+//                TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+//                TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+//                tv_dialog_title.setText("Xác nhận");
+//                tv_dialog_content.setText("Bạn chắc chứ");
+//                btn_yes.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//
+//                    }
+//                });
+//                btn_no.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        dialog.dismiss();
+//                    }
+//                });
+//                dialog.show();
             }
         });
         tv_res.setOnClickListener(new View.OnClickListener() {

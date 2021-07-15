@@ -1,5 +1,6 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -140,7 +141,7 @@ public class infoquestion extends Fragment {
         btn_deletequestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                deleteQS();
+                confirmDel();
             }
         });
 
@@ -197,6 +198,7 @@ public class infoquestion extends Fragment {
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Status status = response.body();
                 Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
 
             @Override
@@ -222,6 +224,7 @@ public class infoquestion extends Fragment {
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Status status = response.body();
                 Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
+                getActivity().onBackPressed();
             }
 
             @Override
@@ -229,5 +232,33 @@ public class infoquestion extends Fragment {
                 Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
             }
         });
+    }
+    private void confirmDel(){
+        Dialog dialog=new Dialog(getActivity());
+//        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+        dialog.setContentView(R.layout.dialog_custom);
+
+        Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+        Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+        TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+        TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+        tv_dialog_title.setText("Xác nhận Xóa");
+        tv_dialog_content.setText("Bạn có chắc muốn xóa câu hỏi này chứ");
+        btn_yes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+                deleteQS();
+
+
+            }
+        });
+        btn_no.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+        dialog.show();
     }
 }

@@ -45,10 +45,10 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
             LayoutInflater inflater=LayoutInflater.from(getContext());
             convertView=inflater.inflate(R.layout.fragment_rowquestion,parent,false);
 
-            if(rmQS.indexOf(position)!=-1){
+            if(rmQS.indexOf(arrayList.get(position).getIdquestion())!=-1){
                 convertView.setBackgroundColor(Color.parseColor("#FFF86E6E"));
             }
-            if(addQS.indexOf(position)!=-1)
+            if(addQS.indexOf(arrayList.get(position).getIdquestion())!=-1)
                 convertView.setBackgroundColor(Color.parseColor("#81C784"));
             TextView tv_qsform = (TextView) convertView.findViewById(R.id.tv_questionform);
             TextView tv_qscontent = (TextView) convertView.findViewById(R.id.tv_qscontent);
@@ -70,17 +70,17 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
         return convertView;
     }
 
-    public void notifyDataSetChanged(int position,int type) {
+    public void notifyDataSetChanged(int id,int type) {
         super.notifyDataSetChanged();
         if(type==-2)
-            rmQS.remove(position);
+            rmQS.remove(rmQS.indexOf(id));
         if(type==2)
-            rmQS.add(position);
+            rmQS.add(id);
         if(type==-1)
-            addQS.remove(position);
+            addQS.remove(addQS.indexOf(id));
         if(type==1)
-            addQS.add(position);
-        Toast.makeText(getContext(),"co thay doi"+Integer.toString(position),Toast.LENGTH_SHORT).show();
+            addQS.add(id);
+//        Toast.makeText(getContext(),"co thay doi"+Integer.toString(id),Toast.LENGTH_SHORT).show();
 
 
     }

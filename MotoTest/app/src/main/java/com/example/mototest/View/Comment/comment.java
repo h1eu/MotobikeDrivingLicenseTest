@@ -41,8 +41,7 @@ public class comment extends AppCompatActivity {
         toolbar_back.setOnClickListener(new  View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent1=new Intent(comment.this, MainActivity.class);
-                startActivity(intent1);
+                finish();
             }
         });
         Intent intent = getIntent();

@@ -1,17 +1,24 @@
 package com.example.mototest;
 
+import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Model.Question;
+import com.example.mototest.View.Login;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
+import androidx.annotation.NonNull;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -21,6 +28,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 import com.example.mototest.databinding.ActivityMainBinding;
+
+import org.jetbrains.annotations.NotNull;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -34,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -41,10 +52,12 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(binding.appBarMain.toolbar);
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
+
+
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_test, R.id.nav_test_random, R.id.nav_review, R.id.nav_tip,R.id.nav_change_pass,R.id.nav_dashboard)
+                R.id.nav_test, R.id.nav_test_random, R.id.nav_review, R.id.nav_tip,R.id.nav_change_pass,R.id.nav_logout,R.id.nav_dashboard)
                 .setDrawerLayout(drawer)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
@@ -59,6 +72,28 @@ public class MainActivity extends AppCompatActivity {
             tv_name_main.setText(((InfoAcc) getApplication()).getName());
             tv_username_main.setText(((InfoAcc) getApplication()).getUsername());
 //        }
+//        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+//            @Override
+//            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+//                int id = item.getItemId();
+//                if (id == R.id.nav_logout) {
+//                    finish();
+//                    return true;
+//                }
+//                return true;
+//            }
+//        });
+
+
+        MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
+        logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+//                Toast.makeText(getBaseContext(),"OK",Toast.LENGTH_SHORT).show();
+                confirmLogout();
+                return false;
+            }
+        });
     }
 
     @Override
@@ -75,17 +110,33 @@ public class MainActivity extends AppCompatActivity {
                 || super.onSupportNavigateUp();
     }
 
-    public void setQuestion(Question qs){
-        this.question=qs;
-        this.check=1;
-        Log.e("Check:",Integer.toString(this.check));
-    }
+    private void confirmLogout(){
+            Dialog dialog=new Dialog(this);
+//        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+            dialog.setContentView(R.layout.dialog_custom);
 
-    public Question getQuestion(){
-//        if(this.check==0) return new Question(-1,"","","","","","","","");
-//        else this.check=0;
-        return this.question;
-//        return null;
+            Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+            Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+            TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+            TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+            tv_dialog_title.setText("Xác nhận đăng xuất");
+            tv_dialog_content.setText("Bạn có chắc muốn đăng xuất chứ");
+            btn_yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    finish();
+                    Intent intent=new Intent(MainActivity.this, Login.class);
+                    startActivity(intent);
+                }
+            });
+            btn_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
     }
 
 }

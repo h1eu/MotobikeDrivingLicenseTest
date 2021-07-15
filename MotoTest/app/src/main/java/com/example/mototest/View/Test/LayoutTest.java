@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.viewpager.widget.ViewPager;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.app.Fragment;
 import android.content.Intent;
@@ -52,6 +53,7 @@ public class LayoutTest extends AppCompatActivity{
     private String action="getTest";
     private boolean isSubmit=false;
     private String idTest;
+    Activity activity=this;
     ArrayList<String> listdadung=new ArrayList<>();
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -126,10 +128,7 @@ public class LayoutTest extends AppCompatActivity{
                     toolbar_back.setOnClickListener(new  View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            isSubmit=true;
-                            finish();
-//                Toast.makeText(LayoutTest.this,"lick thanh cong",Toast.LENGTH_SHORT).show();
-
+                            confirmBack();
                         }
 
                     });
@@ -300,14 +299,54 @@ public class LayoutTest extends AppCompatActivity{
 
     }
 
+    private void confirmBack(){
+        if(!isSubmit){
+            Dialog dialog=new Dialog(activity);
+            dialog.setContentView(R.layout.dialog_custom);
+//                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+//                dialog.setTitle("Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
+            Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
+            Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
+            TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
+            TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
+            tv_dialog_title.setText("Xác nhận thoát");
+            tv_dialog_content.setText("Bạn chưa làm xong bài bạn chắc chắn muốn thoát chứ");
+            btn_yes.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                    isSubmit=true;
+                    finish();
+                }
+            });
+            btn_no.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    dialog.dismiss();
+                }
+            });
+            dialog.show();
+        }
+        else finish();
+    }
     @Override
     protected void onStop() {
-        super.onStop();
         isSubmit=true;
+        super.onStop();
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+//        super.onBackPressed();
+
+        confirmBack();
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
+//        boolean static check=true;
     }
 }

@@ -86,7 +86,7 @@ public class questionmanager extends Fragment {
             TestId=0;
             Log.e("abc","Dinh exception");
         }
-        setAllQS(TestId);
+
     }
 
     @Override
@@ -94,6 +94,7 @@ public class questionmanager extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_questionmanager, container, false);
+        setAllQS(TestId);
 
         btn_newquestion = (Button) v.findViewById(R.id.btn_newquestion);
         btn_newquestion.setOnClickListener(new View.OnClickListener() {
@@ -132,6 +133,7 @@ public class questionmanager extends Fragment {
                 else{
                     Toast.makeText(getContext(),"THEM VAO TEST",Toast.LENGTH_SHORT).show();
                     addtoTest();
+
                 }
 
             }
@@ -184,6 +186,8 @@ public class questionmanager extends Fragment {
         super.onResume();
 //        if else ko chinh sua
         SetAdapter();
+        addqsList.clear();
+        rmqsList.clear();
     }
 
     public void SetAdapter(){
@@ -224,7 +228,7 @@ public class questionmanager extends Fragment {
                             addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
                         }
                     }
-                    adQuestionAdapter.notifyDataSetChanged(position,type);
+                    adQuestionAdapter.notifyDataSetChanged(arrayList.get(position).getIdquestion(),type);
                 }
                 else
                 {
@@ -243,6 +247,9 @@ public class questionmanager extends Fragment {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Log.e("Thanh cong","1 cau hoi");
+                setAllQS(TestId);
+                btn_addtoTest.setText("ADD FROM LIBARY TO TEST");
+                btn_remove.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -250,21 +257,33 @@ public class questionmanager extends Fragment {
                 Log.e("That bai","1 cau hoi");
             }
         });
+        addqsList.clear();
     }
     private void removeQSinTest(){
-        for(String quesId:rmqsList)
-            ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
-                @Override
-                public void onResponse(Call<Status> call, Response<Status> response) {
-                    Log.e("Thanh cong","1 cau hoi");
-                }
+        if(arrayList.size()-rmqsList.size()>0){
+            for(String quesId:rmqsList)
+                ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
+                    @Override
+                    public void onResponse(Call<Status> call, Response<Status> response) {
+                        Log.e("Thanh cong","1 cau hoi");
+                        rmqsList.remove(quesId);
+                        if(rmqsList.size()==0) setAllQS(TestId);
+                    }
 
-                @Override
-                public void onFailure(Call<Status> call, Throwable t) {
-                    Log.e("That bai","1 cau hoi");
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Status> call, Throwable t) {
+                        Log.e("That bai","1 cau hoi");
+                    }
+                });
+
+            Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();
+        }
+
+        else
+            Toast.makeText(getContext(),"1 bài thi cần tối thiểu 1 câu hỏi",Toast.LENGTH_SHORT).show();
+
     }
+
 
     public ArrayList<String> getAddqsList() {
         return addqsList;
