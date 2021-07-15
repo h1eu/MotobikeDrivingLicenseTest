@@ -50,7 +50,10 @@ public class ChangepassFragment extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(edt_changepass_new.getText().toString().equals(edt_changepass_confnew.getText().toString()))
                 changePass();
+                else
+                    Toast.makeText(getContext(),"Mật khẩu mới không trùng nhau",Toast.LENGTH_SHORT).show();
             }
         });
         return v;

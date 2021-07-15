@@ -152,7 +152,7 @@ public class LayoutTest extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Test> call, Throwable t) {
-                Toast.makeText(LayoutTest.this,"Call API FAILED",Toast.LENGTH_SHORT).show();
+                Toast.makeText(LayoutTest.this,"Lấy dữ liệu bài thi thất bại",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -178,7 +178,7 @@ public class LayoutTest extends AppCompatActivity{
             }
             @Override
             public void onFinish() {
-                Toast.makeText(getApplicationContext(),"hết thời gian",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(),"Hết thời gian thi",Toast.LENGTH_SHORT).show();
                 if(isSubmit==false)
                 {
                     checkanser(true);

@@ -78,7 +78,7 @@ public interface ApiService {
 //USER MANAGER
     @FormUrlEncoded
     @POST(api)
-    Call<AllUser> getAllUser(@Field("action") String action,@Field("Access_token") String access_token);
+    Call<AllUser> getAllUser(@Field("action") String action,@Field("Iduser") String Iduser,@Field("Access_token") String access_token);
 
     @FormUrlEncoded
     @POST(api)

@@ -36,11 +36,10 @@ public class ForgetPass extends AppCompatActivity {
 
                 if(edt_forgot_pass.getText().toString().equals(edt_forgot_confpass.getText().toString())){
                     changePass();
-                    Intent intent=new Intent(ForgetPass.this,Login.class);
-                    startActivity(intent);
+
                 }
                 else
-                    Toast.makeText(getBaseContext(),"Pass moi khong trung nhau",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getBaseContext(),"Pass mới không trùng nhau",Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -58,12 +57,14 @@ public class ForgetPass extends AppCompatActivity {
                 "Khoi phuc k can token").enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                Toast.makeText(getBaseContext(),response.body().getStatus(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Khôi phục mật khẩu thành công",Toast.LENGTH_SHORT).show();
+                Intent intent=new Intent(ForgetPass.this,Login.class);
+                startActivity(intent);
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getBaseContext(),"Fail to recover pass",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Sai mã khôi phục hoặc tên tài khoản",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -47,6 +47,7 @@ public class usermanager extends Fragment {
     private String mParam1;
     private String mParam2;
     private String access_token;
+    private String Iduser;
 
 
     public usermanager() {
@@ -87,6 +88,7 @@ public class usermanager extends Fragment {
         View v = inflater.inflate(R.layout.fragment_usermanager, container, false);
 //        UserArrayList.add(new User(1,"abc","123","huy","2",1,"0"));
         access_token =((InfoAcc) getActivity().getApplication()).getAccess_token();
+        Iduser =Integer.toString(((InfoAcc) getActivity().getApplication()).getIduser());
         lv_account = v.findViewById(R.id.lv_account);
         getAllUser();
 
@@ -94,7 +96,7 @@ public class usermanager extends Fragment {
     }
 
     public void getAllUser(){
-        ApiService.apiservice.getAllUser("getAllUser",access_token).enqueue(new Callback<AllUser>() {
+        ApiService.apiservice.getAllUser("getAllUser",Iduser,access_token).enqueue(new Callback<AllUser>() {
             @Override
             public void onResponse(Call<AllUser> call, Response<AllUser> response) {
                 AllUser allUser = response.body();
@@ -113,7 +115,7 @@ public class usermanager extends Fragment {
 
             @Override
             public void onFailure(Call<AllUser> call, Throwable t) {
-                Toast.makeText(getContext(),"GET USER FAIL",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Không lấy được danh sách user",Toast.LENGTH_SHORT).show();
                 Log.e("access_token",access_token+"loi: "+t.toString());
             }
         });

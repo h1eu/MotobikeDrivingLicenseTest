@@ -87,12 +87,12 @@ public class comment extends AppCompatActivity {
         ApiService.apiservice.createCmt("createCmt",Integer.toString(((InfoAcc) getApplication()).getIduser()),Testid,content,((InfoAcc) getApplication()).getAccess_token()).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                Toast.makeText(getBaseContext(),"Tao thanh cong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Đã đăng bình luận",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getBaseContext(),"Tao that bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Bình luận thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -69,16 +69,18 @@ public class Register extends AppCompatActivity {
                     Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
                     Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
                     btn_no.setVisibility(View.GONE);
-                    btn_yes.setText("Đồng Ý");
+                    btn_yes.setText("Đồng Ý, đăng nhập");
                     TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
                     TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
                     tv_dialog_title.setText("Tạo tài khoản thành công");
-                    tv_dialog_content.setText("Chào "+user.getUsername()+", bạn hãy lưu mã khôi phục pass:"+user.getRecover());
+                    tv_dialog_content.setText("Chào "+user.getUsername()+", bạn hãy lưu mã khôi phục pass: "+user.getRecover());
 
                     btn_yes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
                             dialog.dismiss();
+                            Intent intent=new Intent(Register.this,Login.class);
+                            startActivity(intent);
                         }
                     });
                     dialog.show();

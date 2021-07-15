@@ -65,7 +65,7 @@ public class CheckAnserAdapter extends BaseAdapter {
             else
                 if(data!="")
                 viewHolder.ll_da.setBackgroundColor(Color.parseColor("#FFF86E6E"));
-            Log.e("da chay 1 lan","size:"+arrayListDadung.size()+"dap an thu :"+Integer.toString(position)+"KQ:"+arrayListDadung.get(position));
+//            Log.e("da chay 1 lan","size:"+arrayListDadung.size()+"dap an thu :"+Integer.toString(position)+"KQ:"+arrayListDadung.get(position));
         }
         return convertView;
     }

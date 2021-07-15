@@ -57,7 +57,7 @@
     <fragment
         android:id="@+id/accountmanager"
         android:name="com.example.mototest.View.Admin.usermanager"
-        android:label="fragment_accountmanager"
+        android:label="Quản lý tài khoản"
         tools:layout="@layout/fragment_usermanager" >
 
         <action
@@ -67,7 +67,7 @@
     <fragment
         android:id="@+id/infoaccount"
         android:name="com.example.mototest.View.Admin.infoaccount"
-        android:label="fragment_infoaccount"
+        android:label="Thông tin tài khoản"
         tools:layout="@layout/fragment_infoaccount" >
         <argument
             android:name="User"
@@ -76,12 +76,12 @@
     <fragment
         android:id="@+id/infotest"
         android:name="com.example.mototest.View.Admin.infotest"
-        android:label="fragment_infotest"
+        android:label="Thông tin người dùng"
         tools:layout="@layout/fragment_infotest" />
     <fragment
         android:id="@+id/questionmanager"
         android:name="com.example.mototest.View.Admin.questionmanager"
-        android:label="fragment_questionmanager"
+        android:label="Quản lý câu hỏi"
         tools:layout="@layout/fragment_questionmanager" >
 
         <action
@@ -105,7 +105,7 @@
     <fragment
         android:id="@+id/testmanager"
         android:name="com.example.mototest.View.Admin.testmanager"
-        android:label="fragment_testmanager"
+        android:label="Quản lý bài thi"
         tools:layout="@layout/fragment_testmanager" >
 
         <action
@@ -118,7 +118,7 @@
     <fragment
         android:id="@+id/infoquestion"
         android:name="com.example.mototest.View.Admin.infoquestion"
-        android:label="fragment_infoquestion"
+        android:label="Thông tin câu hỏi"
         tools:layout="@layout/fragment_infoquestion" >
         <argument
             android:name="Ques"

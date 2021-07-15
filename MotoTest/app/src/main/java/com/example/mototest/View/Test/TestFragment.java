@@ -94,7 +94,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
             }
             @Override
             public void onFailure(Call<Alltest> call, Throwable t) {
-                Toast.makeText(getContext(), "Call API FAIL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
             }
         });
 //        getActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {

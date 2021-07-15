@@ -121,7 +121,7 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                            Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
                             NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
                             NavController navController = Navigation.findNavController(getView());
                             navController.navigate(action);
@@ -130,11 +130,11 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
                 });
 
 
-                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
             }
             @Override
             public void onFailure(Call<Alltest> call, Throwable t) {
-                Toast.makeText(getContext(), "Call API FAIL", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
             }
 
         });
@@ -144,12 +144,13 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
         ApiService.apiservice.querryTest("createTest","-1","0",access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                Toast.makeText(getContext(),"Tao thanh cong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Tạo bài thi thành công",Toast.LENGTH_SHORT).show();
+                setAdapter();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"Tao that bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Tạo bài thi thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }

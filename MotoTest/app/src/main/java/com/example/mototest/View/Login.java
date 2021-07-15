@@ -103,13 +103,13 @@ public class Login extends AppCompatActivity {
                 Intent intent=new Intent(Login.this, MainActivity.class);
 //                intent.putExtras(bundle);
                 startActivity(intent);
-                Toast.makeText(getBaseContext(),"OK -> LOGIN SOON",Toast.LENGTH_SHORT).show();
-                Toast.makeText(getBaseContext(),user.getAccess_token(),Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(),"OK -> LOGIN SOON",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getBaseContext(),user.getAccess_token(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(getBaseContext(),"SAI TK HOAC MK",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(),"Sai tài khoản hoặc mật khẩu",Toast.LENGTH_SHORT).show();
             }
         });
     }

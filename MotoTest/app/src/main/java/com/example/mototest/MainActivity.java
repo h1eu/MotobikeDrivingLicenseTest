@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity {
 //            }
 //        });
 
-
+        MenuItem dashboard = navigationView.getMenu().findItem(R.id.nav_dashboard);
+        if(!((InfoAcc) getApplication()).getPermission().equals("admin")) dashboard.setVisible(false);
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override

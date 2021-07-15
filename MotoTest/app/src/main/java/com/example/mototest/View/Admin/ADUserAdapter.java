@@ -1,6 +1,7 @@
 package com.example.mototest.View.Admin;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class ADUserAdapter extends ArrayAdapter<User> {
         tv_name.setText(user.getName());
         tv_permission.setText(user.getPermission());
         tv_recover.setText(user.getRecover());
-
+        if(user.getActive()!=1) convertView.setBackgroundColor(Color.parseColor("#FFF86E6E"));
         return convertView;
     }
 }

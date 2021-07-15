@@ -172,12 +172,12 @@ public class infoquestion extends Fragment {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Status status = response.body();
-                Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -197,13 +197,13 @@ public class infoquestion extends Fragment {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Status status = response.body();
-                Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Xóa câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Xóa thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -223,13 +223,13 @@ public class infoquestion extends Fragment {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 Status status = response.body();
-                Toast.makeText(getContext(),"Thanh cong"+status.getStatus(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Tạo câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Tạo thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }

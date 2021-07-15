@@ -101,12 +101,12 @@ public class TestAdapter extends ArrayAdapter<String> {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
                 listener.onEvent(1);
-                Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Xóa bài thi thành công",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"Xoa that bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Xóa thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }

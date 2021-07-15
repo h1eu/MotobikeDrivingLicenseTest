@@ -131,7 +131,7 @@ public class questionmanager extends Fragment {
                     btn_addtoTest.setText("ADD ITEM SELECTED TO TEST");
                 }
                 else{
-                    Toast.makeText(getContext(),"THEM VAO TEST",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),"THEM VAO TEST",Toast.LENGTH_SHORT).show();
                     addtoTest();
 
                 }
@@ -148,23 +148,23 @@ public class questionmanager extends Fragment {
             ApiService.apiservice.getAllQues("getAllQS").enqueue(new Callback<AllQues>() {
                 @Override
                 public void onResponse(Call<AllQues> call, Response<AllQues> response) {
-                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                     AllQues allQues = response.body();
                     arrayList = allQues.getAllQues();
-                    Log.e("size",Integer.toString(arrayList.size()));
+//                    Log.e("size",Integer.toString(arrayList.size()));
                     SetAdapter();
                 }
 
                 @Override
                 public void onFailure(Call<AllQues> call, Throwable t) {
-                    Toast.makeText(getContext(),"CALL API FAIL",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
                 }
             });
         else{
             ApiService.apiservice.getTest("getTest",Integer.toString(TestID)).enqueue(new Callback<Test>() {
                 @Override
                 public void onResponse(Call<Test> call, Response<Test> response) {
-                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                     Test test = response.body();
                     arrayList = test.getListquestion();
 //                    Log.e("size",Integer.toString(arrayList.size()));
@@ -173,7 +173,7 @@ public class questionmanager extends Fragment {
 
                 @Override
                 public void onFailure(Call<Test> call, Throwable t) {
-                    Toast.makeText(getContext(),"CALL API FAIL",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
                 }
             });
 
@@ -265,18 +265,18 @@ public class questionmanager extends Fragment {
                 ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
-                        Log.e("Thanh cong","1 cau hoi");
+//                        Log.e("Thanh cong","1 cau hoi");
                         rmqsList.remove(quesId);
                         if(rmqsList.size()==0) setAllQS(TestId);
                     }
 
                     @Override
                     public void onFailure(Call<Status> call, Throwable t) {
-                        Log.e("That bai","1 cau hoi");
+//                        Log.e("That bai","1 cau hoi");
                     }
                 });
 
-            Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(),"Xóa câu hỏi khỏi bài thi thành công",Toast.LENGTH_SHORT).show();
         }
 
         else

@@ -149,7 +149,6 @@ public class infoaccount extends Fragment {
     }
 
     private void updateUser(int active){
-        Toast.makeText(getContext(),"Co chay Update",Toast.LENGTH_SHORT).show();
         String permission=rbtn_admin.isChecked()?"admin":"user";
         ApiService.apiservice.querryUser("updateUser",
                 Integer.toString(user.getIduser()),
@@ -165,14 +164,16 @@ public class infoaccount extends Fragment {
                     public void onResponse(Call<Status> call, Response<Status> response) {
                         if(active==-1) {
                             btn_active.setText("UNBLOCK");
-                            Toast.makeText(getContext(),"Block thanh cong",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"Block thành công",Toast.LENGTH_SHORT).show();
+                            user.setActive(-1);
                         }else
-                            Toast.makeText(getContext(),"Update thanh cong",Toast.LENGTH_SHORT).show();
+                            if(active==1) btn_active.setText("BLOCK");
+                            Toast.makeText(getContext(),"Update thành công",Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onFailure(Call<Status> call, Throwable t) {
-                        Toast.makeText(getContext(),"That bai",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(),"Thao tác thất bại",Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -201,14 +202,14 @@ public class infoaccount extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                Toast.makeText(getContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
-//                Toast.makeText(getContext(),"Xoa thanh cong",Toast.LENGTH_SHORT).show();
+//                Toast.makeText(getContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Đã xóa người dùng thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                Toast.makeText(getContext(),"Xoa that bai",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(),"Xóa người dùng thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
