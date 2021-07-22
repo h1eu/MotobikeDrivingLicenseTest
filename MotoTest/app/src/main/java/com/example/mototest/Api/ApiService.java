@@ -1,5 +1,6 @@
 package com.example.mototest.Api;
 
+import com.example.mototest.Model.Post;
 import com.example.mototest.Model.Test;
 import com.example.mototest.Model.User;
 import com.google.gson.Gson;
@@ -108,4 +109,19 @@ public interface ApiService {
             @Field("Content") String content,
             @Field("Access_token") String access_token
     );
+    // Ôn tập lý thuyết
+    ApiService apiservice2=new Retrofit.Builder()
+            .baseUrl("https://meothi.000webhostapp.com/")
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+            .create(ApiService.class);
+    @GET("index.php")
+    Call<Post> getLuatGT(@Query("action") String action);
+
+    @GET("index.php")
+    Call<Post> getBienbao(@Query("action") String action);
+
+    @GET("index.php")
+    Call<Post> getXuphat(@Query("action") String action);
+
 }

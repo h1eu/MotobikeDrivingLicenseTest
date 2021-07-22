@@ -1,47 +1,39 @@
 package com.example.mototest.Model;
 
-public class Post {
-    private int Idpost;
-    private String Title;
-    private String Content;
-    private String Image;
-    public Post(int Idpost ,String Title  ,String Content ,String Image){
-        this.Idpost = Idpost;
-        this.Title = Title;
-        this.Content = Content;
-        this.Image = Image;
+import java.io.Serializable;
+import java.util.ArrayList;
 
+public class Post implements Serializable {
+    ArrayList<ContentPost> Post,LuatGT,BienBao,MucXP;
+
+    public ArrayList<ContentPost> getPost() {
+        return Post;
+    }
+    public void setPost(ArrayList<ContentPost> post) {
+        Post = post;
     }
 
-    public int getIdpost() {
-        return Idpost;
+    public ArrayList<ContentPost> getLuatGT() {
+        return LuatGT;
     }
 
-    public void setIdpost(int idpost) {
-        Idpost = idpost;
+    public void setLuatGT(ArrayList<ContentPost> luatGT) {
+        LuatGT = luatGT;
     }
 
-    public String getTitle() {
-        return Title;
+    public ArrayList<ContentPost> getBienBao() {
+        return BienBao;
     }
 
-    public void setTitle(String title) {
-        Title = title;
+    public void setBienBao(ArrayList<ContentPost> bienBao) {
+        BienBao = bienBao;
     }
 
-    public String getContent() {
-        return Content;
+    public ArrayList<ContentPost> getMucXP() {
+        return MucXP;
     }
 
-    public void setContent(String content) {
-        Content = content;
-    }
-
-    public String getImage() {
-        return Image;
-    }
-
-    public void setImage(String image) {
-        Image = image;
+    public void setMucXP(ArrayList<ContentPost> mucXP) {
+        MucXP = mucXP;
     }
 }

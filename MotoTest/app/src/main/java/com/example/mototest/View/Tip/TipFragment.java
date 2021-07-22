@@ -12,35 +12,15 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.example.mototest.R;
 import com.example.mototest.databinding.FragmentTipBinding;
 
 
 public class TipFragment extends Fragment {
-
-    private TipViewModel testViewModel;
-    private FragmentTipBinding binding;
-
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        testViewModel =
-                new ViewModelProvider(this).get(TipViewModel.class);
+        View v = inflater.inflate(R.layout.fragment_tip, container, false);
 
-        binding = FragmentTipBinding.inflate(inflater, container, false);
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textTip;
-        testViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
-                textView.setText(s);
-            }
-        });
-        return root;
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
+        return v;
     }
 }
