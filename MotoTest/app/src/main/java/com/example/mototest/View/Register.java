@@ -25,6 +25,7 @@ public class Register extends AppCompatActivity {
     private Button btn_res_register;
     TextView tv_login;
     Activity activity=this;
+    Dialog dialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,7 +47,9 @@ public class Register extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(edt_res_password.getText().toString().equals(edt_res_ComPassword.getText().toString())){
-//                    Toast.makeText(getBaseContext(),"GOI API REG",Toast.LENGTH_SHORT).show();
+                    dialog2=new Dialog(activity);
+                    dialog2.setContentView(R.layout.loading);
+                    dialog2.show();
                     register();
                 }
                 else
@@ -64,8 +67,6 @@ public class Register extends AppCompatActivity {
                 if(user.getUsername()!=null){
                     Dialog dialog=new Dialog(activity);
                     dialog.setContentView(R.layout.dialog_custom);
-//                customDialog.showdialog(activity,"Đăng Nhập","Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
-//                dialog.setTitle("Bạn có đăng nhập không hahahahahahakkkkkkkkkkkkkk ?");
                     Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
                     Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
                     btn_no.setVisibility(View.GONE);
@@ -74,7 +75,7 @@ public class Register extends AppCompatActivity {
                     TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
                     tv_dialog_title.setText("Tạo tài khoản thành công");
                     tv_dialog_content.setText("Chào "+user.getUsername()+", bạn hãy lưu mã khôi phục pass: "+user.getRecover());
-
+                    dialog2.dismiss();
                     btn_yes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
@@ -93,6 +94,7 @@ public class Register extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getBaseContext(),"Tên tài khoản đã tồn tại",Toast.LENGTH_SHORT).show();
             }
         });

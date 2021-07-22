@@ -50,6 +50,7 @@ public class infoaccount extends Fragment {
     private Button btn_active;
     private TextView tv_iduser;
     private String access_token;
+    Dialog dialog2;
     Activity activity=getActivity();
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -92,6 +93,8 @@ public class infoaccount extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_infoaccount, container, false);
+        dialog2=new Dialog(getActivity());
+        dialog2.setContentView(R.layout.loading);
         try{
 //code that may throw an exception
             user = infoaccountArgs.fromBundle(getArguments()).getUser();
@@ -121,6 +124,7 @@ public class infoaccount extends Fragment {
         btn_update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
                 updateUser(user.getActive());
             }
         });
@@ -128,6 +132,7 @@ public class infoaccount extends Fragment {
         btn_delete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
 //                Toast.makeText(getContext(),"Chay delete",Toast.LENGTH_SHORT).show();
                 confirmDel();
 
@@ -162,6 +167,7 @@ public class infoaccount extends Fragment {
                 .enqueue(new Callback<Status>() {
                     @Override
                     public void onResponse(Call<Status> call, Response<Status> response) {
+                        dialog2.dismiss();
                         if(active==-1) {
                             btn_active.setText("UNBLOCK");
                             Toast.makeText(getContext(),"Block thành công",Toast.LENGTH_SHORT).show();
@@ -173,6 +179,7 @@ public class infoaccount extends Fragment {
 
                     @Override
                     public void onFailure(Call<Status> call, Throwable t) {
+                        dialog2.dismiss();
                         Toast.makeText(getContext(),"Thao tác thất bại",Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -202,6 +209,7 @@ public class infoaccount extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
 //                Toast.makeText(getContext(),response.body().getMessage(),Toast.LENGTH_SHORT).show();
                 Toast.makeText(getContext(),"Đã xóa người dùng thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
@@ -209,12 +217,14 @@ public class infoaccount extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Xóa người dùng thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void confirmDel(){
+        dialog2.dismiss();
         Dialog dialog=new Dialog(getActivity());
 //        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
         dialog.setContentView(R.layout.dialog_custom);

@@ -1,5 +1,6 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -66,6 +67,7 @@ public class questionmanager extends Fragment {
     private int current_index=0;
     private int type=0;
     private String access_token;
+    Dialog dialog2;
     public questionmanager() {
         // Required empty public constructor
     }
@@ -94,11 +96,15 @@ public class questionmanager extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_questionmanager, container, false);
+        dialog2=new Dialog(getActivity());
+        dialog2.setContentView(R.layout.loading);
+        dialog2.show();
         setAllQS(TestId);
 
         btn_newquestion = (Button) v.findViewById(R.id.btn_newquestion);
         btn_newquestion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                dialog2.dismiss();
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_questionmanager_to_infoquestion);
 
@@ -125,12 +131,14 @@ public class questionmanager extends Fragment {
             public void onClick(View v) {
                 if(btn_addtoTest.getText().toString().equals("ADD FROM LIBARY TO TEST"))
                 {
+                    dialog2.show();
                     setAllQS(0);
                     btn_newquestion.setVisibility(View.GONE);
                     btn_remove.setVisibility(View.GONE);
                     btn_addtoTest.setText("ADD ITEM SELECTED TO TEST");
                 }
                 else{
+                    dialog2.show();
 //                    Toast.makeText(getContext(),"THEM VAO TEST",Toast.LENGTH_SHORT).show();
                     addtoTest();
 
@@ -148,6 +156,7 @@ public class questionmanager extends Fragment {
             ApiService.apiservice.getAllQues("getAllQS").enqueue(new Callback<AllQues>() {
                 @Override
                 public void onResponse(Call<AllQues> call, Response<AllQues> response) {
+                    dialog2.dismiss();
 //                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                     AllQues allQues = response.body();
                     arrayList = allQues.getAllQues();
@@ -157,6 +166,7 @@ public class questionmanager extends Fragment {
 
                 @Override
                 public void onFailure(Call<AllQues> call, Throwable t) {
+                    dialog2.dismiss();
                     Toast.makeText(getContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
                 }
             });
@@ -164,6 +174,7 @@ public class questionmanager extends Fragment {
             ApiService.apiservice.getTest("getTest",Integer.toString(TestID)).enqueue(new Callback<Test>() {
                 @Override
                 public void onResponse(Call<Test> call, Response<Test> response) {
+                    dialog2.dismiss();
 //                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                     Test test = response.body();
                     arrayList = test.getListquestion();
@@ -173,6 +184,7 @@ public class questionmanager extends Fragment {
 
                 @Override
                 public void onFailure(Call<Test> call, Throwable t) {
+                    dialog2.dismiss();
                     Toast.makeText(getContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
                 }
             });
@@ -197,6 +209,7 @@ public class questionmanager extends Fragment {
         lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                dialog2.dismiss();
 //                current_index=position;
 //                adQuestionAdapter.notifyDataSetChanged();{
                 if(TestId!=0) {
@@ -246,6 +259,7 @@ public class questionmanager extends Fragment {
         ApiService.apiservice.querryTest("addQStoTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
                 Log.e("Thanh cong","1 cau hoi");
                 setAllQS(TestId);
                 btn_addtoTest.setText("ADD FROM LIBARY TO TEST");
@@ -254,6 +268,7 @@ public class questionmanager extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Log.e("That bai","1 cau hoi");
             }
         });
@@ -280,7 +295,11 @@ public class questionmanager extends Fragment {
         }
 
         else
+        {
+            dialog2.dismiss();
             Toast.makeText(getContext(),"1 bài thi cần tối thiểu 1 câu hỏi",Toast.LENGTH_SHORT).show();
+
+        }
 
     }
 

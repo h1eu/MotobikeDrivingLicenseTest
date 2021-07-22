@@ -36,6 +36,7 @@ public class infoquestion extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private Integer TestId=0;
+    Dialog dialog2;
     EditText edt_questionform;
     EditText edt_info_qscontent;
     EditText edt_da1;
@@ -49,6 +50,7 @@ public class infoquestion extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public infoquestion() {
         // Required empty public constructor
@@ -87,6 +89,8 @@ public class infoquestion extends Fragment {
         // Inflate the layout for this fragment
 //        btn_updatequestion
         View v = inflater.inflate(R.layout.fragment_infoquestion, container, false);
+        dialog2=new Dialog(getActivity());
+        dialog2.setContentView(R.layout.loading);
         edt_questionform = v.findViewById(R.id.edt_questionform);
         edt_info_qscontent = v.findViewById(R.id.edt_info_qscontent);
         edt_da1 = v.findViewById(R.id.edt_da1);
@@ -133,6 +137,7 @@ public class infoquestion extends Fragment {
         btn_updatequestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
                 updateQS();
             }
         });
@@ -149,6 +154,7 @@ public class infoquestion extends Fragment {
         btn_newquestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
                 createQS();
             }
         });
@@ -171,12 +177,14 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
                 Status status = response.body();
                 Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
             }
         });
@@ -196,6 +204,7 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
                 Status status = response.body();
                 Toast.makeText(getContext(),"Xóa câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
@@ -203,6 +212,7 @@ public class infoquestion extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Xóa thất bại",Toast.LENGTH_SHORT).show();
             }
         });
@@ -222,6 +232,7 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
                 Status status = response.body();
                 Toast.makeText(getContext(),"Tạo câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
@@ -229,6 +240,7 @@ public class infoquestion extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Tạo thất bại",Toast.LENGTH_SHORT).show();
             }
         });

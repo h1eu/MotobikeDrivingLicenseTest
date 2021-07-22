@@ -1,5 +1,6 @@
 package com.example.mototest.View.Test;
 
+import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -32,6 +33,7 @@ public class LayoutTestFragment extends Fragment {
     private LinearLayout linearLayout1,linearLayout2,linearLayout3,linearLayout4;
     private View v;
     private int stt=0;
+
 //    private String ctl="";
     static ArrayList<String> listans=new ArrayList<String>();
     @Override

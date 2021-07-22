@@ -55,11 +55,15 @@ public class LayoutTest extends AppCompatActivity{
     private String idTest;
     Activity activity=this;
     ArrayList<String> listdadung=new ArrayList<>();
+    Dialog dialog2;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_test);
         actionBar= getSupportActionBar();
+        dialog2=new Dialog(activity);
+        dialog2.setContentView(R.layout.loading);
+        dialog2.show();
 
         initUi();
 //        questionArrayList = getQuestionList();
@@ -74,6 +78,7 @@ public class LayoutTest extends AppCompatActivity{
         ApiService.apiservice.getTest(action,bundle.getString("Idtest")).enqueue(new Callback<Test>() {
             @Override
             public void onResponse(Call<Test> call, Response<Test> response) {
+                dialog2.dismiss();
 //                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
                 idTest = bundle.getString("Idtest");
                 Test test = response.body();
@@ -152,6 +157,7 @@ public class LayoutTest extends AppCompatActivity{
 
             @Override
             public void onFailure(Call<Test> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(LayoutTest.this,"Lấy dữ liệu bài thi thất bại",Toast.LENGTH_SHORT).show();
             }
         });

@@ -1,5 +1,6 @@
 package com.example.mototest.View.Review;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -27,12 +28,16 @@ public class XuphatFragment extends Fragment {
     ArrayList<ContentPost> contentPostArrayList=new ArrayList<>();
     Context context;
     ListView listView;
+    Dialog dialog;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_xuphat, container, false);
         listView=(ListView)v.findViewById(R.id.lv_mucxuphat);
+        dialog=new Dialog(getActivity());
+        dialog.setContentView(R.layout.loading);
+        dialog.show();
         callapi();
         context=container.getContext();
         // Inflate the layout for this fragment
@@ -46,11 +51,13 @@ public class XuphatFragment extends Fragment {
                 Post post=response.body();
                 contentPostArrayList=post.getMucXP();
                 PostAdapter postAdapter =new PostAdapter(context,contentPostArrayList);
+                dialog.dismiss();
                 listView.setAdapter(postAdapter);
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
+                dialog.dismiss();
                 Log.e("loi","call false");
             }
         });

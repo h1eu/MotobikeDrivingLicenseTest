@@ -1,5 +1,7 @@
 package com.example.mototest.View.Tip;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -28,6 +30,7 @@ public class MeothilythuyetFragment extends Fragment {
     Context context;
     ArrayList<ContentPost> contentPostArrayList=new ArrayList<>();
     ListView listView;
+    Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -35,6 +38,9 @@ public class MeothilythuyetFragment extends Fragment {
         View v=inflater.inflate(R.layout.fragment_meothilythuyet, container, false);
         listView=(ListView)v.findViewById(R.id.lv_mtlt);
         context=container.getContext();
+        dialog=new Dialog(getActivity());
+        dialog.setContentView(R.layout.loading);
+        dialog.show();
         callapi();
         return v;
     }
@@ -46,12 +52,14 @@ public class MeothilythuyetFragment extends Fragment {
                 Post post=response.body();
                 contentPostArrayList=post.getMTLT();
                 PostAdapter postAdapter=new PostAdapter(context,contentPostArrayList);
+                dialog.dismiss();
                 listView.setAdapter(postAdapter);
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
                 Log.e("loi","loi");
+                dialog.dismiss();
             }
         });
     }

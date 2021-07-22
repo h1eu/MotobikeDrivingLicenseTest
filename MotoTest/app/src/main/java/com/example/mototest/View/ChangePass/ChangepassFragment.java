@@ -1,5 +1,6 @@
 package com.example.mototest.View.ChangePass;
 
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -36,6 +37,7 @@ public class ChangepassFragment extends Fragment {
     private EditText edt_changepass_current,edt_changepass_new,edt_changepass_confnew;
     private Button btn_save;
     private String access_token,username;
+    Dialog dialog;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -50,6 +52,9 @@ public class ChangepassFragment extends Fragment {
         btn_save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog=new Dialog(getActivity());
+                dialog.setContentView(R.layout.loading);
+                dialog.show();
                 if(edt_changepass_new.getText().toString().equals(edt_changepass_confnew.getText().toString()))
                 changePass();
                 else
@@ -73,11 +78,13 @@ public class ChangepassFragment extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog.dismiss();
                 Toast.makeText(getContext(),response.body().getStatus(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog.dismiss();
                 Toast.makeText(getContext(),"Change Pass Failed",Toast.LENGTH_SHORT).show();
             }
         });

@@ -2,6 +2,8 @@ package com.example.mototest.View.Comment;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -32,10 +34,15 @@ public class comment extends AppCompatActivity {
     private ArrayList<Comment> arrayList = new ArrayList<>();
     private CmtAdapter cmtAdapter;
     private ListView lv_comment;
+    Activity activity=this;
+    Dialog dialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment);
+        dialog=new Dialog(activity);
+        dialog.setContentView(R.layout.loading);
+        dialog.show();
         toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
 
         toolbar_back.setOnClickListener(new  View.OnClickListener() {
@@ -54,6 +61,7 @@ public class comment extends AppCompatActivity {
         iv_send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.show();
                 String content = edt_cmt_content.getText().toString();
                 if(content!=null)
                 sendCmt(content,Integer.toString(Testid));
@@ -68,6 +76,7 @@ public class comment extends AppCompatActivity {
             @Override
             public void onResponse(Call<AllCmt> call, Response<AllCmt> response) {
                 AllCmt allCmt = response.body();
+                dialog.dismiss();
                 arrayList = allCmt.getAllCmt();
                 ArrayList<User> userArrayList= new ArrayList<>();
                 userArrayList = allCmt.getInfoCmt();
@@ -79,19 +88,23 @@ public class comment extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<AllCmt> call, Throwable t) {
+                dialog.dismiss();
                 Toast.makeText(getBaseContext(),"GET ALL CMT FAIL",Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void sendCmt(String content,String Testid){
+
         ApiService.apiservice.createCmt("createCmt",Integer.toString(((InfoAcc) getApplication()).getIduser()),Testid,content,((InfoAcc) getApplication()).getAccess_token()).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog.dismiss();
                 Toast.makeText(getBaseContext(),"Đã đăng bình luận",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog.dismiss();
                 Toast.makeText(getBaseContext(),"Bình luận thất bại",Toast.LENGTH_SHORT).show();
             }
         });

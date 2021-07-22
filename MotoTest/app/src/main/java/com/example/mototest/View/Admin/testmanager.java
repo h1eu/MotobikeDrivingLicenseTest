@@ -1,5 +1,6 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Dialog;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -46,6 +47,7 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
     private String access_token;
     private ListView lv_test;
     private ImageView img_delTest;
+    Dialog dialog2;
     // TODO: Rename and change types of parameters
     private String mParam1;
 
@@ -84,8 +86,13 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_testmanager, container, false);
         btn_addtest = (Button) v.findViewById(R.id.btn_addtest);
-        btn_addtest.setOnClickListener(new View.OnClickListener() {
+        dialog2=new Dialog(getActivity());
+        dialog2.setContentView(R.layout.loading);
+        dialog2.show();
+        btn_addtest.setOnClickListener(new View.OnClickListener()
+        {
             public void onClick(View v) {
+                dialog2.dismiss();
                 createTest();
                 setAdapter();
 //                NavController navController = Navigation.findNavController(v);
@@ -96,7 +103,6 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
 
         access_token = ((InfoAcc) getActivity().getApplication()).getAccess_token();
         lv_test = v.findViewById(R.id.lv_testmanager);
-
         setAdapter();
 
         return v;
@@ -106,6 +112,7 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
+                dialog2.dismiss();
 //                lv_test=(ListView)getActivity().findViewById(R.id.lv_test);
 //                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
                 Alltest alltest=response.body();
@@ -120,11 +127,11 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
                 lv_test.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
 //                            Toast.makeText(getContext(), "Chuyen huong sang detail", Toast.LENGTH_SHORT).show();
                             NavDirections action = testmanagerDirections.actionTestmanagerToQuestionmanager(testArrayList.get(position));
                             NavController navController = Navigation.findNavController(getView());
                             navController.navigate(action);
+                        dialog2.dismiss();
 
                     }
                 });
@@ -134,6 +141,7 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
             }
             @Override
             public void onFailure(Call<Alltest> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(), "lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
             }
 
@@ -144,12 +152,14 @@ public class testmanager extends Fragment implements TestAdapter.EventListener{
         ApiService.apiservice.querryTest("createTest","-1","0",access_token).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Tạo bài thi thành công",Toast.LENGTH_SHORT).show();
                 setAdapter();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Tạo bài thi thất bại",Toast.LENGTH_SHORT).show();
             }
         });

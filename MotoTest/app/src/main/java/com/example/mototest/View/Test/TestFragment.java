@@ -35,7 +35,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
     TestAdapter testAdapter;
     ListView listViewtest;
     ArrayList<String> testArrayList = new ArrayList<String>();
-
+    Dialog dialog2;
     public TestFragment() {
     }
 
@@ -56,6 +56,9 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v=inflater.inflate(R.layout.fragment_test,container,false);
+        dialog2=new Dialog(getActivity());
+        dialog2.setContentView(R.layout.loading);
+        dialog2.show();
 
         // Inflate the layout for this fragment
         return v;
@@ -69,6 +72,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
+                dialog2.dismiss();
                 listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
 //                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
                 Alltest alltest=response.body();
@@ -94,6 +98,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
             }
             @Override
             public void onFailure(Call<Alltest> call, Throwable t) {
+                dialog2.dismiss();
                 Toast.makeText(getContext(), "Lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
             }
         });
