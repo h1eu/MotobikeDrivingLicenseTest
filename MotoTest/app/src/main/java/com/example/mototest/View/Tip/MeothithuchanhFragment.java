@@ -1,4 +1,4 @@
-package com.example.mototest.View.Review;
+package com.example.mototest.View.Tip;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import com.example.mototest.Api.ApiService;
 import com.example.mototest.Model.ContentPost;
 import com.example.mototest.Model.Post;
 import com.example.mototest.R;
+import com.example.mototest.View.Review.PostAdapter;
 
 import java.util.ArrayList;
 
@@ -22,8 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-
-public class LuatFragment extends Fragment {
+public class MeothithuchanhFragment extends Fragment {
     ArrayList<ContentPost> contentPostArrayList=new ArrayList<>();
     Context context;
     ListView listView;
@@ -31,27 +31,27 @@ public class LuatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v=inflater.inflate(R.layout.fragment_luat, container, false);
         // Inflate the layout for this fragment
-        listView=(ListView)v.findViewById(R.id.lv_luatgt);
-        callapi();
+        View v=inflater.inflate(R.layout.fragment_meothithuchanh, container, false);
+        listView=(ListView)v.findViewById(R.id.lv_mtth);
         context=container.getContext();
+        callapi();
         return v;
     }
 
     private void callapi() {
-        ApiService.apiservice2.getLuatGT("getLuatGT").enqueue(new Callback<Post>() {
+        ApiService.apiservice2.getMeothith("getMTThuchanh").enqueue(new Callback<Post>() {
             @Override
             public void onResponse(Call<Post> call, Response<Post> response) {
                 Post post=response.body();
-                contentPostArrayList=post.getLuatGT();
-                PostAdapter postAdapter =new PostAdapter(context,contentPostArrayList);
+                contentPostArrayList=post.getMTTH();
+                PostAdapter postAdapter=new PostAdapter(context,contentPostArrayList);
                 listView.setAdapter(postAdapter);
             }
 
             @Override
             public void onFailure(Call<Post> call, Throwable t) {
-                Log.e("loi","call false");
+                Log.e("loi","loi");
             }
         });
     }

@@ -17,10 +17,10 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ReviewAdapter extends ArrayAdapter<ContentPost> {
+public class PostAdapter extends ArrayAdapter<ContentPost> {
     Context context;
     ArrayList<ContentPost> contentPostArrayList;
-    public ReviewAdapter(@NonNull Context context, ArrayList<ContentPost> contentPostArrayList) {
+    public PostAdapter(@NonNull Context context, ArrayList<ContentPost> contentPostArrayList) {
         super(context,0,contentPostArrayList);
         this.context=context;
         this.contentPostArrayList=contentPostArrayList;
@@ -30,7 +30,7 @@ public class ReviewAdapter extends ArrayAdapter<ContentPost> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         LayoutInflater inflater=LayoutInflater.from(getContext());
-        convertView=inflater.inflate(R.layout.items_review,parent,false);
+        convertView=inflater.inflate(R.layout.items_post,parent,false);
         TextView content=(TextView)convertView.findViewById(R.id.tv_content_rv);
         ImageView img=(ImageView)convertView.findViewById(R.id.img_rv);
         ContentPost contentPost=contentPostArrayList.get(position);

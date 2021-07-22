@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class Post implements Serializable {
-    ArrayList<ContentPost> Post,LuatGT,BienBao,MucXP;
+    ArrayList<ContentPost> Post,LuatGT,BienBao,MucXP, MTLT,MTTH;
 
     public ArrayList<ContentPost> getPost() {
         return Post;
@@ -35,5 +35,21 @@ public class Post implements Serializable {
 
     public void setMucXP(ArrayList<ContentPost> mucXP) {
         MucXP = mucXP;
+    }
+
+    public ArrayList<ContentPost> getMTLT() {
+        return MTLT;
+    }
+
+    public void setMTLT(ArrayList<ContentPost> MTLT) {
+        this.MTLT = MTLT;
+    }
+
+    public ArrayList<ContentPost> getMTTH() {
+        return MTTH;
+    }
+
+    public void setMTTH(ArrayList<ContentPost> MTTH) {
+        this.MTTH = MTTH;
     }
 }

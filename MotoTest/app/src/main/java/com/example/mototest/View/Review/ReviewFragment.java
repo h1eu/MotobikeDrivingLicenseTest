@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.viewpager.widget.ViewPager;
@@ -35,7 +36,7 @@ public class ReviewFragment extends Fragment {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        ViewPagerReviewAdapter viewPagerReviewAdapter=new ViewPagerReviewAdapter(getParentFragmentManager(), FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
+        ViewPagerReviewAdapter viewPagerReviewAdapter=new ViewPagerReviewAdapter(getParentFragmentManager(), FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         viewPagerReviewAdapter.addFragment(new LuatFragment(),"Luật Giao Thông");
         viewPagerReviewAdapter.addFragment(new BienbaoFragment(),"Biển Báo");
         viewPagerReviewAdapter.addFragment(new XuphatFragment(),"Mức xử phạt");

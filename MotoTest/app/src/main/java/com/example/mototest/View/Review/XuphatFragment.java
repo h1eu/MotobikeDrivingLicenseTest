@@ -45,8 +45,8 @@ public class XuphatFragment extends Fragment {
             public void onResponse(Call<Post> call, Response<Post> response) {
                 Post post=response.body();
                 contentPostArrayList=post.getMucXP();
-                ReviewAdapter reviewAdapter=new ReviewAdapter(context,contentPostArrayList);
-                listView.setAdapter(reviewAdapter);
+                PostAdapter postAdapter =new PostAdapter(context,contentPostArrayList);
+                listView.setAdapter(postAdapter);
             }
 
             @Override

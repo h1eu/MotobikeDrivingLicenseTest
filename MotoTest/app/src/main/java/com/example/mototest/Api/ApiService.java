@@ -124,4 +124,10 @@ public interface ApiService {
     @GET("index.php")
     Call<Post> getXuphat(@Query("action") String action);
 
+    @GET("index.php")
+    Call<Post> getMeothilt(@Query("action") String action);
+
+    @GET("index.php")
+    Call<Post> getMeothith(@Query("action") String action);
+
 }
