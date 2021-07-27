@@ -138,7 +138,7 @@ public class infoaccount extends Fragment {
 
             }
         });
-        tv_iduser.setText(Integer.toString(user.getIduser()));
+        tv_iduser.setText("ID : "+Integer.toString(user.getIduser()));
         edt_username.setText(user.getUsername().toString());
         edt_name.setText(user.getName());
         edt_recoverCode.setText(user.getRecover());

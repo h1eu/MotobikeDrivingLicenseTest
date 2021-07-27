@@ -41,11 +41,11 @@ public class ADUserAdapter extends ArrayAdapter<User> {
         TextView tv_name = (TextView) convertView.findViewById(R.id.tv_name);
         TextView tv_permission = (TextView) convertView.findViewById(R.id.tv_permission);
         User user = arrayList.get(position);
-        tv_username.setText(user.getUsername());
-        tv_name.setText(user.getName());
+        tv_username.setText("Username: "+user.getUsername());
+        tv_name.setText("Tên: "+user.getName());
         tv_permission.setText(user.getPermission());
-        tv_recover.setText(user.getRecover());
-        if(user.getActive()!=1) convertView.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+        tv_recover.setText("Mã khôi phục: "+user.getRecover());
+        if(user.getActive()!=1) convertView.setBackgroundColor(Color.parseColor("#F65B65"));
         return convertView;
     }
 }

@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,8 +25,9 @@ import com.example.mototest.View.Test.LayoutTest;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
-public class ADQuestionAdapter extends ArrayAdapter<Question> {
+public class ADQuestionAdapter extends ArrayAdapter<Question>  {
     Context context;
     ArrayList<Question> arrayList;
     ArrayList<Integer> addQS = new ArrayList<>(),rmQS=new ArrayList<>();
@@ -33,9 +36,10 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
 
     public ADQuestionAdapter(@NonNull @NotNull Context context, int resource, ArrayList<Question> arrayList) {
         super(context, resource, arrayList);
-        this.arrayList = arrayList;
         this.context = context;
         this.layoutResource = resource;
+        this.arrayList = arrayList;
+
     }
 
     @NonNull
@@ -58,14 +62,14 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
             TextView tv_da4 = (TextView) convertView.findViewById(R.id.tv_da4);
             TextView tv_dadung = (TextView) convertView.findViewById(R.id.tv_dadung);
             TextView tv_IdQues = (TextView) convertView.findViewById(R.id.tv_IdQues);
-            tv_IdQues.setText(Integer.toString(arrayList.get(position).getIdquestion()));
-            tv_qsform.setText(arrayList.get(position).getQuestionform());
-            tv_qscontent.setText(arrayList.get(position).getContent());
-            tv_da1.setText(arrayList.get(position).getDa1());
-            tv_da2.setText(arrayList.get(position).getDa2());
-            tv_da3.setText(arrayList.get(position).getDa3());
-            tv_da4.setText(arrayList.get(position).getDa4());
-            tv_dadung.setText(arrayList.get(position).getDadung());
+            tv_IdQues.setText("ID câu hỏi: "+Integer.toString(arrayList.get(position).getIdquestion()));
+            tv_qsform.setText("Loại câu hỏi: "+arrayList.get(position).getQuestionform());
+            tv_qscontent.setText("Nội dung: "+arrayList.get(position).getContent());
+            tv_da1.setText("Đáp án 1: "+arrayList.get(position).getDa1());
+            tv_da2.setText("Đáp án 2: "+arrayList.get(position).getDa2());
+            tv_da3.setText("Đáp án 3: "+arrayList.get(position).getDa3());
+            tv_da4.setText("Đáp án 4: "+arrayList.get(position).getDa4());
+            tv_dadung.setText("Đáp án đúng: "+arrayList.get(position).getDadung());
 //            if(position==current_index)
         return convertView;
     }
@@ -84,4 +88,5 @@ public class ADQuestionAdapter extends ArrayAdapter<Question> {
 
 
     }
+
 }

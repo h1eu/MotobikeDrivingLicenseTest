@@ -51,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="check user"
+                    android:text="Quản lý tài khoản"
                     android:padding="5dp"
                     android:textColor="@color/lineGrayLine"></TextView>
             </LinearLayout>
@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="check test"
+                    android:text="Quản lý bài thi"
                     android:padding="5dp"
                     android:textColor="@color/lineGrayLine"></TextView>
             </LinearLayout>
@@ -138,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="check question"
+                    android:text="Quản lý câu hỏi"
                     android:padding="5dp"
                     android:textColor="@color/lineGrayLine">
                 </TextView>

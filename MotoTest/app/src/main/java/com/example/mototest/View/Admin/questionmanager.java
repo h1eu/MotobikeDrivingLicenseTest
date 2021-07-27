@@ -1,5 +1,6 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,6 +12,8 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,8 +21,10 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.AllQues;
@@ -66,8 +71,12 @@ public class questionmanager extends Fragment {
     private LinearLayout ll_rowques;
     private int current_index=0;
     private int type=0;
-    private String access_token;
     Dialog dialog2;
+    private String access_token;
+    private SearchView searchView;
+    private EditText edts;
+
+
     public questionmanager() {
         // Required empty public constructor
     }
@@ -76,6 +85,7 @@ public class questionmanager extends Fragment {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 //        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
@@ -96,15 +106,14 @@ public class questionmanager extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v= inflater.inflate(R.layout.fragment_questionmanager, container, false);
+        setAllQS(TestId);
         dialog2=new Dialog(getActivity());
         dialog2.setContentView(R.layout.loading);
         dialog2.show();
-        setAllQS(TestId);
-
         btn_newquestion = (Button) v.findViewById(R.id.btn_newquestion);
+        searchView=(SearchView) v.findViewById(R.id.search_bar);
         btn_newquestion.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                dialog2.dismiss();
                 NavController navController = Navigation.findNavController(v);
                 navController.navigate(R.id.action_questionmanager_to_infoquestion);
 
@@ -122,6 +131,7 @@ public class questionmanager extends Fragment {
         btn_remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
                 removeQSinTest();
             }
         });
@@ -129,13 +139,13 @@ public class questionmanager extends Fragment {
         btn_addtoTest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(btn_addtoTest.getText().toString().equals("ADD FROM LIBARY TO TEST"))
+                if(btn_addtoTest.getText().toString().equals("Thêm câu hỏi vào đề thi"))
                 {
                     dialog2.show();
                     setAllQS(0);
                     btn_newquestion.setVisibility(View.GONE);
                     btn_remove.setVisibility(View.GONE);
-                    btn_addtoTest.setText("ADD ITEM SELECTED TO TEST");
+                    btn_addtoTest.setText("Thêm câu hỏi được chọn vào đề thi");
                 }
                 else{
                     dialog2.show();
@@ -148,8 +158,12 @@ public class questionmanager extends Fragment {
         });
 //        cb_addtoTest = (CheckBox) v.findViewById(R.id.cb_addtoTest);
 
+
         return v;
     }
+
+
+
 
     private void setAllQS(Integer TestID){
         if(TestID==0)
@@ -209,12 +223,13 @@ public class questionmanager extends Fragment {
         lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                dialog2.dismiss();
+                    dialog2.dismiss();
+
 //                current_index=position;
 //                adQuestionAdapter.notifyDataSetChanged();{
                 if(TestId!=0) {
 
-                    if (btn_addtoTest.getText().toString().equals("ADD FROM LIBARY TO TEST")) {
+                    if (btn_addtoTest.getText().toString().equals("Thêm câu hỏi vào đề thi")) {
                         //                        rmqsList.add();
                         int pos = rmqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
                         Log.e("POS:", Integer.toString(pos));
@@ -250,9 +265,138 @@ public class questionmanager extends Fragment {
                     navController.navigate(action);
                 }
 //                    Toast.makeText(getContext(),"da chon" + Integer.toString(arrayList.get(position).getIdquestion())+"testid:"+TestId,Toast.LENGTH_SHORT).show();
+
                 }
 
         });
+        //search item theo id
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                ArrayList<Question> filter=new ArrayList<Question>();
+                for (Question question:arrayList){
+                    if(String.valueOf(question.getIdquestion()).toLowerCase().contains(query.toLowerCase())){
+                        filter.add(question);
+                    }
+                }
+                ADQuestionAdapter adapter=new ADQuestionAdapter(getContext(),0,arrayList);
+                lv_question.setAdapter(adapter);
+                lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        dialog2.dismiss();
+
+//                current_index=position;
+//                adQuestionAdapter.notifyDataSetChanged();{
+                        if(TestId!=0) {
+
+                            if (btn_addtoTest.getText().toString().equals("Thêm câu hỏi vào đề thi")) {
+                                //                        rmqsList.add();
+                                int pos = rmqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                Log.e("POS:", Integer.toString(pos));
+                                if (pos != -1) {
+                                    type=-2;
+                                    rmqsList.remove(pos);
+
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                                    //                            Log.e("SET BACKGAO R","TRUE");
+                                } else {
+                                    type=2;
+                                    rmqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+//                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                                }
+                            } else {
+                                int pos = addqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                if (pos != -1) {
+                                    type=-1;
+                                    addqsList.remove(pos);
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                                } else {
+                                    type=1;
+//                            view.setBackgroundColor(Color.parseColor("#81C784"));
+                                    addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+                                }
+                            }
+                            adQuestionAdapter.notifyDataSetChanged(arrayList.get(position).getIdquestion(),type);
+                        }
+                        else
+                        {
+                            NavDirections action = questionmanagerDirections.actionQuestionmanagerToInfoquestion(filter.get(position));
+                            NavController navController = Navigation.findNavController(view);
+                            navController.navigate(action);
+                        }
+//                    Toast.makeText(getContext(),"da chon" + Integer.toString(arrayList.get(position).getIdquestion())+"testid:"+TestId,Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                ArrayList<Question> filter=new ArrayList<Question>();
+                for (Question question:arrayList){
+                    if(String.valueOf(question.getIdquestion()).toLowerCase().contains(s.toLowerCase())){
+                        filter.add(question);
+                    }
+                }
+                ADQuestionAdapter adapter=new ADQuestionAdapter(getContext(),0,filter);
+                lv_question.setAdapter(adapter);
+                lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                        dialog2.dismiss();
+
+//                current_index=position;
+//                adQuestionAdapter.notifyDataSetChanged();{
+                        if(TestId!=0) {
+
+                            if (btn_addtoTest.getText().toString().equals("Thêm câu hỏi vào đề thi")) {
+                                //                        rmqsList.add();
+                                int pos = rmqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                Log.e("POS:", Integer.toString(pos));
+                                if (pos != -1) {
+                                    type=-2;
+                                    rmqsList.remove(pos);
+
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                                    //                            Log.e("SET BACKGAO R","TRUE");
+                                } else {
+                                    type=2;
+                                    rmqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+//                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
+                                }
+                            } else {
+                                int pos = addqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                if (pos != -1) {
+                                    type=-1;
+                                    addqsList.remove(pos);
+//                            view.setBackgroundColor(Color.parseColor("#fcfcfc"));
+                                } else {
+                                    type=1;
+//                            view.setBackgroundColor(Color.parseColor("#81C784"));
+                                    addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+                                }
+                            }
+                            adQuestionAdapter.notifyDataSetChanged(arrayList.get(position).getIdquestion(),type);
+                        }
+                        else
+                        {
+                            NavDirections action = questionmanagerDirections.actionQuestionmanagerToInfoquestion(filter.get(position));
+                            NavController navController = Navigation.findNavController(view);
+                            navController.navigate(action);
+                        }
+//                    Toast.makeText(getContext(),"da chon" + Integer.toString(arrayList.get(position).getIdquestion())+"testid:"+TestId,Toast.LENGTH_SHORT).show();
+
+                    }
+
+                });
+                return false;
+            }
+        });
+
     }
     private void addtoTest(){
         for(String quesId:addqsList)
@@ -262,7 +406,7 @@ public class questionmanager extends Fragment {
                 dialog2.dismiss();
                 Log.e("Thanh cong","1 cau hoi");
                 setAllQS(TestId);
-                btn_addtoTest.setText("ADD FROM LIBARY TO TEST");
+                btn_addtoTest.setText("Thêm câu hỏi vào đề thi");
                 btn_remove.setVisibility(View.VISIBLE);
             }
 
@@ -275,6 +419,7 @@ public class questionmanager extends Fragment {
         addqsList.clear();
     }
     private void removeQSinTest(){
+        dialog2.dismiss();
         if(arrayList.size()-rmqsList.size()>0){
             for(String quesId:rmqsList)
                 ApiService.apiservice.querryTest("deleteQSinTest",Integer.toString(TestId),quesId,access_token).enqueue(new Callback<Status>() {
@@ -296,7 +441,6 @@ public class questionmanager extends Fragment {
 
         else
         {
-            dialog2.dismiss();
             Toast.makeText(getContext(),"1 bài thi cần tối thiểu 1 câu hỏi",Toast.LENGTH_SHORT).show();
 
         }

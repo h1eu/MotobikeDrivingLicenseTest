@@ -133,7 +133,6 @@ public class infoquestion extends Fragment {
         edt_da4.setText(ques.getDa4());
         edt_dadung.setText(ques.getDadung());
 
-
         btn_updatequestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -146,6 +145,7 @@ public class infoquestion extends Fragment {
         btn_deletequestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog2.show();
                 confirmDel();
             }
         });
@@ -164,6 +164,7 @@ public class infoquestion extends Fragment {
     }
 
     private void updateQS(){
+        dialog2.dismiss();
         ApiService.apiservice.querryQues("updateQS",
                 tv_QuesId.getText().toString(),
                 edt_questionform.getText().toString(),
@@ -177,20 +178,21 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                dialog2.dismiss();
+
                 Status status = response.body();
                 Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                dialog2.dismiss();
+
                 Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void deleteQS(){
+        dialog2.dismiss();
         ApiService.apiservice.querryQues("deleteQS",
                 tv_QuesId.getText().toString(),
                 edt_questionform.getText().toString(),
@@ -204,7 +206,7 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                dialog2.dismiss();
+
                 Status status = response.body();
                 Toast.makeText(getContext(),"Xóa câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
@@ -212,13 +214,14 @@ public class infoquestion extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                dialog2.dismiss();
+
                 Toast.makeText(getContext(),"Xóa thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void createQS(){
+        dialog2.dismiss();
         ApiService.apiservice.querryQues("createQS",
                 tv_QuesId.getText().toString(),
                 edt_questionform.getText().toString(),
@@ -232,7 +235,7 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-                dialog2.dismiss();
+
                 Status status = response.body();
                 Toast.makeText(getContext(),"Tạo câu hỏi thành công",Toast.LENGTH_SHORT).show();
                 getActivity().onBackPressed();
@@ -240,12 +243,13 @@ public class infoquestion extends Fragment {
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-                dialog2.dismiss();
+
                 Toast.makeText(getContext(),"Tạo thất bại",Toast.LENGTH_SHORT).show();
             }
         });
     }
     private void confirmDel(){
+        dialog2.dismiss();
         Dialog dialog=new Dialog(getActivity());
 //        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
         dialog.setContentView(R.layout.dialog_custom);

@@ -135,8 +135,12 @@ public class LayoutTestFragment extends Fragment {
                 if(question.getDa4()==null){
                     linearLayout4.setVisibility(View.GONE);
                 }
-                if(question.getImage()!=null)
-                    Picasso.get().load(question.getImage()).into(iv_description);
+                try {
+                    if(!question.getImage().trim().equals(null))
+                        Picasso.get().load(question.getImage().trim()).into(iv_description);
+                }catch (Exception e){
+                    Log.e("Loi","ko tim duoc image");
+                }
             }
 
         }

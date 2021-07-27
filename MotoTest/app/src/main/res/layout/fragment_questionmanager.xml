@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".View.Admin.questionmanager">
 
     <!-- TODO: Update blank fragment layout -->
@@ -10,28 +11,58 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:orientation="vertical"
-        android:background="@color/blue">
-
+        >
 
         <Button
             android:id="@+id/btn_newquestion"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="New Question" />
+            android:backgroundTint="@color/green"
+            android:text="Thêm câu hỏi mới" />
+
+        <SearchView
+            android:id="@+id/search_bar"
+            android:queryHint="Tìm kiếm câu hỏi"
+            android:clickable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/edt_searchlayout"-->
+<!--            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="0dp"-->
+<!--            android:hint="Tìm kiếm câu hỏi..."-->
+<!--            app:startIconDrawable="@drawable/ic_search"-->
+<!--            >-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/edt_search"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:inputType="text"-->
+<!--                android:maxLines="1" />-->
+
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
 
         <Button
             android:id="@+id/btn_addtoTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ADD FROM LIBARY TO TEST"
+            android:text="Thêm câu hỏi vào đề thi"
+            android:backgroundTint="@color/green"
             android:visibility="gone"/>
 
         <Button
             android:id="@+id/btn_remove"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:backgroundTint="@color/green"
             android:visibility="gone"
-            android:text="Remove" />
+            android:text="Xoá" />
 
         <ListView
             android:id="@+id/lv_question"
