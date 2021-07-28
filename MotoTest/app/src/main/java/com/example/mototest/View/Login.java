@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.MainActivity;
+import com.example.mototest.Model.DBHandler;
+import com.example.mototest.Model.Test;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
 
@@ -29,10 +31,14 @@ public class Login extends AppCompatActivity {
     private int i=0;
     Activity activity=this;
     Dialog dialog2;
+//    Test test = new Test(4,null,null);
+//    Question question = new Question(3,"d","f","d","a","a","a","a","1");
+//    private DBHandler dbHandler ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+//        dbHandler = new DBHandler(context);
         btn_login = (Button)findViewById(R.id.btn_login);
         tv_res = (TextView) findViewById(R.id.tv_register);
         tv_forgetpass=(TextView) findViewById(R.id.tv_forgetpass);
@@ -45,6 +51,17 @@ public class Login extends AppCompatActivity {
                 dialog2=new Dialog(activity);
                 dialog2.setContentView(R.layout.loading);
                 dialog2.show();
+//                dbHandler.getAllTest();
+//                dbHandler.getAllQuestion();
+////               dbHandler.addTest(test);
+////                dbHandler.updateTest(test);
+//                dbHandler.getTest(4);
+////               dbHandler.deleteTest(test);
+////               dbHandler.addQuestion(question);
+////               dbHandler.deleteQuestion(question);
+////               dbHandler.updateQuestion(question);
+////               dbHandler.getTest(4);
+//                dbHandler.getQuestion(1);
             }
         });
         tv_res.setOnClickListener(new View.OnClickListener() {

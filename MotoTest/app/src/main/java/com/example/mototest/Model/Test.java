@@ -14,8 +14,11 @@ public class Test implements Serializable {
             this.Listquestion = ListQuestion;
             this.Time = Time;
         }
+    public Test() {
+    }
 
-        public int getIdtest() {
+
+    public int getIdtest() {
             return Idtest;
         }
 
