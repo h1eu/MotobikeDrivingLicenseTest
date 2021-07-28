@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mototest.Api.Alltest;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
 import com.example.mototest.View.Login;
@@ -36,6 +37,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
     ListView listViewtest;
     ArrayList<String> testArrayList = new ArrayList<String>();
     Dialog dialog2;
+    private DBHandler dbHandler ;
     public TestFragment() {
     }
 
@@ -50,6 +52,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
 //                Toast.makeText(getContext(),"TEST",Toast.LENGTH_SHORT).show();
             }
         };
+        dbHandler = new DBHandler(this.getContext());
         getActivity().getOnBackPressedDispatcher().addCallback(this, callback);
     }
 
@@ -68,12 +71,35 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
     @Override
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
+        listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
+        if(true){
+            dialog2.dismiss();
+            listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
+            ArrayList<Test> allidTest=dbHandler.getAllTest();
+            for(Test t : allidTest)
+            {
+                testArrayList.add(Integer.toString(t.getIdtest()));
+            }
+            testAdapter=new TestAdapter(getActivity(),testArrayList,TestFragment.this::onEvent);
+            listViewtest.setAdapter(testAdapter);
+            listViewtest.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                @Override
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                    Bundle bundle=new Bundle();
+                    bundle.putString("Idtest", testArrayList.get(position));
+                    Intent intent=new Intent();
+                    intent.putExtras(bundle);
+                    intent.setClass(getActivity(), LayoutTest.class);
+                    getActivity().startActivity(intent);
+                }
+            });
+        }
+        else
         ApiService.apiservice.getAllTest("getAllTest").enqueue(new Callback<Alltest>() {
             @Override
             public void onResponse(Call<Alltest> call, Response<Alltest> response) {
                 dialog2.dismiss();
-                listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
+
 //                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
                 Alltest alltest=response.body();
                 ArrayList<Test> allidTest=alltest.getAllTest();
@@ -102,9 +128,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
                 Toast.makeText(getContext(), "Lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
             }
         });
-//        getActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
-            //your code
-//        }
+
     }
 
     private void confirmLogout(){

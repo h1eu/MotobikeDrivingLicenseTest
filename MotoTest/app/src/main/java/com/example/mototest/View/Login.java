@@ -9,6 +9,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -155,10 +156,13 @@ public class Login extends AppCompatActivity {
 //                Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thành công 222", Toast.LENGTH_SHORT).show();
                 ArrayList<TestQS> listTest = alltest.getAllTest();
 //                testArrayList = new ArrayList<String>();
+                int i=0;
                 for(TestQS t : listTest)
                 {
+                    i++;
                     dbHandler.addTest(t);
                 }
+                Log.e("Tong so",Integer.toString(i));
 
 //                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
             }

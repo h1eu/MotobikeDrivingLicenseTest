@@ -26,6 +26,7 @@ import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
 import com.example.mototest.MainActivity;
+import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
@@ -53,6 +54,7 @@ public class LayoutTest extends AppCompatActivity{
     private String action="getTest";
     private boolean isSubmit=false;
     private String idTest;
+    private DBHandler dbHandler ;
     Activity activity=this;
     ArrayList<String> listdadung=new ArrayList<>();
     Dialog dialog2;
@@ -61,6 +63,7 @@ public class LayoutTest extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_layout_test);
         actionBar= getSupportActionBar();
+        dbHandler = new DBHandler(this);
         dialog2=new Dialog(activity);
         dialog2.setContentView(R.layout.loading);
         dialog2.show();
@@ -69,99 +72,168 @@ public class LayoutTest extends AppCompatActivity{
 //        questionArrayList = getQuestionList();
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
-        if(bundle!=null)
-            if(bundle.getString("Idtest").equals("random")){
-                action="getTestRand";
+
+        if(true){
+            dialog2.dismiss();
+            questionArrayList=dbHandler.getQSinTest(Integer.parseInt(bundle.getString("Idtest")));
+
+            idTest = bundle.getString("Idtest");
+            while (listans.size() < questionArrayList.size()) {
+                listans.add("");
             }
+            ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),
+                    FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, questionArrayList);
+            viewPager.setAdapter(viewPagerAdapter);
 
-        if(bundle!=null)
-        ApiService.apiservice.getTest(action,bundle.getString("Idtest")).enqueue(new Callback<Test>() {
-            @Override
-            public void onResponse(Call<Test> call, Response<Test> response) {
-                dialog2.dismiss();
-//                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
-                idTest = bundle.getString("Idtest");
-                Test test = response.body();
-                if(test!=null) {
-                    Log.e("test:", Integer.toString(test.getIdtest()));
-                    questionArrayList=test.getListquestion();
-                    while (listans.size()<questionArrayList.size()){
-                        listans.add("");
-                    }
-                    ViewPagerAdapter viewPagerAdapter=new ViewPagerAdapter(getSupportFragmentManager(),
-                            FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, questionArrayList);
-                    viewPager.setAdapter(viewPagerAdapter);
-
-                    tv_toolbar_check.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            checkanser(false);
-                        }
-                    });
-
-                    tvcurrentquestion.setText("1");
-                    tvmaxquestion.setText(String.valueOf(questionArrayList.size()));
-                    viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-                        @Override
-                        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-                        }
-
-                        @Override
-                        public void onPageSelected(int position) {
-                            tvcurrentquestion.setText(String.valueOf(position+1));
-                            if(position==0)
-                            {
-                                tvbackquestion.setVisibility(View.GONE);
-                                tvnextquestion.setVisibility(View.VISIBLE);
-                            } else if(position == questionArrayList.size()-1){
-                                tvbackquestion.setVisibility(View.VISIBLE);
-                                tvnextquestion.setVisibility(View.GONE);
-                            }
-                            else {
-                                tvbackquestion.setVisibility(View.VISIBLE);
-                                tvnextquestion.setVisibility(View.VISIBLE);
-                            }
-                        }
-
-                        @Override
-                        public void onPageScrollStateChanged(int state) {
-
-                        }
-                    });
-
-                    toolbar_back.setOnClickListener(new  View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            confirmBack();
-                        }
-
-                    });
-
-                    tvbackquestion.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            viewPager.setCurrentItem(viewPager.getCurrentItem()-1 );
-                        }
-                    });
-
-                    tvnextquestion.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            viewPager.setCurrentItem(viewPager.getCurrentItem()+1 );
-                        }
-                    });
+            tv_toolbar_check.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    checkanser(false);
                 }
-                countdowntime();
-            }
+            });
 
-            @Override
-            public void onFailure(Call<Test> call, Throwable t) {
-                dialog2.dismiss();
-                Toast.makeText(LayoutTest.this,"Lấy dữ liệu bài thi thất bại",Toast.LENGTH_SHORT).show();
-            }
-        });
+            tvcurrentquestion.setText("1");
+            tvmaxquestion.setText(String.valueOf(questionArrayList.size()));
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
+                }
+
+                @Override
+                public void onPageSelected(int position) {
+                    tvcurrentquestion.setText(String.valueOf(position + 1));
+                    if (position == 0) {
+                        tvbackquestion.setVisibility(View.GONE);
+                        tvnextquestion.setVisibility(View.VISIBLE);
+                    } else if (position == questionArrayList.size() - 1) {
+                        tvbackquestion.setVisibility(View.VISIBLE);
+                        tvnextquestion.setVisibility(View.GONE);
+                    } else {
+                        tvbackquestion.setVisibility(View.VISIBLE);
+                        tvnextquestion.setVisibility(View.VISIBLE);
+                    }
+                }
+
+                @Override
+                public void onPageScrollStateChanged(int state) {
+
+                }
+            });
+
+            toolbar_back.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    confirmBack();
+                }
+
+            });
+
+            tvbackquestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                }
+            });
+
+            tvnextquestion.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                }
+            });
+            countdowntime();
+        }
+        else
+        if(bundle!=null) {
+            if (bundle.getString("Idtest").equals("random")) {
+                action = "getTestRand";
+            }
+            ApiService.apiservice.getTest(action, bundle.getString("Idtest")).enqueue(new Callback<Test>() {
+                @Override
+                public void onResponse(Call<Test> call, Response<Test> response) {
+                    dialog2.dismiss();
+//                Toast.makeText(LayoutTest.this,"Call API SUCCESS",Toast.LENGTH_SHORT).show();
+                    idTest = bundle.getString("Idtest");
+                    Test test = response.body();
+                    if (test != null) {
+                        Log.e("test:", Integer.toString(test.getIdtest()));
+                        questionArrayList = test.getListquestion();
+                        while (listans.size() < questionArrayList.size()) {
+                            listans.add("");
+                        }
+                        ViewPagerAdapter viewPagerAdapter = new ViewPagerAdapter(getSupportFragmentManager(),
+                                FragmentStatePagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT, questionArrayList);
+                        viewPager.setAdapter(viewPagerAdapter);
+
+                        tv_toolbar_check.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                checkanser(false);
+                            }
+                        });
+
+                        tvcurrentquestion.setText("1");
+                        tvmaxquestion.setText(String.valueOf(questionArrayList.size()));
+                        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                            @Override
+                            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+                            }
+
+                            @Override
+                            public void onPageSelected(int position) {
+                                tvcurrentquestion.setText(String.valueOf(position + 1));
+                                if (position == 0) {
+                                    tvbackquestion.setVisibility(View.GONE);
+                                    tvnextquestion.setVisibility(View.VISIBLE);
+                                } else if (position == questionArrayList.size() - 1) {
+                                    tvbackquestion.setVisibility(View.VISIBLE);
+                                    tvnextquestion.setVisibility(View.GONE);
+                                } else {
+                                    tvbackquestion.setVisibility(View.VISIBLE);
+                                    tvnextquestion.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+                            @Override
+                            public void onPageScrollStateChanged(int state) {
+
+                            }
+                        });
+
+                        toolbar_back.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                confirmBack();
+                            }
+
+                        });
+
+                        tvbackquestion.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                viewPager.setCurrentItem(viewPager.getCurrentItem() - 1);
+                            }
+                        });
+
+                        tvnextquestion.setOnClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                viewPager.setCurrentItem(viewPager.getCurrentItem() + 1);
+                            }
+                        });
+                    }
+                    countdowntime();
+                }
+
+                @Override
+                public void onFailure(Call<Test> call, Throwable t) {
+                    dialog2.dismiss();
+                    Toast.makeText(LayoutTest.this, "Lấy dữ liệu bài thi thất bại", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
 
 
     }

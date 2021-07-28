@@ -49,8 +49,8 @@ public class DBHandler extends SQLiteOpenHelper {
                 + KEY_IDUSER + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_USERNAME + " TEXT,"
                 + KEY_PASSWORD  + " TEXT," + KEY_NAME +"TEXT," +KEY_ACTIVE + "INTEGER,"+ KEY_RECOVER +"TEXT,"+KEY_ACCESS_TOKEN+"TEXT"+" )";
         db.execSQL(CREATE_USER_TABLE);
-        final String INSERT_USER="INSERT INTO "+TABLE_USERS+" VALUES( 1,'hieulaptop','123','hieuque',123,'bavsv','aaa')";
-        db.execSQL(INSERT_USER);
+//        final String INSERT_USER="INSERT INTO "+TABLE_USERS+" VALUES( 1,'hieulaptop','123','hieuque',123,'bavsv','aaa')";
+//        db.execSQL(INSERT_USER);
 //        String CREATE_QUESTION_TABLE = "CREATE TABLE " + TABLE_QUESTIONS+ "("
 //                + KEY_IDQUESTION + " INTEGER PRIMARY KEY AUTOINCREMENT ,"+ KEY_QUESTIONFORM + " TEXT," + KEY_CONTENT + " TEXT,"
 //                + KEY_IMAGE + " TEXT," + KEY_DA1 +"TEXT," + KEY_DA2 + "TEXT,"+ KEY_DA3 +"TEXT,"+ KEY_DA4 +"TEXT,"+ KEY_DADUNG +"TEXT"+" )";
@@ -73,17 +73,17 @@ public class DBHandler extends SQLiteOpenHelper {
         Log.e("gi sql",CREATE_QUESTION_TABLE);
 
         db.execSQL(CREATE_QUESTION_TABLE);
-        final String INSERT_QUESTION="INSERT INTO "+TABLE_QUESTIONS+" VALUES( null,'kiến thức luật','“Làn đường” là gì?','hhhhhhhh','Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, sử dụng cho xe chạy.','Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, có bề rộng đủ cho xe chạy an toàn.', 'Là đường cho xe ô tô chạy, dừng, đỗ an toàn.','Null','2')";
-        db.execSQL(INSERT_QUESTION);
+//        final String INSERT_QUESTION="INSERT INTO "+TABLE_QUESTIONS+" VALUES( null,'kiến thức luật','“Làn đường” là gì?','hhhhhhhh','Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, sử dụng cho xe chạy.','Là một phần của phần đường xe chạy được chia theo chiều dọc của đường, có bề rộng đủ cho xe chạy an toàn.', 'Là đường cho xe ô tô chạy, dừng, đỗ an toàn.','Null','2')";
+//        db.execSQL(INSERT_QUESTION);
 
         String CREATE_TESTS_TABLE = "CREATE TABLE " + TABLE_TESTS + "("
                 + KEY_IDTEST + " INTEGER ," + KEY_LISTQUESTION + " INTEGER ,"
                 + KEY_TIME  + " TEXT," +"PRIMARY KEY (" +KEY_IDTEST+","+KEY_LISTQUESTION+") ," +"  FOREIGN KEY(listquestion) REFERENCES questions(idquestion))";
         db.execSQL(CREATE_TESTS_TABLE);
-        final String INSERT_TEST="INSERT INTO "+TABLE_TESTS+" VALUES( null,'1','00:00')";
-        db.execSQL(INSERT_TEST);
-        final String INSERT_TEST1="INSERT INTO "+TABLE_TESTS+" VALUES( null,'1','00:00')";
-        db.execSQL(INSERT_TEST1);
+//        final String INSERT_TEST="INSERT INTO "+TABLE_TESTS+" VALUES( null,'1','00:00')";
+//        db.execSQL(INSERT_TEST);
+//        final String INSERT_TEST1="INSERT INTO "+TABLE_TESTS+" VALUES( null,'1','00:00')";
+//        db.execSQL(INSERT_TEST1);
 
 
 
@@ -102,7 +102,7 @@ public class DBHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_IDTEST,test.getIdtest());
-        values.put(KEY_LISTQUESTION, String.valueOf(test.getListquestion()));
+        values.put(KEY_LISTQUESTION, test.getListquestion());
         values.put(KEY_TIME , test.getTime());
         db.insert(TABLE_TESTS, null, values);
         db.close();
@@ -144,11 +144,12 @@ public class DBHandler extends SQLiteOpenHelper {
                 null, cursor.getString(2));
         Log.e("adadad",test.toString());
         return test;
+
     }
 
-    public ArrayList<Object> getAllTest() {
-        ArrayList<Object> testList = new ArrayList<Object>();
-        String selectQuery = "SELECT  * FROM " + TABLE_TESTS;
+    public ArrayList<Test> getAllTest() {
+        ArrayList<Test> testList = new ArrayList<Test>();
+        String selectQuery = "SELECT DISTINCT "+KEY_IDTEST+" FROM " + TABLE_TESTS;
 
         SQLiteDatabase db = this.getWritableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
@@ -158,13 +159,42 @@ public class DBHandler extends SQLiteOpenHelper {
                 Test test = new Test();
                 test.setIdtest(Integer.parseInt(cursor.getString(0)));
 //               test.setListquestion(cursor.getString(1)); cái này là arraylist t chưa lấy đc
-                test.setTime(cursor.getString(2));
+//                test.setTime(cursor.getString(2));
                 testList.add(test);
                 Log.e("adadad",test.toString());
             } while (cursor.moveToNext());
         }
 
         return testList;
+    }
+
+    public ArrayList<Question> getQSinTest(int idTest) {
+        ArrayList<Question> quesList = new ArrayList<Question>();
+        String selectQuery = "SELECT * FROM " + TABLE_QUESTIONS +" WHERE "+KEY_IDQUESTION+" in (SELECT "+KEY_LISTQUESTION+" FROM "+TABLE_TESTS+" WHERE "+KEY_IDTEST+" = "+idTest+" )";
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery,null);
+
+        
+//        Log.e("abc",Tong);
+        if (cursor.moveToFirst()) {
+            do {
+                Question question = new Question();
+                question.setIdquestion(Integer.parseInt(cursor.getString(0)));
+                question.setQuestionform(cursor.getString(1));
+                question.setContent(cursor.getString(2));
+                question.setImage(cursor.getString(3));
+                question.setDa1(cursor.getString(4));
+                question.setDa2(cursor.getString(5));
+                question.setDa3(cursor.getString(6));
+                question.setDa4(cursor.getString(7));
+                question.setDadung(cursor.getString(8));
+                quesList.add(question);
+//                Log.e("adadad",test.toString());
+            } while (cursor.moveToNext());
+        }
+
+        return quesList;
     }
     public void addQuestion(Question question) {
         Log.e("id:",Integer.toString(question.getIdquestion()));
