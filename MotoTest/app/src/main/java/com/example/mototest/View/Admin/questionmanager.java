@@ -32,6 +32,7 @@ import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.Status;
 import com.example.mototest.MainActivity;
+import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.Question;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
@@ -75,7 +76,7 @@ public class questionmanager extends Fragment {
     private String access_token;
     private SearchView searchView;
     private EditText edts;
-
+    private DBHandler dbHandler ;
 
     public questionmanager() {
         // Required empty public constructor
@@ -174,6 +175,9 @@ public class questionmanager extends Fragment {
 //                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
                     AllQues allQues = response.body();
                     arrayList = allQues.getAllQues();
+//                    for(Question q:arrayList)
+//                    dbHandler.addQuestion(q);
+
 //                    Log.e("size",Integer.toString(arrayList.size()));
                     SetAdapter();
                 }
@@ -279,8 +283,8 @@ public class questionmanager extends Fragment {
                         filter.add(question);
                     }
                 }
-                ADQuestionAdapter adapter=new ADQuestionAdapter(getContext(),0,arrayList);
-                lv_question.setAdapter(adapter);
+                ADQuestionAdapter adapter2=new ADQuestionAdapter(getContext(),R.layout.fragment_rowquestion,filter);
+                lv_question.setAdapter(adapter2);
                 lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -306,7 +310,7 @@ public class questionmanager extends Fragment {
 //                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
                                 }
                             } else {
-                                int pos = addqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                int pos = addqsList.indexOf(Integer.toString(filter.get(position).getIdquestion()));
                                 if (pos != -1) {
                                     type=-1;
                                     addqsList.remove(pos);
@@ -314,10 +318,10 @@ public class questionmanager extends Fragment {
                                 } else {
                                     type=1;
 //                            view.setBackgroundColor(Color.parseColor("#81C784"));
-                                    addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+                                    addqsList.add(Integer.toString(filter.get(position).getIdquestion()));
                                 }
                             }
-                            adQuestionAdapter.notifyDataSetChanged(arrayList.get(position).getIdquestion(),type);
+                            adapter2.notifyDataSetChanged(filter.get(position).getIdquestion(),type);
                         }
                         else
                         {
@@ -342,8 +346,8 @@ public class questionmanager extends Fragment {
                         filter.add(question);
                     }
                 }
-                ADQuestionAdapter adapter=new ADQuestionAdapter(getContext(),0,filter);
-                lv_question.setAdapter(adapter);
+                ADQuestionAdapter adapter2=new ADQuestionAdapter(getContext(),R.layout.fragment_rowquestion,filter);
+                lv_question.setAdapter(adapter2);
                 lv_question.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -355,7 +359,7 @@ public class questionmanager extends Fragment {
 
                             if (btn_addtoTest.getText().toString().equals("Thêm câu hỏi vào đề thi")) {
                                 //                        rmqsList.add();
-                                int pos = rmqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                int pos = rmqsList.indexOf(Integer.toString(filter.get(position).getIdquestion()));
                                 Log.e("POS:", Integer.toString(pos));
                                 if (pos != -1) {
                                     type=-2;
@@ -365,11 +369,11 @@ public class questionmanager extends Fragment {
                                     //                            Log.e("SET BACKGAO R","TRUE");
                                 } else {
                                     type=2;
-                                    rmqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+                                    rmqsList.add(Integer.toString(filter.get(position).getIdquestion()));
 //                            view.setBackgroundColor(Color.parseColor("#FFF86E6E"));
                                 }
                             } else {
-                                int pos = addqsList.indexOf(Integer.toString(arrayList.get(position).getIdquestion()));
+                                int pos = addqsList.indexOf(Integer.toString(filter.get(position).getIdquestion()));
                                 if (pos != -1) {
                                     type=-1;
                                     addqsList.remove(pos);
@@ -377,10 +381,10 @@ public class questionmanager extends Fragment {
                                 } else {
                                     type=1;
 //                            view.setBackgroundColor(Color.parseColor("#81C784"));
-                                    addqsList.add(Integer.toString(arrayList.get(position).getIdquestion()));
+                                    addqsList.add(Integer.toString(filter.get(position).getIdquestion()));
                                 }
                             }
-                            adQuestionAdapter.notifyDataSetChanged(arrayList.get(position).getIdquestion(),type);
+                            adapter2.notifyDataSetChanged(filter.get(position).getIdquestion(),type);
                         }
                         else
                         {

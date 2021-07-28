@@ -7,6 +7,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.mototest.Api.TestQS;
+
 public class DBHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "motortest";
@@ -53,16 +56,16 @@ public class DBHandler extends SQLiteOpenHelper {
 //                + KEY_IMAGE + " TEXT," + KEY_DA1 +"TEXT," + KEY_DA2 + "TEXT,"+ KEY_DA3 +"TEXT,"+ KEY_DA4 +"TEXT,"+ KEY_DADUNG +"TEXT"+" )";
         String CREATE_QUESTION_TABLE =   "CREATE TABLE " + TABLE_QUESTIONS + " (" +
                 KEY_IDQUESTION + " INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + KEY_QUESTIONFORM + " TEXT NOT NULL, "
+                + KEY_QUESTIONFORM + " TEXT, "
                 + KEY_CONTENT + " TEXT NOT NULL, "
                 // Here ------------^
-                + KEY_IMAGE + " TEXT NOT NULL, "
+                + KEY_IMAGE + " TEXT, "
                 // Here ---------^
-                + KEY_DA1 + " TEXT NOT NULL, "
+                + KEY_DA1 + " TEXT, "
                 // Here ------------^
-                + KEY_DA2 + " TEXT NOT NULL, "
-                + KEY_DA3 + " TEXT NOT NULL, "
-                + KEY_DA4 + " TEXT NOT NULL, "
+                + KEY_DA2 + " TEXT, "
+                + KEY_DA3 + " TEXT, "
+                + KEY_DA4 + " TEXT, "
                 // Here -----------------^
                 + KEY_DADUNG + " TEXT NOT NULL"
                 // Here ----------------^
@@ -95,7 +98,7 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void addTest(Test test) {
+    public void addTest(TestQS test) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(KEY_IDTEST,test.getIdtest());

@@ -52,6 +52,7 @@ public class ADQuestionAdapter extends ArrayAdapter<Question>  {
             if(rmQS.indexOf(arrayList.get(position).getIdquestion())!=-1){
                 convertView.setBackgroundColor(Color.parseColor("#FFF86E6E"));
             }
+            else Log.e("id",Integer.toString(arrayList.get(position).getIdquestion()));
             if(addQS.indexOf(arrayList.get(position).getIdquestion())!=-1)
                 convertView.setBackgroundColor(Color.parseColor("#81C784"));
             TextView tv_qsform = (TextView) convertView.findViewById(R.id.tv_questionform);

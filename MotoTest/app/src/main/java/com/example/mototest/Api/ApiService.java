@@ -31,7 +31,9 @@ public interface ApiService {
                        @Query("idtest") String idtest);
     @GET(api)
     Call<Alltest> getAllTest(@Query("action") String action);
-
+//    FOR INSERT DB OFF
+    @GET(api)
+    Call<AllTestQS> getAllTestAndQS(@Query("action") String action);
     @FormUrlEncoded
     @POST(api)
     Call<User> login(
