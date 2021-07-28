@@ -77,8 +77,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL(INSERT_QUESTION);
 
         String CREATE_TESTS_TABLE = "CREATE TABLE " + TABLE_TESTS + "("
-                + KEY_IDTEST + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_LISTQUESTION + " INTEGER,"
-                + KEY_TIME  + " TEXT," +"  FOREIGN KEY(listquestion) REFERENCES questions(idquestion))";
+                + KEY_IDTEST + " INTEGER ," + KEY_LISTQUESTION + " INTEGER ,"
+                + KEY_TIME  + " TEXT," +"PRIMARY KEY (" +KEY_IDTEST+","+KEY_LISTQUESTION+") ," +"  FOREIGN KEY(listquestion) REFERENCES questions(idquestion))";
         db.execSQL(CREATE_TESTS_TABLE);
         final String INSERT_TEST="INSERT INTO "+TABLE_TESTS+" VALUES( null,'1','00:00')";
         db.execSQL(INSERT_TEST);
