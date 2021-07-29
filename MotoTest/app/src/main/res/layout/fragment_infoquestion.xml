@@ -242,6 +242,17 @@
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/tv_img"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="Hình ảnh" />
+            <ImageView
+                android:id="@+id/img"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
 
     <LinearLayout
         android:id="@+id/ll_editquestion"

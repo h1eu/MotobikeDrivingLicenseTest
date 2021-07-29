@@ -1,15 +1,22 @@
 package com.example.mototest.View.Admin;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +26,9 @@ import com.example.mototest.Api.Status;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
 import com.example.mototest.R;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -46,6 +56,9 @@ public class infoquestion extends Fragment {
     EditText edt_dadung;
     TextView tv_QuesId;
     Button btn_updatequestion,btn_deletequestion,btn_newquestion,btn_imagequestion;
+    ImageView img;
+    int SELECT_PHOTO=1;
+    private Uri img_path;
     private String access_token;
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -99,6 +112,7 @@ public class infoquestion extends Fragment {
         edt_da4 = v.findViewById(R.id.edt_da4);
         edt_dadung = v.findViewById(R.id.edt_dadung);
         tv_QuesId = v.findViewById(R.id.tv_QuesId);
+        img=(ImageView)v.findViewById(R.id.img);
         btn_updatequestion = (Button) v.findViewById(R.id.btn_updatequestion);
         btn_deletequestion = (Button) v.findViewById(R.id.btn_deletequestion);
         btn_newquestion = (Button) v.findViewById(R.id.btn_newquestion);
@@ -158,10 +172,35 @@ public class infoquestion extends Fragment {
                 createQS();
             }
         });
-
+        btn_imagequestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(Intent.ACTION_PICK);
+                intent.setType("image/*");
+                startActivityForResult(intent,SELECT_PHOTO);
+            }
+        });
 
         return v;
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        if(requestCode==SELECT_PHOTO && resultCode== Activity.RESULT_OK && data!=null && data.getData() != null){
+            img_path=data.getData();
+            try {
+                Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),img_path);
+                img.setImageBitmap(bitmap);
+
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        super.onActivityResult(requestCode, resultCode, data);
+    }
+
 
     private void updateQS(){
         dialog2.dismiss();

@@ -3,6 +3,7 @@ package com.example.mototest.View.Admin;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Bundle;
 
@@ -12,6 +13,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 
+import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -39,6 +41,8 @@ import com.example.mototest.R;
 import com.example.mototest.View.Login;
 import com.example.mototest.View.Test.LayoutTest;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import retrofit2.Call;
@@ -162,8 +166,6 @@ public class questionmanager extends Fragment {
 
         return v;
     }
-
-
 
 
     private void setAllQS(Integer TestID){
