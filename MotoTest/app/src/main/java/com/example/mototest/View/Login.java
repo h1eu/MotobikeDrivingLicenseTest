@@ -30,7 +30,7 @@ import com.example.mototest.Model.Test;
 import com.example.mototest.Model.User;
 import com.example.mototest.R;
 import com.example.mototest.View.Admin.testmanager;
-import com.example.mototest.View.Admin.testmanagerDirections;
+//import com.example.mototest.View.Admin;
 import com.example.mototest.View.Test.TestAdapter;
 
 import java.util.ArrayList;
@@ -59,43 +59,44 @@ public class Login extends AppCompatActivity {
         tv_forgetpass=(TextView) findViewById(R.id.tv_forgetpass);
         edt_usn_login=(EditText)findViewById(R.id.edt_usn_login);
         edt_pass_login=(EditText)findViewById(R.id.edt_pass_login);
-        btn_login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        if(((InfoAcc) activity.getApplication()).getMode().equals("offline")){
+            btn_login.setText("Vào thi offline");
+            btn_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(Login.this, MainActivity.class);
+                    startActivity(intent);
+                }
+            });
+        }
+        else{
+            btn_login.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
 
-                dialog2=new Dialog(activity);
-                dialog2.setContentView(R.layout.loading);
-                dialog2.show();
-                insertTest();
-                insertQues();
-                login();
-//                dbHandler.getAllTest();
-//                dbHandler.getAllQuestion();
-////               dbHandler.addTest(test);
-////                dbHandler.updateTest(test);
-//                dbHandler.getTest(4);
-////               dbHandler.deleteTest(test);
-////               dbHandler.addQuestion(question);
-////               dbHandler.deleteQuestion(question);
-////               dbHandler.updateQuestion(question);
-////               dbHandler.getTest(4);
-//                dbHandler.getQuestion(1);
-            }
-        });
-        tv_res.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Login.this,Register.class);
-                startActivity(intent);
-            }
-        });
-        tv_forgetpass.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent=new Intent(Login.this,ForgetPass.class);
-                startActivity(intent);
-            }
-        });
+                    dialog2=new Dialog(activity);
+                    dialog2.setContentView(R.layout.loading);
+                    dialog2.show();
+                    insertTest();
+                    insertQues();
+                    login();
+                }
+            });
+            tv_res.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(Login.this,Register.class);
+                    startActivity(intent);
+                }
+            });
+            tv_forgetpass.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(Login.this,ForgetPass.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
 
     private void login(){

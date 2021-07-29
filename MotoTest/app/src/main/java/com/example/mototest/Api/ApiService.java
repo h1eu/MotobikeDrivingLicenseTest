@@ -6,13 +6,17 @@ import com.example.mototest.Model.User;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 import retrofit2.http.Query;
 
 //https://btl60pm2.000webhostapp.com/api
@@ -67,6 +71,20 @@ public interface ApiService {
             @Field("QDadung") String QDadung,
             @Field("Access_token") String access_token
     );
+
+    @Multipart
+    @POST(api)
+    Call<Status> updateQS(@Part("action")RequestBody action,
+                          @Part("QId")RequestBody QId,
+                          @Part("QForm")RequestBody QForm,
+                          @Part("QContent")RequestBody QContent,
+                          @Part("QDa1")RequestBody QDa1,
+                          @Part("QDa2")RequestBody QDa2,
+                          @Part("QDa3")RequestBody QDa3,
+                          @Part("QDa4")RequestBody QDa4,
+                          @Part("QDadung")RequestBody QDadung,
+                          @Part("Access_token")RequestBody access_token,
+                          @Part MultipartBody.Part img);
 
     @FormUrlEncoded
     @POST(api)

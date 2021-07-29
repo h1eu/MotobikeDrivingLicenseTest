@@ -84,12 +84,12 @@
         android:label="Quản lý câu hỏi"
         tools:layout="@layout/fragment_questionmanager" >
 
-        <action
-            android:id="@+id/action_questionmanager_to_infoquestion"
-            app:destination="@id/infoquestion" />
         <argument
             android:name="TestID"
             app:argType="string" />
+        <action
+            android:id="@+id/action_questionmanager_to_infoquestion"
+            app:destination="@id/infoquestion" />
     </fragment>
     <fragment
         android:id="@+id/rowaccount"

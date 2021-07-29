@@ -19,6 +19,7 @@ import androidx.fragment.app.Fragment;
 
 import com.example.mototest.Api.Alltest;
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.Test;
 import com.example.mototest.R;
@@ -72,7 +73,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
     public void onActivityCreated(@Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
-        if(true){
+        if(((InfoAcc) getActivity().getApplication()).getMode().equals("offline")){
             dialog2.dismiss();
             listViewtest=(ListView)getActivity().findViewById(R.id.lv_test);
             ArrayList<Test> allidTest=dbHandler.getAllTest();

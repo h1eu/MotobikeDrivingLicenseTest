@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.Question;
@@ -73,7 +74,7 @@ public class LayoutTest extends AppCompatActivity{
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
 
-        if(true){
+        if(((InfoAcc) activity.getApplication()).getMode().equals("offline")){
             dialog2.dismiss();
             questionArrayList=dbHandler.getQSinTest(Integer.parseInt(bundle.getString("Idtest")));
 

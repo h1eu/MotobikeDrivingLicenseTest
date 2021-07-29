@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,14 +23,19 @@ import android.widget.Toast;
 
 import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.InfoAcc;
+import com.example.mototest.Api.RealPathUtil;
 import com.example.mototest.Api.Status;
 import com.example.mototest.MainActivity;
 import com.example.mototest.Model.Question;
 import com.example.mototest.R;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -57,6 +63,7 @@ public class infoquestion extends Fragment {
     TextView tv_QuesId;
     Button btn_updatequestion,btn_deletequestion,btn_newquestion,btn_imagequestion;
     ImageView img;
+    private Uri mUri;
     int SELECT_PHOTO=1;
     private Uri img_path;
     private String access_token;
@@ -188,6 +195,7 @@ public class infoquestion extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
         if(requestCode==SELECT_PHOTO && resultCode== Activity.RESULT_OK && data!=null && data.getData() != null){
             img_path=data.getData();
+            mUri=img_path;
             try {
                 Bitmap bitmap= MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),img_path);
                 img.setImageBitmap(bitmap);
@@ -203,31 +211,63 @@ public class infoquestion extends Fragment {
 
 
     private void updateQS(){
-        dialog2.dismiss();
-        ApiService.apiservice.querryQues("updateQS",
-                tv_QuesId.getText().toString(),
-                edt_questionform.getText().toString(),
-                edt_info_qscontent.getText().toString(),
-                edt_da1.getText().toString(),
-                edt_da2.getText().toString(),
-                edt_da3.getText().toString(),
-                edt_da4.getText().toString(),
-                edt_dadung.getText().toString(),
-                access_token
-        ).enqueue(new Callback<Status>() {
-            @Override
-            public void onResponse(Call<Status> call, Response<Status> response) {
 
-                Status status = response.body();
-                Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
-            }
+        if(mUri!=null){
+            Log.e("check","co du lieu anh");
+            RequestBody requestBodyAction = RequestBody.create(MediaType.parse("multipart/form-data"),"updateQS");
+            RequestBody requestBodyQId = RequestBody.create(MediaType.parse("multipart/form-data"),tv_QuesId.getText().toString());
+            RequestBody requestBodyQForm = RequestBody.create(MediaType.parse("multipart/form-data"),edt_questionform.getText().toString());
+            RequestBody requestBodyQContent = RequestBody.create(MediaType.parse("multipart/form-data"),edt_info_qscontent.getText().toString());
+            RequestBody requestBodyQDa1 = RequestBody.create(MediaType.parse("multipart/form-data"),edt_da1.getText().toString());
+            RequestBody requestBodyQDa2 = RequestBody.create(MediaType.parse("multipart/form-data"),edt_da2.getText().toString());
+            RequestBody requestBodyQDa3 = RequestBody.create(MediaType.parse("multipart/form-data"),edt_da3.getText().toString());
+            RequestBody requestBodyQDa4 = RequestBody.create(MediaType.parse("multipart/form-data"),edt_da4.getText().toString());
+            RequestBody requestBodyQDadung = RequestBody.create(MediaType.parse("multipart/form-data"),edt_dadung.getText().toString());
+            RequestBody requestBodyAccess_token = RequestBody.create(MediaType.parse("multipart/form-data"),access_token);
+            String realpath = RealPathUtil.getRealPath(getContext(),mUri);
+            File file = new File(realpath);
+            RequestBody requestBodyImg = RequestBody.create(MediaType.parse("multipart/form-data"),file);
+            MultipartBody.Part multipartBodyImg = MultipartBody.Part.createFormData("img",file.getName(),requestBodyImg);
 
-            @Override
-            public void onFailure(Call<Status> call, Throwable t) {
+            ApiService.apiservice.updateQS(requestBodyAction,requestBodyQId,requestBodyQForm,requestBodyQContent,requestBodyQDa1,requestBodyQDa2,requestBodyQDa3,requestBodyQDa4,
+                    requestBodyQDadung,requestBodyAccess_token,multipartBodyImg).enqueue(new Callback<Status>() {
+                @Override
+                public void onResponse(Call<Status> call, Response<Status> response) {
+                    dialog2.dismiss();
+                    Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
+                }
 
-                Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onFailure(Call<Status> call, Throwable t) {
+                    Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
+
+//        ApiService.apiservice.querryQues("updateQS",
+//                tv_QuesId.getText().toString(),
+//                edt_questionform.getText().toString(),
+//                edt_info_qscontent.getText().toString(),
+//                edt_da1.getText().toString(),
+//                edt_da2.getText().toString(),
+//                edt_da3.getText().toString(),
+//                edt_da4.getText().toString(),
+//                edt_dadung.getText().toString(),
+//                access_token
+//        ).enqueue(new Callback<Status>() {
+//            @Override
+//            public void onResponse(Call<Status> call, Response<Status> response) {
+//
+//                Status status = response.body();
+//                Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Status> call, Throwable t) {
+//
+//                Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
+//            }
+//        });
     }
 
     private void deleteQS(){

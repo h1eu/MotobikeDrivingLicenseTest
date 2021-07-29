@@ -55,8 +55,8 @@ public class MainActivity extends AppCompatActivity {
 
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
-        mNetworkReceiver = new MyReceiver();
-        this.registerReceiver(mNetworkReceiver, filter);
+//        mNetworkReceiver = new MyReceiver();
+        this.registerReceiver(mNetworkReceiver2, filter);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
@@ -96,6 +96,13 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         MenuItem dashboard = navigationView.getMenu().findItem(R.id.nav_dashboard);
+        if(((InfoAcc) activity.getApplication()).getMode().equals("offline")){
+            navigationView.getMenu().findItem(R.id.nav_dashboard).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_test_random).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_review).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_tip).setVisible(false);
+            navigationView.getMenu().findItem(R.id.nav_change_pass).setVisible(false);
+        }
         if(!((InfoAcc) getApplication()).getPermission().equals("admin")) dashboard.setVisible(false);
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -151,44 +158,48 @@ public class MainActivity extends AppCompatActivity {
             dialog.show();
     }
 
-//    private final MyReceiver mNetworkReceiver2 = new MyReceiver(){
-//
-//        @Override
-//        public void onReceive(Context context, Intent intent) {
-//            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//            if (cm.getActiveNetworkInfo() == null) {
-//                Dialog dialog=new Dialog(activity);
-////        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
-//                dialog.setContentView(R.layout.dialog_custom);
-//
-//                Button btn_yes=(Button)dialog.findViewById(R.id.btn_yes);
-//                Button btn_no=(Button)dialog.findViewById(R.id.btn_no);
-//                TextView tv_dialog_title= dialog.findViewById(R.id.tv_dialog_title);
-//                TextView tv_dialog_content=dialog.findViewById(R.id.tv_dialog_content);
-//                tv_dialog_title.setText("Xác nhận chuyển hướng");
-//                tv_dialog_content.setText("Bạn đã mất kết nối mạng, chuyển qua chế độ offline?");
-//                btn_yes.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-////                        dialog.dismiss();
-////                        finish();
-////                        Intent intent=new Intent(MainActivity.this, Login.class);
-////                        startActivity(intent);
+    private final MyReceiver mNetworkReceiver2 = new MyReceiver() {
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            if (cm.getActiveNetworkInfo() == null) {
+                if(!((InfoAcc) activity.getApplication()).getMode().equals("offline")){
+                    Dialog dialog = new Dialog(activity);
+//        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
+                    dialog.setContentView(R.layout.dialog_custom);
+
+                    Button btn_yes = (Button) dialog.findViewById(R.id.btn_yes);
+                    Button btn_no = (Button) dialog.findViewById(R.id.btn_no);
+                    TextView tv_dialog_title = dialog.findViewById(R.id.tv_dialog_title);
+                    TextView tv_dialog_content = dialog.findViewById(R.id.tv_dialog_content);
+                    tv_dialog_title.setText("Xác nhận chuyển hướng");
+                    tv_dialog_content.setText("Bạn đã mất kết nối mạng, chuyển qua chế độ offline?");
+                    btn_yes.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                            finish();
+                            ((InfoAcc) activity.getApplication()).setMode("offline");
+                            Intent intent = new Intent(MainActivity.this, Login.class);
+                            startActivity(intent);
 //                        Toast.makeText(context, "Internet Connected 2", Toast.LENGTH_LONG).show();
-//                    }
-//                });
-//                btn_no.setOnClickListener(new View.OnClickListener() {
-//                    @Override
-//                    public void onClick(View v) {
-//                        dialog.dismiss();
-//                    }
-//                });
-//                dialog.show();
-//
-//            } else if (cm.getActiveNetworkInfo() != null) {
-//                Toast.makeText(context, "Internet Connected 2", Toast.LENGTH_LONG).show();
-//            }
-//        }
-//    };
+                        }
+                    });
+                    btn_no.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            dialog.dismiss();
+                        }
+                    });
+                    dialog.show();
+                }
+            } else {
+                if(((InfoAcc) activity.getApplication()).getMode().equals("offline"))
+                Toast.makeText(context, "Đã online đăng nhập lại để chuyển chế độ", Toast.LENGTH_LONG).show();
+                ((InfoAcc) activity.getApplication()).setMode("online");
+            }
+        }
+    };
 
 }

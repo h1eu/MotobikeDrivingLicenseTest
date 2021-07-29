@@ -8,6 +8,15 @@ public class InfoAcc extends Application {
     private String Name;
     private String Permission;
     private String Access_token;
+    private String mode="online";
+
+    public String getMode() {
+        return mode;
+    }
+
+    public void setMode(String mode) {
+        this.mode = mode;
+    }
 
     public String getAccess_token() {
         return Access_token;
