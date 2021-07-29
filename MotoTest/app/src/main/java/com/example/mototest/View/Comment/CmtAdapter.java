@@ -39,14 +39,11 @@ public class CmtAdapter extends ArrayAdapter<Comment> {
             convertView=inflater.inflate(R.layout.items_cmt,parent,false);
         }
         tv_cmt_name = convertView.findViewById(R.id.tv_cmt_name);
-        tv_cmt_usn = convertView.findViewById(R.id.tv_cmt_usn);
         tv_cmt_guess = convertView.findViewById(R.id.tv_cmt_guess);
         tv_cmt_guess.setText(cmtArrayList.get(position).getContent());
         String name =  userArrayList.get(findEle(cmtArrayList.get(position).getIduser())).getName();
         String username =  userArrayList.get(findEle(cmtArrayList.get(position).getIduser())).getUsername();
         tv_cmt_name.setText(name);
-        tv_cmt_usn.setText(username);
-
         return convertView;
     }
 

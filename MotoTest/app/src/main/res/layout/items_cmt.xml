@@ -18,26 +18,19 @@
         <TextView
             android:id="@+id/tv_cmt_name"
             android:layout_width="match_parent"
-            android:layout_height="31dp"
-            android:layout_marginLeft="20dp"
-            android:text="Guess 1"
-            android:textColor="@color/black"
-            android:textSize="16sp" />
-
-        <TextView
-            android:id="@+id/tv_cmt_usn"
-            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:text="username"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:text="Guess 1"
+            android:textStyle="bold"
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
+
 
         <TextView
             android:id="@+id/tv_cmt_guess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="5dp"
             android:text="đây là 1 comment của 1 bạn nào đó"
             android:textColor="@color/black"
             android:textSize="20sp" />

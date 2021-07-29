@@ -51,7 +51,7 @@ public class LayoutTest extends AppCompatActivity{
     private ArrayList<String> listans=new ArrayList<String>();
     ArrayList<Question> questionArrayList=new ArrayList<>();
     private int point=0;
-    private int ttTime=1;
+    private int ttTime=20;
     private String action="getTest";
     private boolean isSubmit=false;
     private String idTest;
