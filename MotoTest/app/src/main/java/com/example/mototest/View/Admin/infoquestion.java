@@ -245,6 +245,7 @@ public class infoquestion extends Fragment {
 
                 @Override
                 public void onFailure(Call<Status> call, Throwable t) {
+                    dialog2.dismiss();
                     Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
                 }
             });
@@ -263,14 +264,14 @@ public class infoquestion extends Fragment {
         ).enqueue(new Callback<Status>() {
             @Override
             public void onResponse(Call<Status> call, Response<Status> response) {
-
+                dialog2.dismiss();
                 Status status = response.body();
                 Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onFailure(Call<Status> call, Throwable t) {
-
+                dialog2.dismiss();
                 Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
             }
         });
