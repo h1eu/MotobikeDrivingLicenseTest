@@ -17,7 +17,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.mototest.Api.AllQues;
+import com.example.mototest.Api.AllTestQS;
+import com.example.mototest.Api.ApiService;
 import com.example.mototest.Api.InfoAcc;
+import com.example.mototest.Api.TestQS;
+import com.example.mototest.Model.DBHandler;
 import com.example.mototest.Model.MyReceiver;
 import com.example.mototest.Model.Question;
 import com.example.mototest.View.Login;
@@ -37,6 +42,12 @@ import com.example.mototest.databinding.ActivityMainBinding;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
@@ -47,12 +58,13 @@ public class MainActivity extends AppCompatActivity {
     protected Question question;
     public int check=0;
     private Activity activity = this;
+    private DBHandler dbHandler ;
     private MyReceiver mNetworkReceiver;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 //        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-
+        dbHandler = new DBHandler(this);
         IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
 //        mNetworkReceiver = new MyReceiver();
@@ -113,6 +125,8 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
+        insertTest();
+        insertQues();
     }
 
     @Override
@@ -201,5 +215,62 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     };
+    private void insertQues(){
+//        INSERT ALL QS
+        ApiService.apiservice.getAllQues("getAllQS").enqueue(new Callback<AllQues>() {
+            @Override
+            public void onResponse(Call<AllQues> call, Response<AllQues> response) {
+//                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
+                AllQues allQues = response.body();
+                ArrayList<Question> arrayList = allQues.getAllQues();
+                for(Question q:arrayList)
+                 try{
+                     dbHandler.addQuestion(q);
+                }catch (Exception e){
 
+                }
+
+//                    Log.e("size",Integer.toString(arrayList.size()));
+            }
+
+            @Override
+            public void onFailure(Call<AllQues> call, Throwable t) {
+                Toast.makeText(getBaseContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
+            }
+        });
+////        INSERT ALL TEST
+
+    }
+    private void insertTest(){
+        ApiService.apiservice.getAllTestAndQS("getAllTestAndQS").enqueue(new Callback<AllTestQS>() {
+            @Override
+            public void onResponse(Call<AllTestQS> call, Response<AllTestQS> response) {
+//                lv_test=(ListView)getActivity().findViewById(R.id.lv_test);
+//                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
+                AllTestQS alltest=response.body();
+//                Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thành công 222", Toast.LENGTH_SHORT).show();
+                ArrayList<TestQS> listTest = alltest.getAllTest();
+//                testArrayList = new ArrayList<String>();
+                int i=0;
+                for(TestQS t : listTest)
+                {
+                    i++;
+                    try{
+                        dbHandler.addTest(t);
+                    }catch (Exception e){
+
+                    }
+
+                }
+                Log.e("Tong so",Integer.toString(i));
+
+//                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
+            }
+            @Override
+            public void onFailure(Call<AllTestQS> call, Throwable t) {
+//                dialog2.dismiss();
+                Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thất bại 222", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 }

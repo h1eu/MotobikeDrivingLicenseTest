@@ -77,8 +77,6 @@ public class Login extends AppCompatActivity {
                     dialog2=new Dialog(activity);
                     dialog2.setContentView(R.layout.loading);
                     dialog2.show();
-                    insertTest();
-                    insertQues();
                     login();
                 }
             });
@@ -123,55 +121,5 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    private void insertQues(){
-//        INSERT ALL QS
-        ApiService.apiservice.getAllQues("getAllQS").enqueue(new Callback<AllQues>() {
-            @Override
-            public void onResponse(Call<AllQues> call, Response<AllQues> response) {
-                dialog2.dismiss();
-//                    Toast.makeText(getContext(),"CALL API SUCCESS",Toast.LENGTH_SHORT).show();
-                AllQues allQues = response.body();
-                ArrayList<Question> arrayList = allQues.getAllQues();
-                for(Question q:arrayList)
-                    dbHandler.addQuestion(q);
 
-//                    Log.e("size",Integer.toString(arrayList.size()));
-            }
-
-            @Override
-            public void onFailure(Call<AllQues> call, Throwable t) {
-                dialog2.dismiss();
-                Toast.makeText(getBaseContext(),"Lấy danh sách câu hỏi thất bại",Toast.LENGTH_SHORT).show();
-            }
-        });
-////        INSERT ALL TEST
-
-    }
-    private void insertTest(){
-        ApiService.apiservice.getAllTestAndQS("getAllTestAndQS").enqueue(new Callback<AllTestQS>() {
-            @Override
-            public void onResponse(Call<AllTestQS> call, Response<AllTestQS> response) {
-//                lv_test=(ListView)getActivity().findViewById(R.id.lv_test);
-//                Toast.makeText(getContext(), "Call API SUCCESS", Toast.LENGTH_SHORT).show();
-                AllTestQS alltest=response.body();
-//                Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thành công 222", Toast.LENGTH_SHORT).show();
-                ArrayList<TestQS> listTest = alltest.getAllTest();
-//                testArrayList = new ArrayList<String>();
-                int i=0;
-                for(TestQS t : listTest)
-                {
-                    i++;
-                    dbHandler.addTest(t);
-                }
-                Log.e("Tong so",Integer.toString(i));
-
-//                Toast.makeText(getContext(), "Call API get test 1 lan", Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onFailure(Call<AllTestQS> call, Throwable t) {
-//                dialog2.dismiss();
-                Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thất bại 222", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }

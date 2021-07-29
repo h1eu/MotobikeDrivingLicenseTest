@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.provider.MediaStore;
@@ -226,7 +227,12 @@ public class infoquestion extends Fragment {
             RequestBody requestBodyAccess_token = RequestBody.create(MediaType.parse("multipart/form-data"),access_token);
             String realpath = RealPathUtil.getRealPath(getContext(),mUri);
             File file = new File(realpath);
+            if(file.exists()){
+                Log.e("path",realpath);
+            }
             RequestBody requestBodyImg = RequestBody.create(MediaType.parse("multipart/form-data"),file);
+//            img.setImageURI(Uri.fromFile(file));
+            Log.e("name",file.getName());
             MultipartBody.Part multipartBodyImg = MultipartBody.Part.createFormData("img",file.getName(),requestBodyImg);
 
             ApiService.apiservice.updateQS(requestBodyAction,requestBodyQId,requestBodyQForm,requestBodyQContent,requestBodyQDa1,requestBodyQDa2,requestBodyQDa3,requestBodyQDa4,
@@ -243,31 +249,31 @@ public class infoquestion extends Fragment {
                 }
             });
         }
+        else
+        ApiService.apiservice.querryQues("updateQS",
+                tv_QuesId.getText().toString(),
+                edt_questionform.getText().toString(),
+                edt_info_qscontent.getText().toString(),
+                edt_da1.getText().toString(),
+                edt_da2.getText().toString(),
+                edt_da3.getText().toString(),
+                edt_da4.getText().toString(),
+                edt_dadung.getText().toString(),
+                access_token
+        ).enqueue(new Callback<Status>() {
+            @Override
+            public void onResponse(Call<Status> call, Response<Status> response) {
 
-//        ApiService.apiservice.querryQues("updateQS",
-//                tv_QuesId.getText().toString(),
-//                edt_questionform.getText().toString(),
-//                edt_info_qscontent.getText().toString(),
-//                edt_da1.getText().toString(),
-//                edt_da2.getText().toString(),
-//                edt_da3.getText().toString(),
-//                edt_da4.getText().toString(),
-//                edt_dadung.getText().toString(),
-//                access_token
-//        ).enqueue(new Callback<Status>() {
-//            @Override
-//            public void onResponse(Call<Status> call, Response<Status> response) {
-//
-//                Status status = response.body();
-//                Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(Call<Status> call, Throwable t) {
-//
-//                Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
-//            }
-//        });
+                Status status = response.body();
+                Toast.makeText(getContext(),"Cập nhật câu hỏi thành công",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure(Call<Status> call, Throwable t) {
+
+                Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     private void deleteQS(){
@@ -356,4 +362,5 @@ public class infoquestion extends Fragment {
         });
         dialog.show();
     }
+
 }
