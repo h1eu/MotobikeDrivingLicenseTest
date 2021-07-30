@@ -371,6 +371,7 @@ public class LayoutTest extends AppCompatActivity{
         bundle.putString("minutes",Dominutes);
         bundle.putString("seconds",Doseconds);
         bundle.putString("IdTest",idTest);
+        bundle.putInt("soluong",questionArrayList.size());
         isSubmit=true;
         Intent intent=new Intent(LayoutTest.this,Result.class);
         intent.putExtras(bundle);

@@ -17,7 +17,7 @@ import com.squareup.picasso.Picasso;
 
 public class Result extends AppCompatActivity {
     private Button btn_xemlaibaithi,btn_cmt;
-    private TextView tv_diem,tv_ketqua;
+    private TextView tv_diem,tv_ketqua,tv_rs;
     private LinearLayout ll_rs;
     private ImageView img_v1;
     private ImageView toolbar_back;
@@ -31,6 +31,7 @@ public class Result extends AppCompatActivity {
         toolbar_back=(ImageView) findViewById(R.id.iv_toolbar_back);
         tv_diem=(TextView)findViewById(R.id.tv_diem);
         tv_ketqua=(TextView)findViewById(R.id.tv_ketqua);
+        tv_rs=(TextView)findViewById(R.id.tv_rs);
 //        ActionBar actionBar=getSupportActionBar();
 //        actionBar.setDisplayHomeAsUpEnabled(true);
 //        actionBar.setTitle("Kết quả thi");
@@ -40,6 +41,7 @@ public class Result extends AppCompatActivity {
         if(bundle!=null) {
             Idtest=bundle.getString("IdTest");
             tv_diem.setText(Integer.toString(bundle.getInt("point")));
+            tv_rs.setText("/"+Integer.toString(bundle.getInt("soluong")));
             if(bundle.getInt("point")>15)
                 tv_ketqua.setText("ĐỖ - Time: "+bundle.get("minutes")+":"+bundle.get("seconds"));
             else
