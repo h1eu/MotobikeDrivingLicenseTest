@@ -120,6 +120,7 @@ public class TestFragment extends Fragment implements TestAdapter.EventListener 
                         intent.putExtras(bundle);
                         intent.setClass(getActivity(), LayoutTest.class);
                         getActivity().startActivity(intent);
+//                        getActivity().unregisterReceiver(mNetworkReceiver2);
                     }
                 });
             }

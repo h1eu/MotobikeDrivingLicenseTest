@@ -246,7 +246,8 @@ public class infoquestion extends Fragment {
                 @Override
                 public void onFailure(Call<Status> call, Throwable t) {
                     dialog2.dismiss();
-                    Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),"Cập nhật thất bại",Toast.LENGTH_SHORT).show();
+                    Log.e("Lỗi","Cập nhật câu hỏi thất bại");
                 }
             });
         }

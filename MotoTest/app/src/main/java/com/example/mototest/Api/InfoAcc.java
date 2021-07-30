@@ -6,7 +6,7 @@ public class InfoAcc extends Application {
     private int Iduser;
     private String Username;
     private String Name;
-    private String Permission;
+    private String Permission="";
     private String Access_token;
     private String mode="online";
 

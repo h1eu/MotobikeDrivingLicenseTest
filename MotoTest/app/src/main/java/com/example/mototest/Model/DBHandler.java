@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.mototest.Api.InfoAcc;
 import com.example.mototest.Api.TestQS;
 
 public class DBHandler extends SQLiteOpenHelper {
@@ -35,7 +36,7 @@ public class DBHandler extends SQLiteOpenHelper {
     private static final String KEY_ACTIVE= "active";
     private static final String KEY_RECOVER = "recover";
     private static final String KEY_ACCESS_TOKEN= "access_token";
-
+    SQLiteDatabase dboff;
 
     public DBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -44,6 +45,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        dboff=db;
         // TODO Auto-generated method stub
         String CREATE_USER_TABLE = "CREATE TABLE " + TABLE_USERS+ "("
                 + KEY_IDUSER + " INTEGER PRIMARY KEY AUTOINCREMENT," + KEY_USERNAME + " TEXT,"
@@ -98,6 +100,13 @@ public class DBHandler extends SQLiteOpenHelper {
         onCreate(db);
     }
 
+    public void updateDB(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_USERS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_TESTS);
+        onCreate(db);
+    }
     public void addTest(TestQS test) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();

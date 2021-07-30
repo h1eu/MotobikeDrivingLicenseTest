@@ -115,6 +115,12 @@ public class MainActivity extends AppCompatActivity {
             navigationView.getMenu().findItem(R.id.nav_tip).setVisible(false);
             navigationView.getMenu().findItem(R.id.nav_change_pass).setVisible(false);
         }
+        else
+        {
+            dbHandler.updateDB();
+            insertTest();
+            insertQues();
+        }
         if(!((InfoAcc) getApplication()).getPermission().equals("admin")) dashboard.setVisible(false);
         MenuItem logoutItem = navigationView.getMenu().findItem(R.id.nav_logout);
         logoutItem.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
@@ -125,8 +131,7 @@ public class MainActivity extends AppCompatActivity {
                 return false;
             }
         });
-        insertTest();
-        insertQues();
+
     }
 
     @Override
@@ -176,23 +181,23 @@ public class MainActivity extends AppCompatActivity {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            ConnectivityManager cm = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            if (cm.getActiveNetworkInfo() == null) {
+            boolean isnotConnected = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+            if (isnotConnected) {
                 if(!((InfoAcc) activity.getApplication()).getMode().equals("offline")){
-                    Dialog dialog = new Dialog(activity);
+                    Dialog dialog1 = new Dialog(activity);
 //        View view  = getActivity().getLayoutInflater().inflate(R.layout.dialog_custom, null);
-                    dialog.setContentView(R.layout.dialog_custom);
+                    dialog1.setContentView(R.layout.dialog_custom);
 
-                    Button btn_yes = (Button) dialog.findViewById(R.id.btn_yes);
-                    Button btn_no = (Button) dialog.findViewById(R.id.btn_no);
-                    TextView tv_dialog_title = dialog.findViewById(R.id.tv_dialog_title);
-                    TextView tv_dialog_content = dialog.findViewById(R.id.tv_dialog_content);
+                    Button btn_yes = (Button) dialog1.findViewById(R.id.btn_yes);
+                    Button btn_no = (Button) dialog1.findViewById(R.id.btn_no);
+                    TextView tv_dialog_title = dialog1.findViewById(R.id.tv_dialog_title);
+                    TextView tv_dialog_content = dialog1.findViewById(R.id.tv_dialog_content);
                     tv_dialog_title.setText("Xác nhận chuyển hướng");
                     tv_dialog_content.setText("Bạn đã mất kết nối mạng, chuyển qua chế độ offline?");
                     btn_yes.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
+                            dialog1.dismiss();
                             finish();
                             ((InfoAcc) activity.getApplication()).setMode("offline");
                             Intent intent = new Intent(MainActivity.this, Login.class);
@@ -203,10 +208,10 @@ public class MainActivity extends AppCompatActivity {
                     btn_no.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            dialog.dismiss();
+                            dialog1.dismiss();
                         }
                     });
-                    dialog.show();
+                    dialog1.show();
                 }
             } else {
                 if(((InfoAcc) activity.getApplication()).getMode().equals("offline"))
@@ -272,5 +277,20 @@ public class MainActivity extends AppCompatActivity {
                 Toast.makeText(getBaseContext(), "lấy dữ liệu bài thi thất bại 222", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(mNetworkReceiver2);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(Intent.ACTION_AIRPLANE_MODE_CHANGED);
+//        mNetworkReceiver = new MyReceiver();
+        this.registerReceiver(mNetworkReceiver2, filter);
     }
 }

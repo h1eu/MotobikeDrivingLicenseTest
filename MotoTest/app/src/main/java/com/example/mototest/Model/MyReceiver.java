@@ -18,8 +18,8 @@ public class MyReceiver extends BroadcastReceiver {
     private static final String TAG = "MyBroadcastReceiver";
     @Override
     public void onReceive(Context context, Intent intent) {
-        boolean isConnected = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
-        if(isConnected){
+        boolean isnotConnected = intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY, false);
+        if(isnotConnected){
             Toast.makeText(context,"YÊU CẦU BẬT WIFI TRƯỚC KHI SỬ DỤNG", Toast.LENGTH_LONG).show();
         }
         else{
